@@ -1,5 +1,7 @@
+import { API_URL } from "../config";
+
 export function login() {
-  fetch(`http://localhost:3000/authenticate/login`, {
+  fetch(`${API_URL}/authenticate/login`, {
     credentials: "include",
     method: "POST",
     headers: {
@@ -17,7 +19,7 @@ export function login() {
 }
 
 export function create() {
-  fetch(`http://localhost:3000/authenticate/create`, {
+  fetch(`${API_URL}/authenticate/create`, {
     credentials: "include",
     method: "POST",
     headers: {
@@ -37,7 +39,7 @@ export function create() {
 }
 
 export function logged_in() {
-  fetch(`http://localhost:3000/authenticate/logged_in`, {
+  fetch(`${API_URL}/authenticate/logged_in`, {
     credentials: "include",
     method: "GET",
   })
@@ -46,7 +48,7 @@ export function logged_in() {
 }
 
 export function logout() {
-  fetch(`http://localhost:3000/authenticate/logout`, {
+  fetch(`${API_URL}/authenticate/logout`, {
     credentials: "include",
     method: "DELETE",
   })
