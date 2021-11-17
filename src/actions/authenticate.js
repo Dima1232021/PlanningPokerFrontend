@@ -1,5 +1,3 @@
-
-
 export function login() {
   fetch(`http://localhost:3000/authenticate/login`, {
     credentials: "include",
