@@ -6,7 +6,7 @@ import MainPage from "./MainPage/MainPage";
 import AuthenticatePage from "./AuthenticatePage/AuthenticatePage";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
-import {logged_in} from '../actions/authenticate'
+import { logged_in } from "../actions/authenticate";
 
 import "./app.scss";
 

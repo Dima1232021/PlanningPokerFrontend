@@ -1,37 +1,32 @@
-const CHANGE_DATES = 'CHANGE_DATE';
-const ADD_DATA = 'ADD_DATA';
+const ADD_DATA = "ADD_DATA";
+const DELETE_DATA = "DELETE_DATA";
 
 const defaultState = {
-	startDate: '2019-10-01',
-	endDate: '2019-10-07',
-	userData: [],
+  logged_in: false,
+  username: "",
+  email: "",
+  userid: "",
 };
 
 export const userReducer = (state = defaultState, action) => {
-	switch (action.type) {
-		case ADD_DATA:
-			return { ...state, userData: action.payload };
+  switch (action.type) {
+    case ADD_DATA:
+      return { ...state };
 
-		case CHANGE_DATES:
-			const { startDate, endDate } = action.payload;
+    case DELETE_DATA:
+      return { ...state };
 
-			return {
-				...state,
-				startDate,
-				endDate,
-			};
-
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 };
 
-export const addUserDataAction = payload => ({
-	type: ADD_DATA,
-	payload: payload,
+export const addUserDataAction = (payload) => ({
+  type: ADD_DATA,
+  payload: payload,
 });
 
-export const changeDatesAction = payload => ({
-	type: CHANGE_DATES,
-	payload: payload,
+export const deleteUserDataAction = (payload) => ({
+  type: DELETE_DATA,
+  payload: payload,
 });
