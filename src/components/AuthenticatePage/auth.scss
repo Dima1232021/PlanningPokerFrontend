@@ -1,4 +1,68 @@
 .auth {
   flex: 1 1 100%;
-  background: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  &__form {
+    max-width: 500px;
+    border-radius: 15px;
+    background-color: #3a80ba;
+    overflow: hidden;
+    padding: 10px 15px;
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: center;
+    color: rgb(194, 194, 194);
+
+    & .active {
+      background-color: #1c3b55;
+      color: #fff;
+      border-radius: 15px;
+    }
+  }
+
+  &__link {
+    padding: 10px 60px;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  &__input,
+  &__btn {
+    flex: 1 0 100%;
+    border-radius: 10px;
+    padding: 10px 15px;
+  }
+
+  &__input {
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &__btn {
+    background-color: #1c3b55;
+    color: #fff;
+    font-size: 24px;
+    line-height: 29px;
+  }
 }
