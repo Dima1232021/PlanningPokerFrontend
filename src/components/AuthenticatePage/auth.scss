@@ -15,14 +15,8 @@
 
   &__menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     color: rgb(194, 194, 194);
-
-    & .active {
-      background-color: #1c3b55;
-      color: #fff;
-      border-radius: 15px;
-    }
   }
 
   &__link {
@@ -30,6 +24,19 @@
     font-weight: 600;
     font-size: 22px;
     line-height: 24px;
+    border-radius: 15px;
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      background-color: #1c3b5569;
+      cursor: pointer;
+    }
+
+    &.active {
+      background-color: #1c3b55;
+      color: #fff;
+    }
   }
 
   &__title {
@@ -64,5 +71,14 @@
     color: #fff;
     font-size: 24px;
     line-height: 29px;
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      opacity: 0.9;
+      -moz-box-shadow: -1px 4px 14px #000000;
+      -webkit-box-shadow: -1px 4px 4px #000000;
+      box-shadow: -1px 4px 4px #00000052;
+    }
   }
 }

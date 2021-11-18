@@ -10,7 +10,7 @@ export default function AuthForm({ auth }) {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  function authLog() {
+  function authLogIn() {
     dispatch(login(email, password));
   }
 
@@ -37,7 +37,7 @@ export default function AuthForm({ auth }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={authLog} className="auth__btn">
+          <button onClick={authLogIn} className="auth__btn">
             Log in
           </button>
         </div>

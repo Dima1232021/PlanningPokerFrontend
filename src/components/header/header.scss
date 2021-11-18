@@ -1,9 +1,45 @@
 .header {
   padding: 15px 0px;
   background: #3a80ba;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__title {
     font-size: 40px;
     line-height: 49px;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__username {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-right: 20px;
+  }
+
+  &__btn-log {
+    font-size: 16px;
+    line-height: 142%;
+    border-radius: 8px;
+    padding: 7px 15px;
+    color: #3a80ba;
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      -moz-box-shadow: -1px 4px 14px #000000;
+      -webkit-box-shadow: -1px 4px 4px #000000;
+      box-shadow: -1px 4px 4px #00000052;
+    }
   }
 
   @media (max-width: 767.98px) {

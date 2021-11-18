@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import MainPage from "./MainPage/MainPage";
 import AuthenticatePage from "./AuthenticatePage/AuthenticatePage";
@@ -12,6 +12,7 @@ import "./app.scss";
 
 function App() {
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) => state.user.logged_in);
 
   useEffect(() => {
     dispatch(logged_in());
@@ -20,7 +21,7 @@ function App() {
   return (
     <div className="wrapper">
       <Header />
-      {false ? (
+      {loggedIn ? (
         <Switch>
           <Route path="/main" component={MainPage} />
           <Redirect to="/main" />

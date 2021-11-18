@@ -1,4 +1,8 @@
 import { API_URL } from "../config";
+import {
+  addUserDataAction,
+  deleteUserDataAction,
+} from "../reducers/userReducer";
 
 export function login(email, password) {
   return (dispatch) => {
@@ -14,9 +18,14 @@ export function login(email, password) {
           password,
         },
       }),
-    })
-      .then((valu) => valu.json())
-      .then((val) => console.log(val));
+    }).then((value) =>
+      value.json().then((data) => {
+        console.log(data);
+        if (data.logged_in) {
+          dispatch(addUserDataAction(data));
+        }
+      })
+    );
   };
 }
 
@@ -36,9 +45,14 @@ export function create(username, email, password, password_confirmation) {
           password_confirmation,
         },
       }),
-    })
-      .then((valu) => valu.json())
-      .then((val) => console.log(val));
+    }).then((value) =>
+      value.json().then((data) => {
+        console.log(data);
+        if (data.logged_in) {
+          dispatch(addUserDataAction(data));
+        }
+      })
+    );
   };
 }
 
@@ -47,17 +61,29 @@ export function logged_in() {
     fetch(`${API_URL}/authenticate/logged_in`, {
       credentials: "include",
       method: "GET",
-    })
-      .then((valu) => valu.json())
-      .then((val) => console.log(val));
+    }).then((value) =>
+      value.json().then((data) => {
+        console.log(data);
+        if (data.logged_in) {
+          dispatch(addUserDataAction(data));
+        }
+      })
+    );
   };
 }
 
 export function logout() {
-  fetch(`${API_URL}/authenticate/logout`, {
-    credentials: "include",
-    method: "DELETE",
-  })
-    .then((valu) => valu.json())
-    .then((val) => console.log(val));
+  return (dispatch) => {
+    fetch(`${API_URL}/authenticate/logout`, {
+      credentials: "include",
+      method: "DELETE",
+    }).then((value) =>
+      value.json().then((data) => {
+        console.log(data);
+        if (data.logged_out) {
+          dispatch(deleteUserDataAction());
+        }
+      })
+    );
+  };
 }

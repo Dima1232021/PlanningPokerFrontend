@@ -11,10 +11,23 @@ const defaultState = {
 export const userReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_DATA:
-      return { ...state };
+      const { logged_in, user } = action.payload;
+      return {
+        ...state,
+        logged_in,
+        username: user.username,
+        email: user.email,
+        userid: user.id,
+      };
 
     case DELETE_DATA:
-      return { ...state };
+      return {
+        ...state,
+        logged_in: false,
+        username: "",
+        email: "",
+        userid: "",
+      };
 
     default:
       return state;
@@ -28,5 +41,4 @@ export const addUserDataAction = (payload) => ({
 
 export const deleteUserDataAction = (payload) => ({
   type: DELETE_DATA,
-  payload: payload,
 });
