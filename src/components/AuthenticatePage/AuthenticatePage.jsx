@@ -1,10 +1,12 @@
 import React from "react";
-import "./authenticatePage.scss";
+import "./auth.scss";
 
 export default function AuthenticatePage() {
   return (
-    <div>
-      <h1>Authenticate</h1>
+    <div className="auth">
+      <div className="container">
+        <h1>Authenticate</h1>
+      </div>
     </div>
   );
 }

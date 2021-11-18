@@ -1,9 +1,9 @@
 import React from "react";
-import "./mainPage.scss";
+import "./main.scss";
 
 export default function MainPage() {
   return (
-    <div>
+    <div className="main">
       <h1>Main page</h1>
     </div>
   );

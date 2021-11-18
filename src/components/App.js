@@ -1,19 +1,28 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Header from "./header/Header";
+import { Switch, Route, Redirect } from "react-router-dom";
+
 import MainPage from "./MainPage/MainPage";
 import AuthenticatePage from "./AuthenticatePage/AuthenticatePage";
+import Header from "./header/Header";
+import Footer from "./footer/Footer";
 import "./app.scss";
 
 function App() {
   return (
     <div className="wrapper">
       <Header />
-      <Routes>
-        <Route path="/authenticate" element={<AuthenticatePage />} />
-        <Route path="/main" element={<MainPage />} />
-        <Route path="*" element={<AuthenticatePage />} />
-      </Routes>
+      {false ? (
+        <Switch>
+          <Route path="/main" component={MainPage} />
+          <Redirect to="/main" />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route path="/authenticet" component={AuthenticatePage} />
+          <Redirect to="/authenticet" />
+        </Switch>
+      )}
+      <Footer />
     </div>
   );
 }
