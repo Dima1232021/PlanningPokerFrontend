@@ -4,19 +4,17 @@ import { login, create } from "../../actions/authenticate";
 
 export default function AuthForm({ auth }) {
   const dispatch = useDispatch();
-  
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   function authLog() {
-    console.log(email, password);
     dispatch(login(email, password));
   }
 
   function authCreate() {
-    console.log(username, email, password, passwordConfirmation);
     dispatch(create(username, email, password, passwordConfirmation));
   }
 

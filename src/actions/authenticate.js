@@ -43,12 +43,14 @@ export function create(username, email, password, password_confirmation) {
 }
 
 export function logged_in() {
-  fetch(`${API_URL}/authenticate/logged_in`, {
-    credentials: "include",
-    method: "GET",
-  })
-    .then((valu) => valu.json())
-    .then((val) => console.log(val));
+  return (dispatch) => {
+    fetch(`${API_URL}/authenticate/logged_in`, {
+      credentials: "include",
+      method: "GET",
+    })
+      .then((valu) => valu.json())
+      .then((val) => console.log(val));
+  };
 }
 
 export function logout() {
