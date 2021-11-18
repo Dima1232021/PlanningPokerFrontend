@@ -3,8 +3,10 @@ import "./header.scss";
 
 export default function Header() {
   return (
-    <div>
-      <h1>Header</h1>
+    <div className="header">
+      <div className="container">
+        <h1 className="header__title">Planning Poker</h1>
+      </div>
     </div>
   );
 }
