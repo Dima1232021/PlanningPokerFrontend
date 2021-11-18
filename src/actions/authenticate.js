@@ -1,41 +1,45 @@
 import { API_URL } from "../config";
 
-export function login() {
-  fetch(`${API_URL}/authenticate/login`, {
-    credentials: "include",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        email,
-        password,
+export function login(email, password) {
+  return (dispatch) => {
+    fetch(`${API_URL}/authenticate/login`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    }),
-  })
-    .then((valu) => valu.json())
-    .then((val) => console.log(val));
+      body: JSON.stringify({
+        user: {
+          email,
+          password,
+        },
+      }),
+    })
+      .then((valu) => valu.json())
+      .then((val) => console.log(val));
+  };
 }
 
-export function create() {
-  fetch(`${API_URL}/authenticate/create`, {
-    credentials: "include",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        username,
-        email,
-        password,
-        password_confirmation,
+export function create(username, email, password, password_confirmation) {
+  return (dispatch) => {
+    fetch(`${API_URL}/authenticate/create`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    }),
-  })
-    .then((valu) => valu.json())
-    .then((val) => console.log(val));
+      body: JSON.stringify({
+        user: {
+          username,
+          email,
+          password,
+          password_confirmation,
+        },
+      }),
+    })
+      .then((valu) => valu.json())
+      .then((val) => console.log(val));
+  };
 }
 
 export function logged_in() {
