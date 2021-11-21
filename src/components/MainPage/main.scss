@@ -1,4 +1,11 @@
 .main {
   flex: 1 1 auto;
   color: #000;
+
+  &__show-user {
+    width: 100px;
+    height: 200px;
+    overflow: auto;
+    background-color: aqua;
+  }
 }
