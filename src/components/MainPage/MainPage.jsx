@@ -9,6 +9,7 @@ export default function MainPage() {
   const [users, setUsers] = useState([]);
   const [addPlayers, setAddPlayers] = useState([]);
   const [yourGames, setYourGames] = useState([]);
+  const [invitedGames, setInvitedGames] = useState([]);
 
   const [nameGame, setNameGame] = useState("");
 
@@ -18,18 +19,39 @@ export default function MainPage() {
     }).then((value) =>
       value.json().then((data) => {
         setUsers(data);
-        console.log(data);
+        // console.log(data);
       })
     );
   }, [numberOfUsers]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/game/your_games`, {
+      credentials: "include",
+    }).then((value) =>
+      value.json().then((data) => {
+        setYourGames(data);
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_URL}/game/invited_games`, {
+      credentials: "include",
+    }).then((value) =>
+      value.json().then((data) => {
+        setInvitedGames(data);
+        // console.log(data);
+      })
+    );
+  }, []);
 
   function addUser(user) {
     let findUser = addPlayers.find((value) => value === user);
     !findUser && setAddPlayers([...addPlayers, user]);
   }
+
   function deleteUser(user) {
     let arr = addPlayers.filter((value) => value !== user);
-    console.log(arr);
     setAddPlayers(arr);
   }
 
@@ -43,7 +65,46 @@ export default function MainPage() {
       body: JSON.stringify({ name: nameGame, users: addPlayers }),
     }).then((value) =>
       value.json().then((data) => {
-        console.log(data);
+        setYourGames([...yourGames, data.game]);
+        // console.log("створити гру: ", data);
+      })
+    );
+  }
+
+  function deleteGame(game_id) {
+    fetch(`${API_URL}/game/delete_game`, {
+      credentials: "include",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ game_id }),
+    }).then((value) =>
+      value.json().then((data) => {
+        if (data.delete_game) {
+          let arr = yourGames.filter((value) => value.id !== game_id);
+          setYourGames(arr);
+        }
+      })
+    );
+  }
+
+  function deleteInvited(invitation_id) {
+    fetch(`${API_URL}/game/delete_invited`, {
+      credentials: "include",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ invitation_id }),
+    }).then((value) =>
+      value.json().then((data) => {
+        if (data.delete_invited) {
+          let arr = invitedGames.filter(
+            (value) => value.invitation_id !== invitation_id
+          );
+          setInvitedGames(arr);
+        }
       })
     );
   }
@@ -89,6 +150,7 @@ export default function MainPage() {
               })}
             </ul>
           </div>
+
           <input
             type="text"
             placeholder="Назва гри"
@@ -99,7 +161,39 @@ export default function MainPage() {
         </div>
 
         <div className="main__row">
-
+          <div className="main__block block">
+            <h2 className="block__title">Ігри які ви створили</h2>
+            <ul className="block__list">
+              {yourGames.map((game) => {
+                return (
+                  <li key={game.id} className="block__link">
+                    {game.name}
+                    <button onClick={() => deleteGame(game.id)}>
+                      Видалити гру
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="main__block block">
+            <h2 className="block__title">Ігри до яких вас запрошують</h2>
+            <ul className="block__list">
+              {invitedGames.map((game) => {
+                return (
+                  <li key={game.invitation_id} className="block__link">
+                    {game.game_name}
+                    <button onClick={() => deleteInvited(game.invitation_id)}>
+                      Відклонити запрос
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="main__block block">
+            <h2 className="block__title">Ігри до яких ви приєдналися</h2>
+          </div>
         </div>
       </div>
     </div>

@@ -9,6 +9,14 @@
     background-color: brown;
     padding: 20px;
     margin-top: 20px;
+
+    &:nth-child(2) {
+      background-color: rgb(128, 165, 42);
+
+      & .block {
+        flex: 0 0 30%;
+      }
+    }
   }
 
   &__title {
@@ -34,5 +42,15 @@
 
   &__list {
     background-color: bisque;
+    padding: 15px;
+  }
+
+  &__link {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    background-color: cadetblue;
   }
 }
