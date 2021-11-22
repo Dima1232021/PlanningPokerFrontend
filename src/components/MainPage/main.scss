@@ -2,10 +2,37 @@
   flex: 1 1 auto;
   color: #000;
 
-  &__show-user {
-    width: 100px;
-    height: 200px;
-    overflow: auto;
-    background-color: aqua;
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: brown;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  &__title {
+    flex: 1 0 100%;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    margin-top: 25px;
+  }
+}
+
+.block {
+  flex: 0 0 45%;
+  background-color: blueviolet;
+  &__title {
+    flex: 1 0 100%;
+    font-size: 22px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  &__list {
+    background-color: bisque;
   }
 }
