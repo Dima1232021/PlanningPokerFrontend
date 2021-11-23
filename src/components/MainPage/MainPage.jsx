@@ -10,6 +10,7 @@ export default function MainPage() {
   const [addPlayers, setAddPlayers] = useState([]);
   const [yourGames, setYourGames] = useState([]);
   const [invitedGames, setInvitedGames] = useState([]);
+  const [gamesYouHaveJoined, setGamesYouHaveJoined] = useState([]);
 
   const [nameGame, setNameGame] = useState("");
 
@@ -30,6 +31,7 @@ export default function MainPage() {
     }).then((value) =>
       value.json().then((data) => {
         setYourGames(data);
+        // console.log(data);
       })
     );
   }, []);
@@ -40,6 +42,17 @@ export default function MainPage() {
     }).then((value) =>
       value.json().then((data) => {
         setInvitedGames(data);
+        // console.log(data);
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_URL}/game/games_you_have_joined`, {
+      credentials: "include",
+    }).then((value) =>
+      value.json().then((data) => {
+        setGamesYouHaveJoined(data);
         // console.log(data);
       })
     );
@@ -99,12 +112,32 @@ export default function MainPage() {
       body: JSON.stringify({ invitation_id }),
     }).then((value) =>
       value.json().then((data) => {
+        // console.log(data)
         if (data.delete_invited) {
-          let arr = invitedGames.filter(
+          let arr1 = invitedGames.filter(
             (value) => value.invitation_id !== invitation_id
           );
-          setInvitedGames(arr);
+          let arr2 = gamesYouHaveJoined.filter(
+            (value) => value.invitation_id !== invitation_id
+          );
+          setInvitedGames(arr1);
+          setGamesYouHaveJoined(arr2);
         }
+      })
+    );
+  }
+
+  function joinTheGame({ invitation_id, game_id }) {
+    fetch(`${API_URL}/game/join_the_game`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ invitation_id, game_id }),
+    }).then((value) =>
+      value.json().then((data) => {
+        console.log(data);
       })
     );
   }
@@ -176,6 +209,7 @@ export default function MainPage() {
               })}
             </ul>
           </div>
+
           <div className="main__block block">
             <h2 className="block__title">Ігри до яких вас запрошують</h2>
             <ul className="block__list">
@@ -183,16 +217,32 @@ export default function MainPage() {
                 return (
                   <li key={game.invitation_id} className="block__link">
                     {game.game_name}
+                    <button onClick={() => joinTheGame(game)}>
+                      Приєднатися
+                    </button>
                     <button onClick={() => deleteInvited(game.invitation_id)}>
-                      Відклонити запрос
+                      Відмовитися
                     </button>
                   </li>
                 );
               })}
             </ul>
           </div>
+
           <div className="main__block block">
             <h2 className="block__title">Ігри до яких ви приєдналися</h2>
+            <ul className="block__list">
+              {gamesYouHaveJoined.map((game) => {
+                return (
+                  <li key={game.game_id} className="block__link">
+                    {game.game_name}
+                    <button onClick={() => deleteInvited(game.invitation_id)}>
+                      Відмовитися
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </div>
