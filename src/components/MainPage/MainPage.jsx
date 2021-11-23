@@ -127,7 +127,7 @@ export default function MainPage() {
     );
   }
 
-  function joinTheGame({ invitation_id, game_id }) {
+  function joinTheGame({ invitation_id, game_id, game_name }) {
     fetch(`${API_URL}/game/join_the_game`, {
       credentials: "include",
       method: "POST",
@@ -137,7 +137,16 @@ export default function MainPage() {
       body: JSON.stringify({ invitation_id, game_id }),
     }).then((value) =>
       value.json().then((data) => {
-        console.log(data);
+        let arr1 = invitedGames.filter(
+          (value) => value.invitation_id !== invitation_id
+        );
+        setInvitedGames(arr1);
+
+        setGamesYouHaveJoined([
+          ...gamesYouHaveJoined,
+          { invitation_id, game_id, game_name },
+        ]);
+        // console.log(data);
       })
     );
   }
