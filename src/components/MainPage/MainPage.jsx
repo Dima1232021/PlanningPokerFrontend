@@ -12,7 +12,7 @@ export default function MainPage() {
   const userid = useSelector((state) => state.user.userid);
   const yourGames = useSelector((state) => state.games.yourGames);
 
-  const [active, seActive] = useState(false);
+  const [active, seActive] = useState(true);
 
   const [invitedGames, setInvitedGames] = useState([]);
   const [gamesYouHaveJoined, setGamesYouHaveJoined] = useState([]);
@@ -125,55 +125,85 @@ export default function MainPage() {
 
       <div className="container">
         <div className="main__row">
-          <div className="main__block block">
-            <h2 className="block__title">Ігри які ви створили</h2>
-            <ul className="block__list">
-              {yourGames.map((game) => {
-                return (
-                  <li key={game.id} className="block__link">
-                    {game.name}
-                    {/* <button onClick={() => deleteGame(game.id)}>
-                      Видалити гру
-                    </button> */}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <div className="main__games">
+            <div className="main__title">
+              <h2>Інформація по іграм</h2>
+            </div>
+            <div className="main__block block">
+              <p className="block__text">Ігри які ви створили</p>
+              <ul className="block__list">
+                {yourGames.map((game) => {
+                  return (
+                    <li key={game.id} className="block__link">
+                      <span>{game.name_game}</span>
+                      {/* <button onClick={() => fan(value)}>{nameBtn}</button> */}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
-          <div className="main__block block">
-            <h2 className="block__title">Ігри до яких вас запрошують</h2>
-            <ul className="block__list">
-              {invitedGames.map((game) => {
-                return (
-                  <li key={game.invitation_id} className="block__link">
-                    {game.game_name}
-                    <button onClick={() => joinTheGame(game)}>
-                      Приєднатися
-                    </button>
-                    <button onClick={() => deleteInvited(game.invitation_id)}>
-                      Відмовитися
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+            {/* <div className="main__block block">
+              <p className="block__text">Ігри до яких вас запрошують</p>
+              <ul className="block__list">
+                {invitedGames.map((game) => {
+                  return (
+                    <li key={game.invitation_id} className="block__link">
+                      {game.game_name}
+                      <button onClick={() => joinTheGame(game)}>
+                        Приєднатися
+                      </button>
+                      <button onClick={() => deleteInvited(game.invitation_id)}>
+                        Відмовитися
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div> */}
 
-          <div className="main__block block">
-            <h2 className="block__title">Ігри до яких ви приєдналися</h2>
-            <ul className="block__list">
-              {gamesYouHaveJoined.map((game) => {
-                return (
-                  <li key={game.game_id} className="block__link">
-                    {game.game_name}
-                    <button onClick={() => deleteInvited(game.invitation_id)}>
-                      Відмовитися
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="main__block block">
+              <p className="block__text">Ігри до яких вас запрошують</p>
+              <ul className="block__list">
+                {invitedGames.map((game) => {
+                  return (
+                    <li key={game.invitation_id} className="block__link">
+                      <span>{game.game_name}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* <div className="main__block block">
+              <p className="block__text">Ігри до яких ви приєдналися</p>
+
+              <ul className="block__list">
+                {gamesYouHaveJoined.map((game) => {
+                  return (
+                    <li key={game.game_id} className="block__link">
+                      {game.game_name}
+                      <button onClick={() => deleteInvited(game.invitation_id)}>
+                        Відмовитися
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div> */}
+
+            <div className="main__block block">
+              <p className="block__text">Ігри до яких вас запрошують</p>
+              <ul className="block__list">
+                {gamesYouHaveJoined.map((game) => {
+                  return (
+                    <li key={game.game_id} className="block__link">
+                      <span>{game.game_name}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
 

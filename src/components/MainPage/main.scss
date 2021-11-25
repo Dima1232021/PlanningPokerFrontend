@@ -1,13 +1,47 @@
 .main {
   flex: 1 1 auto;
-  color: #000;
-
-
-
 
   &__row {
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 30px;
+  }
+
+  &__games {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #1c3b55;
+    padding: 20px 10px;
+    border-radius: 30px;
+  }
+
+  &__title {
+    flex: 0 0 100%;
+    text-align: center;
+    font-size: 32px;
+    line-height: 39px;
+    color: #fff;
+  }
+
+  &__block {
+    flex: 0 0 32%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #3a80ba;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+
+    .block {
+      &__link {
+        background-color: #1c3b55;
+      }
+    }
   }
 
   &__btn-create {
