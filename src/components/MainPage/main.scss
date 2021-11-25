@@ -2,30 +2,12 @@
   flex: 1 1 auto;
   color: #000;
 
+
+
+
   &__row {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-color: brown;
-    padding: 20px;
-    margin-top: 20px;
-
-    &:nth-child(2) {
-      background-color: rgb(128, 165, 42);
-
-      & .block {
-        flex: 0 0 30%;
-      }
-    }
-  }
-
-  &__title {
-    flex: 1 0 100%;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 38px;
-    text-align: center;
-    margin-top: 25px;
+    justify-content: center;
   }
 
   &__btn-create {
@@ -37,34 +19,4 @@
     font-size: 24px;
     line-height: 29px;
   }
-}
-
-.block {
-  // flex: 0 0 45%;
-  // background-color: blueviolet;
-  // &__title {
-  //   flex: 1 0 100%;
-  //   font-size: 22px;
-  //   line-height: 24px;
-  //   text-align: center;
-  //   margin-top: 25px;
-  // }
-
-  // &__list {
-  //   background-color: bisque;
-  //   padding: 15px;
-  // }
-
-  // &__link {
-  //   margin-bottom: 10px;
-  //   padding: 10px;
-  //   border-radius: 15px;
-  //   display: flex;
-  //   justify-content: space-between;
-  //   background-color: cadetblue;
-
-  //   button {
-  //     margin-left: 5px;
-  //   }
-  // }
 }

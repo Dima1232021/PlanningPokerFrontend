@@ -1,4 +1,8 @@
 import { API_URL } from "../config";
+import {
+  addYourtGameAction,
+  addYourtGamesAction,
+} from "../reducers/gamesReducer";
 
 export function createGame(nameGame, users, stories, justDriving) {
   return (dispatch) => {
@@ -11,7 +15,21 @@ export function createGame(nameGame, users, stories, justDriving) {
       body: JSON.stringify({ nameGame, users, stories, justDriving }),
     }).then((value) =>
       value.json().then((data) => {
-        console.log("створити гру: ", data);
+        if (data.status === "created") {
+          dispatch(addYourtGameAction(data.game));
+        }
+      })
+    );
+  };
+}
+
+export function showYoyrGame() {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/your_games`, {
+      credentials: "include",
+    }).then((value) =>
+      value.json().then((data) => {
+        dispatch(addYourtGamesAction(data));
       })
     );
   };
