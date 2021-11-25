@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
 import { ActionCable } from "react-actioncable-provider";
+import CreateGame from "./createGame/CreateGame";
+import { useDispatch, useSelector } from "react-redux";
 import "./main.scss";
 
 export default function MainPage() {
+  const dispatch = useDispatch();
+  const userid = useSelector((state) => state.user.userid);
+
+  const [active, seActive] = useState(false);
+
   const [numberOfUsers, setNumberOfUsers] = useState(null);
 
   const [users, setUsers] = useState([]);
@@ -30,8 +37,8 @@ export default function MainPage() {
       credentials: "include",
     }).then((value) =>
       value.json().then((data) => {
-        setYourGames(data);
-        // console.log(data);
+        // setYourGames(data);
+        console.log("your_games", data);
       })
     );
   }, []);
@@ -41,8 +48,8 @@ export default function MainPage() {
       credentials: "include",
     }).then((value) =>
       value.json().then((data) => {
-        setInvitedGames(data);
-        // console.log(data);
+        // setInvitedGames(data);
+        console.log("invited_games", data);
       })
     );
   }, []);
@@ -52,14 +59,14 @@ export default function MainPage() {
       credentials: "include",
     }).then((value) =>
       value.json().then((data) => {
-        setGamesYouHaveJoined(data);
-        // console.log(data);
+        // setGamesYouHaveJoined(data);
+        console.log("games_you_have_joined", data);
       })
     );
   }, []);
 
   function addUser(user) {
-    let findUser = addPlayers.find((value) => value === user);
+    let findUser = addPlayers.find((value) => value.id === user.id);
     !findUser && setAddPlayers([...addPlayers, user]);
   }
 
@@ -153,14 +160,16 @@ export default function MainPage() {
 
   return (
     <div className="main">
-      {
-        <ActionCable
-          channel={{ channel: "ShowUsersChannel" }}
-          onReceived={(value) => {
-            setNumberOfUsers(value);
-          }}
-        />
-      }
+      <ActionCable
+        key={userid}
+        channel={{
+          channel: "ShowingGameRequestsChannel",
+          user: userid,
+        }}
+        onReceived={(value) => {
+          console.log("ShowingGameRequestsChannel:", value);
+        }}
+      />
       <div className="container">
         <div className="main__row">
           <h2 className="main__title">Cтворити нову гру</h2>
@@ -179,9 +188,7 @@ export default function MainPage() {
           </div>
 
           <div className="main__block block">
-            <h2 className="block__title">
-              користувачі які ви плануєте пригласити до гри
-            </h2>
+            <p className="block__title">Користувачі яких ви вибрали</p>
             <ul className="block__list">
               {addPlayers.map((user) => {
                 return (
@@ -254,6 +261,17 @@ export default function MainPage() {
             </ul>
           </div>
         </div>
+
+        {active ? (
+          <button
+            className="main__btn-create"
+            onClick={() => seActive(!active)}
+          >
+            Створити нову гру
+          </button>
+        ) : (
+          <CreateGame seActive={seActive} />
+        )}
       </div>
     </div>
   );

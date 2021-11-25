@@ -5,7 +5,7 @@ const defaultState = {
   logged_in: false,
   username: "",
   email: "",
-  userid: "",
+  userid: null,
 };
 
 export const userReducer = (state = defaultState, action) => {
