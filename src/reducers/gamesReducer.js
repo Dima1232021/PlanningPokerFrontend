@@ -1,11 +1,13 @@
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
 const DELETE_YOUR_GAME = "DELETE_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
+const ADD_GAMES_INVITATIONS = "ADD_GAMES_INVITATIONS";
+const ADD_GAME_INVITATION = "ADD_GAME_INVITATION";
 
 const defaultState = {
   error: "",
   yourGames: [],
-  invitedGames: [],
+  showingInvitationsToGames: [],
   gamesYouHaveJoined: [],
 };
 
@@ -22,6 +24,12 @@ export const gamesReducer = (state = defaultState, action) => {
 
     case ADD_YOUR_GAMES:
       return { ...state, yourGames: action.payload };
+
+    case ADD_GAMES_INVITATIONS:
+      return { ...state, showingInvitationsToGames: action.payload };
+
+    case ADD_GAME_INVITATION:
+      return { ...state, showingInvitationsToGames: [...state.showingInvitationsToGames, action.payload] };
 
     default:
       return state;
@@ -40,5 +48,15 @@ export const deleteYourtGameAction = (payload) => ({
 
 export const addYourtGamesAction = (payload) => ({
   type: ADD_YOUR_GAMES,
+  payload: payload,
+});
+
+export const addGamesInvitationsAction = (payload) => ({
+  type: ADD_GAMES_INVITATIONS,
+  payload: payload,
+});
+
+export const addGameInvitationAction = (payload) => ({
+  type: ADD_GAME_INVITATION,
   payload: payload,
 });

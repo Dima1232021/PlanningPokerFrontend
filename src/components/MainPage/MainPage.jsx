@@ -3,7 +3,12 @@ import { API_URL } from "../../config";
 import { ActionCable } from "react-actioncable-provider";
 import CreateGame from "./createGame/CreateGame";
 import { useDispatch, useSelector } from "react-redux";
-import { showYoyrGame, deleteYoyrGame } from "../../actions/Game";
+import {
+  showYoyrGame,
+  deleteYoyrGame,
+  showingYourInvitationsToGames,
+} from "../../actions/Game";
+import { addGameInvitationAction } from "../../reducers/gamesReducer";
 
 import "./main.scss";
 
@@ -11,30 +16,22 @@ export default function MainPage() {
   const dispatch = useDispatch();
   const userid = useSelector((state) => state.user.userid);
   const yourGames = useSelector((state) => state.games.yourGames);
+  const showingInvitationsToGames = useSelector(
+    (state) => state.games.showingInvitationsToGames
+  );
 
   const [active, seActive] = useState(true);
 
-  const [invitedGames, setInvitedGames] = useState([]);
   const [gamesYouHaveJoined, setGamesYouHaveJoined] = useState([]);
 
   useEffect(() => {
     dispatch(showYoyrGame());
+    dispatch(showingYourInvitationsToGames());
   }, []);
 
-  function deleteGame(game_id) {
-    dispatch(deleteYoyrGame(game_id));
+  function deleteGame(gameId) {
+    dispatch(deleteYoyrGame(gameId));
   }
-
-  useEffect(() => {
-    fetch(`${API_URL}/game/invited_games`, {
-      credentials: "include",
-    }).then((value) =>
-      value.json().then((data) => {
-        // setInvitedGames(data);
-        console.log("invited_games", data);
-      })
-    );
-  }, []);
 
   useEffect(() => {
     fetch(`${API_URL}/game/games_you_have_joined`, {
@@ -47,72 +44,54 @@ export default function MainPage() {
     );
   }, []);
 
-  // function deleteGame(game_id) {
-  //   fetch(`${API_URL}/game/delete_game`, {
+  // function deleteInvited(invitation_id) {
+  //   fetch(`${API_URL}/game/delete_invited`, {
   //     credentials: "include",
   //     method: "DELETE",
   //     headers: {
   //       "Content-Type": "application/json",
   //     },
-  //     body: JSON.stringify({ game_id }),
+  //     body: JSON.stringify({ invitation_id }),
   //   }).then((value) =>
   //     value.json().then((data) => {
-  //       if (data.delete_game) {
-  //         let arr = yourGames.filter((value) => value.id !== game_id);
-  //         setYourGames(arr);
+  //       // console.log(data)
+  //       if (data.delete_invited) {
+  //         let arr1 = invitedGames.filter(
+  //           (value) => value.invitation_id !== invitation_id
+  //         );
+  //         let arr2 = gamesYouHaveJoined.filter(
+  //           (value) => value.invitation_id !== invitation_id
+  //         );
+  //         setInvitedGames(arr1);
+  //         setGamesYouHaveJoined(arr2);
   //       }
   //     })
   //   );
   // }
 
-  function deleteInvited(invitation_id) {
-    fetch(`${API_URL}/game/delete_invited`, {
-      credentials: "include",
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ invitation_id }),
-    }).then((value) =>
-      value.json().then((data) => {
-        // console.log(data)
-        if (data.delete_invited) {
-          let arr1 = invitedGames.filter(
-            (value) => value.invitation_id !== invitation_id
-          );
-          let arr2 = gamesYouHaveJoined.filter(
-            (value) => value.invitation_id !== invitation_id
-          );
-          setInvitedGames(arr1);
-          setGamesYouHaveJoined(arr2);
-        }
-      })
-    );
-  }
+  // function joinTheGame({ invitation_id, game_id, game_name }) {
+  //   fetch(`${API_URL}/game/join_the_game`, {
+  //     credentials: "include",
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ invitation_id, game_id }),
+  //   }).then((value) =>
+  //     value.json().then((data) => {
+  //       let arr1 = invitedGames.filter(
+  //         (value) => value.invitation_id !== invitation_id
+  //       );
+  //       setInvitedGames(arr1);
 
-  function joinTheGame({ invitation_id, game_id, game_name }) {
-    fetch(`${API_URL}/game/join_the_game`, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ invitation_id, game_id }),
-    }).then((value) =>
-      value.json().then((data) => {
-        let arr1 = invitedGames.filter(
-          (value) => value.invitation_id !== invitation_id
-        );
-        setInvitedGames(arr1);
-
-        setGamesYouHaveJoined([
-          ...gamesYouHaveJoined,
-          { invitation_id, game_id, game_name },
-        ]);
-        // console.log(data);
-      })
-    );
-  }
+  //       setGamesYouHaveJoined([
+  //         ...gamesYouHaveJoined,
+  //         { invitation_id, game_id, game_name },
+  //       ]);
+  //       // console.log(data);
+  //     })
+  //   );
+  // }
 
   return (
     <div className="main">
@@ -123,7 +102,8 @@ export default function MainPage() {
           user: userid,
         }}
         onReceived={(value) => {
-          console.log("ShowingGameRequestsChannel:", value);
+          console.log(value);
+          dispatch(addGameInvitationAction(value));
         }}
       />
 
@@ -175,10 +155,14 @@ export default function MainPage() {
             <div className="main__block block">
               <p className="block__text">Ігри до яких вас запрошують</p>
               <ul className="block__list">
-                {invitedGames.map((game) => {
+                {showingInvitationsToGames.map((game) => {
                   return (
                     <li key={game.invitation_id} className="block__link">
                       <span>{game.game_name}</span>
+                      <div>
+                        <button>Приєднатися</button>
+                        <button>Відмовитися</button>
+                      </div>
                     </li>
                   );
                 })}
