@@ -40,6 +40,15 @@
     .block {
       &__link {
         background-color: #1c3b55;
+
+        div {
+          display: flex;
+          flex-direction: column;
+        }
+
+        button:nth-child(1) {
+          margin-bottom: 5px;
+        }
       }
     }
   }

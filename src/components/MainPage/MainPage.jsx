@@ -3,7 +3,7 @@ import { API_URL } from "../../config";
 import { ActionCable } from "react-actioncable-provider";
 import CreateGame from "./createGame/CreateGame";
 import { useDispatch, useSelector } from "react-redux";
-import { showYoyrGame } from "../../actions/Game";
+import { showYoyrGame, deleteYoyrGame } from "../../actions/Game";
 
 import "./main.scss";
 
@@ -20,6 +20,10 @@ export default function MainPage() {
   useEffect(() => {
     dispatch(showYoyrGame());
   }, []);
+
+  function deleteGame(game_id) {
+    dispatch(deleteYoyrGame(game_id));
+  }
 
   useEffect(() => {
     fetch(`${API_URL}/game/invited_games`, {
@@ -129,6 +133,7 @@ export default function MainPage() {
             <div className="main__title">
               <h2>Інформація по іграм</h2>
             </div>
+
             <div className="main__block block">
               <p className="block__text">Ігри які ви створили</p>
               <ul className="block__list">
@@ -136,7 +141,12 @@ export default function MainPage() {
                   return (
                     <li key={game.id} className="block__link">
                       <span>{game.name_game}</span>
-                      {/* <button onClick={() => fan(value)}>{nameBtn}</button> */}
+                      <div>
+                        <button>До гри</button>
+                        <button onClick={() => deleteGame(game.id)}>
+                          Видалити
+                        </button>
+                      </div>
                     </li>
                   );
                 })}

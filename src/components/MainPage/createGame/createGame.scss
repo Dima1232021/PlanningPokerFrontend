@@ -38,6 +38,12 @@
     &:nth-child(-n + 2) {
       flex: 0 0 49%;
     }
+
+    &__link {
+      button {
+        margin: 0px 0px auto 20px;
+      }
+    }
   }
 }
 
@@ -108,7 +114,6 @@
       border-radius: 8px;
       font-size: 14px;
       line-height: 20px;
-      margin: 0px 0px auto 20px;
     }
   }
 

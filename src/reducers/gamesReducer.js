@@ -1,4 +1,5 @@
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
+const DELETE_YOUR_GAME = "DELETE_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
 
 const defaultState = {
@@ -13,6 +14,12 @@ export const gamesReducer = (state = defaultState, action) => {
     case ADD_YOUR_GAME:
       return { ...state, yourGames: [...state.yourGames, action.payload] };
 
+    case DELETE_YOUR_GAME:
+      let yourGames = state.yourGames.filter(
+        (value) => value.id !== action.payload
+      );
+      return { ...state, yourGames };
+
     case ADD_YOUR_GAMES:
       return { ...state, yourGames: action.payload };
 
@@ -23,6 +30,11 @@ export const gamesReducer = (state = defaultState, action) => {
 
 export const addYourtGameAction = (payload) => ({
   type: ADD_YOUR_GAME,
+  payload: payload,
+});
+
+export const deleteYourtGameAction = (payload) => ({
+  type: DELETE_YOUR_GAME,
   payload: payload,
 });
 
