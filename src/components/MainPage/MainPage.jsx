@@ -7,6 +7,9 @@ import {
   showYoyrGame,
   deleteYoyrGame,
   showingYourInvitationsToGames,
+  joinTheGame,
+  showTheGamesYouHaveJoined,
+  declineInvitation,
 } from "../../actions/Game";
 import { addGameInvitationAction } from "../../reducers/gamesReducer";
 
@@ -19,79 +22,17 @@ export default function MainPage() {
   const showingInvitationsToGames = useSelector(
     (state) => state.games.showingInvitationsToGames
   );
+  const gamesYouHaveJoined = useSelector(
+    (state) => state.games.gamesYouHaveJoined
+  );
 
   const [active, seActive] = useState(true);
-
-  const [gamesYouHaveJoined, setGamesYouHaveJoined] = useState([]);
 
   useEffect(() => {
     dispatch(showYoyrGame());
     dispatch(showingYourInvitationsToGames());
+    dispatch(showTheGamesYouHaveJoined());
   }, []);
-
-  function deleteGame(gameId) {
-    dispatch(deleteYoyrGame(gameId));
-  }
-
-  useEffect(() => {
-    fetch(`${API_URL}/game/games_you_have_joined`, {
-      credentials: "include",
-    }).then((value) =>
-      value.json().then((data) => {
-        // setGamesYouHaveJoined(data);
-        console.log("games_you_have_joined", data);
-      })
-    );
-  }, []);
-
-  // function deleteInvited(invitation_id) {
-  //   fetch(`${API_URL}/game/delete_invited`, {
-  //     credentials: "include",
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ invitation_id }),
-  //   }).then((value) =>
-  //     value.json().then((data) => {
-  //       // console.log(data)
-  //       if (data.delete_invited) {
-  //         let arr1 = invitedGames.filter(
-  //           (value) => value.invitation_id !== invitation_id
-  //         );
-  //         let arr2 = gamesYouHaveJoined.filter(
-  //           (value) => value.invitation_id !== invitation_id
-  //         );
-  //         setInvitedGames(arr1);
-  //         setGamesYouHaveJoined(arr2);
-  //       }
-  //     })
-  //   );
-  // }
-
-  // function joinTheGame({ invitation_id, game_id, game_name }) {
-  //   fetch(`${API_URL}/game/join_the_game`, {
-  //     credentials: "include",
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ invitation_id, game_id }),
-  //   }).then((value) =>
-  //     value.json().then((data) => {
-  //       let arr1 = invitedGames.filter(
-  //         (value) => value.invitation_id !== invitation_id
-  //       );
-  //       setInvitedGames(arr1);
-
-  //       setGamesYouHaveJoined([
-  //         ...gamesYouHaveJoined,
-  //         { invitation_id, game_id, game_name },
-  //       ]);
-  //       // console.log(data);
-  //     })
-  //   );
-  // }
 
   return (
     <div className="main">
@@ -123,7 +64,9 @@ export default function MainPage() {
                       <span>{game.name_game}</span>
                       <div>
                         <button>До гри</button>
-                        <button onClick={() => deleteGame(game.id)}>
+                        <button
+                          onClick={() => dispatch(deleteYoyrGame(game.id))}
+                        >
                           Видалити
                         </button>
                       </div>
@@ -133,25 +76,6 @@ export default function MainPage() {
               </ul>
             </div>
 
-            {/* <div className="main__block block">
-              <p className="block__text">Ігри до яких вас запрошують</p>
-              <ul className="block__list">
-                {invitedGames.map((game) => {
-                  return (
-                    <li key={game.invitation_id} className="block__link">
-                      {game.game_name}
-                      <button onClick={() => joinTheGame(game)}>
-                        Приєднатися
-                      </button>
-                      <button onClick={() => deleteInvited(game.invitation_id)}>
-                        Відмовитися
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div> */}
-
             <div className="main__block block">
               <p className="block__text">Ігри до яких вас запрошують</p>
               <ul className="block__list">
@@ -160,31 +84,22 @@ export default function MainPage() {
                     <li key={game.invitation_id} className="block__link">
                       <span>{game.game_name}</span>
                       <div>
-                        <button>Приєднатися</button>
-                        <button>Відмовитися</button>
+                        <button onClick={() => dispatch(joinTheGame(game))}>
+                          Приєднатися
+                        </button>
+                        <button
+                          onClick={() =>
+                            dispatch(declineInvitation(game.invitation_id))
+                          }
+                        >
+                          Відмовитися
+                        </button>
                       </div>
                     </li>
                   );
                 })}
               </ul>
             </div>
-
-            {/* <div className="main__block block">
-              <p className="block__text">Ігри до яких ви приєдналися</p>
-
-              <ul className="block__list">
-                {gamesYouHaveJoined.map((game) => {
-                  return (
-                    <li key={game.game_id} className="block__link">
-                      {game.game_name}
-                      <button onClick={() => deleteInvited(game.invitation_id)}>
-                        Відмовитися
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div> */}
 
             <div className="main__block block">
               <p className="block__text">Ігри до яких вас запрошують</p>
@@ -193,6 +108,16 @@ export default function MainPage() {
                   return (
                     <li key={game.game_id} className="block__link">
                       <span>{game.game_name}</span>
+                      <div>
+                        <button>До гри</button>
+                        <button
+                          onClick={() =>
+                            dispatch(declineInvitation(game.invitation_id))
+                          }
+                        >
+                          Видалити
+                        </button>
+                      </div>
                     </li>
                   );
                 })}

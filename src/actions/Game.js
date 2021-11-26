@@ -4,6 +4,9 @@ import {
   addYourtGamesAction,
   deleteYourtGameAction,
   addGamesInvitationsAction,
+  addTheGameYouJoined,
+  addGamesYouHaveJoined,
+  deleteInvitationAction,
 } from "../reducers/gamesReducer";
 
 export function createGame(nameGame, users, stories, justDriving) {
@@ -68,27 +71,52 @@ export function showingYourInvitationsToGames() {
   };
 }
 
-// export function deleteInvited(invitation_id) {
-//     fetch(`${API_URL}/game/delete_invited`, {
-//       credentials: "include",
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ invitation_id }),
-//     }).then((value) =>
-//       value.json().then((data) => {
-//         // console.log(data)
-//         if (data.delete_invited) {
-//           let arr1 = invitedGames.filter(
-//             (value) => value.invitation_id !== invitation_id
-//           );
-//           let arr2 = gamesYouHaveJoined.filter(
-//             (value) => value.invitation_id !== invitation_id
-//           );
-//           setInvitedGames(arr1);
-//           setGamesYouHaveJoined(arr2);
-//         }
-//       })
-//     );
-//   }
+export function joinTheGame({ invitation_id, game_id, game_name }) {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/join_the_game`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ invitation_id, game_id }),
+    }).then((value) =>
+      value.json().then((data) => {
+        if (data.join_the_game) {
+          dispatch(addTheGameYouJoined({ invitation_id, game_id, game_name }));
+        }
+      })
+    );
+  };
+}
+
+export function showTheGamesYouHaveJoined() {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/games_you_have_joined`, {
+      credentials: "include",
+    }).then((value) =>
+      value.json().then((data) => {
+        dispatch(addGamesYouHaveJoined(data));
+      })
+    );
+  };
+}
+
+export function declineInvitation(invitationId) {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/delete_invited`, {
+      credentials: "include",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ invitation_id: invitationId }),
+    }).then((value) =>
+      value.json().then((data) => {
+        if (data.delete_invited) {
+          dispatch(deleteInvitationAction(invitationId));
+        }
+      })
+    );
+  };
+}
