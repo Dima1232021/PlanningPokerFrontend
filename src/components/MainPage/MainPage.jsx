@@ -37,14 +37,23 @@ export default function MainPage() {
   return (
     <div className="main">
       <ActionCable
-        key={userid}
         channel={{
           channel: "ShowingGameRequestsChannel",
           user: userid,
         }}
         onReceived={(value) => {
-          console.log(value);
-          dispatch(addGameInvitationAction(value));
+          // dispatch(addGameInvitationAction(value));
+          console.log("ShowingGameRequestsChannel", value);
+        }}
+      />
+      <ActionCable
+        channel={{
+          channel: "DeleteInvitationChannel",
+          user: userid,
+        }}
+        onReceived={(value) => {
+          console.log("DeleteInvitationChannel", value);
+          // dispatch(addGameInvitationAction(value));
         }}
       />
 
