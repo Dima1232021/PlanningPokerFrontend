@@ -11,7 +11,10 @@ import {
   showTheGamesYouHaveJoined,
   declineInvitation,
 } from "../../actions/Game";
-import { addGameInvitationAction } from "../../reducers/gamesReducer";
+import {
+  addGameInvitationAction,
+  deleteInvitationAction,
+} from "../../reducers/gamesReducer";
 
 import "./main.scss";
 
@@ -19,8 +22,8 @@ export default function MainPage() {
   const dispatch = useDispatch();
   const userid = useSelector((state) => state.user.userid);
   const yourGames = useSelector((state) => state.games.yourGames);
-  const showingInvitationsToGames = useSelector(
-    (state) => state.games.showingInvitationsToGames
+  const invitationsToGames = useSelector(
+    (state) => state.games.invitationsToGames
   );
   const gamesYouHaveJoined = useSelector(
     (state) => state.games.gamesYouHaveJoined
@@ -42,8 +45,7 @@ export default function MainPage() {
           user: userid,
         }}
         onReceived={(value) => {
-          // dispatch(addGameInvitationAction(value));
-          console.log("ShowingGameRequestsChannel", value);
+          dispatch(addGameInvitationAction(value));
         }}
       />
       <ActionCable
@@ -52,8 +54,13 @@ export default function MainPage() {
           user: userid,
         }}
         onReceived={(value) => {
+          dispatch(
+            deleteInvitationAction({
+              invitationId: value.invitation_id,
+              value: "are invited",
+            })
+          );
           console.log("DeleteInvitationChannel", value);
-          // dispatch(addGameInvitationAction(value));
         }}
       />
 
@@ -88,7 +95,7 @@ export default function MainPage() {
             <div className="main__block block">
               <p className="block__text">Ігри до яких вас запрошують</p>
               <ul className="block__list">
-                {showingInvitationsToGames.map((game) => {
+                {invitationsToGames.map((game) => {
                   return (
                     <li key={game.invitation_id} className="block__link">
                       <span>{game.game_name}</span>
@@ -98,7 +105,12 @@ export default function MainPage() {
                         </button>
                         <button
                           onClick={() =>
-                            dispatch(declineInvitation(game.invitation_id))
+                            dispatch(
+                              declineInvitation(
+                                game.invitation_id,
+                                "are invited"
+                              )
+                            )
                           }
                         >
                           Відмовитися
@@ -111,7 +123,7 @@ export default function MainPage() {
             </div>
 
             <div className="main__block block">
-              <p className="block__text">Ігри до яких вас запрошують</p>
+              <p className="block__text">Ігри до яких ви приєдналися</p>
               <ul className="block__list">
                 {gamesYouHaveJoined.map((game) => {
                   return (
@@ -121,7 +133,9 @@ export default function MainPage() {
                         <button>До гри</button>
                         <button
                           onClick={() =>
-                            dispatch(declineInvitation(game.invitation_id))
+                            dispatch(
+                              declineInvitation(game.invitation_id, "joined")
+                            )
                           }
                         >
                           Видалити

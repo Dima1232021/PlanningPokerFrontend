@@ -13,7 +13,7 @@ const DELETE_INVITATION = "DELETE_INVITATION";
 const defaultState = {
   error: "",
   yourGames: [],
-  showingInvitationsToGames: [],
+  invitationsToGames: [],
   gamesYouHaveJoined: [],
 };
 
@@ -32,25 +32,29 @@ export const gamesReducer = (state = defaultState, action) => {
       return { ...state, yourGames: action.payload };
 
     case ADD_GAMES_INVITATIONS:
-      return { ...state, showingInvitationsToGames: action.payload };
+      return { ...state, invitationsToGames: action.payload };
 
     case ADD_GAME_INVITATION:
-      return {
-        ...state,
-        showingInvitationsToGames: [
-          ...state.showingInvitationsToGames,
-          action.payload,
-        ],
-      };
+      let value = state.invitationsToGames.find(
+        (element) => element.game_id === action.payload.game_id
+      );
+      if (!value) {
+        return {
+          ...state,
+          invitationsToGames: [...state.invitationsToGames, action.payload],
+        };
+      } else {
+        return state;
+      }
 
     case ADD_THE_GAME_YOU_JOINED:
-      let showingInvitationsToGames = state.showingInvitationsToGames.filter(
+      let invitationsToGames = state.invitationsToGames.filter(
         (value) => value.invitation_id !== action.payload.invitation_id
       );
       return {
         ...state,
         gamesYouHaveJoined: [...state.gamesYouHaveJoined, action.payload],
-        showingInvitationsToGames,
+        invitationsToGames,
       };
 
     case ADD_GAMES_YOU_HAVE_JOINED:
@@ -60,17 +64,17 @@ export const gamesReducer = (state = defaultState, action) => {
       };
 
     case DELETE_INVITATION:
-      let showingInv = state.showingInvitationsToGames.filter(
-        (value) => value.invitation_id !== action.payload
-      );
-      let gamesYouHaveJoined = state.gamesYouHaveJoined.filter(
-        (value) => value.invitation_id !== action.payload
-      );
-      return {
-        ...state,
-        showingInvitationsToGames: showingInv,
-        gamesYouHaveJoined,
-      };
+      if (action.payload.value === "are invited") {
+        let invitationsToGames = state.invitationsToGames.filter(
+          (value) => value.invitation_id !== action.payload.invitationId
+        );
+        return { ...state, invitationsToGames };
+      } else {
+        let gamesYouHaveJoined = state.gamesYouHaveJoined.filter(
+          (value) => value.invitation_id !== action.payload.invitationId
+        );
+        return { ...state, gamesYouHaveJoined };
+      }
 
     default:
       return state;

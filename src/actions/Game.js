@@ -102,7 +102,7 @@ export function showTheGamesYouHaveJoined() {
   };
 }
 
-export function declineInvitation(invitationId) {
+export function declineInvitation(invitationId, value) {
   return (dispatch) => {
     fetch(`${API_URL}/game/delete_invited`, {
       credentials: "include",
@@ -111,10 +111,10 @@ export function declineInvitation(invitationId) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ invitation_id: invitationId }),
-    }).then((value) =>
-      value.json().then((data) => {
-        if (data.delete_invited) {
-          dispatch(deleteInvitationAction(invitationId));
+    }).then((date1) =>
+      date1.json().then((data2) => {
+        if (data2.delete_invited) {
+          dispatch(deleteInvitationAction({ invitationId, value }));
         }
       })
     );

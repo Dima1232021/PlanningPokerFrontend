@@ -18,14 +18,16 @@ export function login(email, password) {
           password,
         },
       }),
-    }).then((value) =>
-      value.json().then((data) => {
-        console.log(data);
-        if (data.logged_in) {
-          dispatch(addUserDataAction(data));
-        }
-      })
-    );
+    })
+      .then((value) =>
+        value.json().then((data) => {
+          console.log(data);
+          if (data.logged_in) {
+            dispatch(addUserDataAction(data));
+          }
+        })
+      )
+      .catch((error) => console.log("Сервер не відповідає"));
   };
 }
 
@@ -45,14 +47,16 @@ export function create(username, email, password, password_confirmation) {
           password_confirmation,
         },
       }),
-    }).then((value) =>
-      value.json().then((data) => {
-        console.log(data);
-        if (data.logged_in) {
-          dispatch(addUserDataAction(data));
-        }
-      })
-    );
+    })
+      .then((value) =>
+        value.json().then((data) => {
+          console.log(data);
+          if (data.logged_in) {
+            dispatch(addUserDataAction(data));
+          }
+        })
+      )
+      .catch((error) => console.log("Сервер не відповідає"));
   };
 }
 
@@ -61,14 +65,16 @@ export function logged_in() {
     fetch(`${API_URL}/authenticate/logged_in`, {
       credentials: "include",
       method: "GET",
-    }).then((value) =>
-      value.json().then((data) => {
-        console.log(data);
-        if (data.logged_in) {
-          dispatch(addUserDataAction(data));
-        }
-      })
-    );
+    })
+      .then((value) =>
+        value.json().then((data) => {
+          console.log(data);
+          if (data.logged_in) {
+            dispatch(addUserDataAction(data));
+          }
+        })
+      )
+      .catch((error) => console.log("Сервер не відповідає"));
   };
 }
 
@@ -77,13 +83,15 @@ export function logout() {
     fetch(`${API_URL}/authenticate/logout`, {
       credentials: "include",
       method: "DELETE",
-    }).then((value) =>
-      value.json().then((data) => {
-        console.log(data);
-        if (data.logged_out) {
-          dispatch(deleteUserDataAction());
-        }
-      })
-    );
+    })
+      .then((value) =>
+        value.json().then((data) => {
+          console.log(data);
+          if (data.logged_out) {
+            dispatch(deleteUserDataAction());
+          }
+        })
+      )
+      .catch((error) => console.log("Сервер не відповідає"));
   };
 }
