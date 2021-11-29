@@ -1,5 +1,6 @@
 import { API_URL } from "../config";
 import {
+  changeActveFormAction,
   addYourtGameAction,
   addYourtGamesAction,
   deleteYourtGameAction,
@@ -21,7 +22,8 @@ export function createGame(nameGame, users, stories, justDriving) {
     }).then((value) =>
       value.json().then((data) => {
         if (data.status === "created") {
-          dispatch(addYourtGameAction(data.game));
+          dispatch(addYourtGameAction(data.game), changeActveFormAction(false));
+          dispatch(changeActveFormAction(false));
         }
       })
     );
