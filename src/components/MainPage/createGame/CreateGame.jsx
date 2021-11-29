@@ -3,6 +3,7 @@ import { ActionCable } from "react-actioncable-provider";
 import { useDispatch, useSelector } from "react-redux";
 import { showUser } from "../../../actions/users";
 import { createGame } from "../../../actions/Game";
+import { changeActveFormAction } from "../../../reducers/gamesReducer";
 import List from "./List";
 import Cheks from "./Cheks";
 
@@ -114,7 +115,7 @@ export default function CreateGame({ seActive }) {
             <Cheks justDriving={justDriving} setJustDriving={setJustDriving} />
             <div>
               <button
-                onClick={() => seActive((value) => !value)}
+                onClick={() => dispatch(changeActveFormAction(false))}
                 className="block__btn-exit"
               >
                 Відмінити

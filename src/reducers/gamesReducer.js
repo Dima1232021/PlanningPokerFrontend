@@ -1,3 +1,5 @@
+const CHANGE_ACTIVE_FORM = "CHANGE_ACTIVE_FORM";
+
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
 
@@ -11,6 +13,7 @@ const DELETE_YOUR_GAME = "DELETE_YOUR_GAME";
 const DELETE_INVITATION = "DELETE_INVITATION";
 
 const defaultState = {
+  activeForm: false,
   error: "",
   yourGames: [],
   invitationsToGames: [],
@@ -19,6 +22,9 @@ const defaultState = {
 
 export const gamesReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case CHANGE_ACTIVE_FORM:
+      return { ...state, activeForm: action.payload };
+
     case ADD_YOUR_GAME:
       return { ...state, yourGames: [...state.yourGames, action.payload] };
 
@@ -80,6 +86,11 @@ export const gamesReducer = (state = defaultState, action) => {
       return state;
   }
 };
+
+export const changeActveFormAction = (payload) => ({
+  type: CHANGE_ACTIVE_FORM,
+  payload: payload,
+});
 
 export const addYourtGameAction = (payload) => ({
   type: ADD_YOUR_GAME,

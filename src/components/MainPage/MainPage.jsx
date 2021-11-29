@@ -12,6 +12,7 @@ import {
   declineInvitation,
 } from "../../actions/Game";
 import {
+  changeActveFormAction,
   addGameInvitationAction,
   deleteInvitationAction,
 } from "../../reducers/gamesReducer";
@@ -20,6 +21,7 @@ import "./main.scss";
 
 export default function MainPage() {
   const dispatch = useDispatch();
+  const activeForm = useSelector((state) => state.games.activeForm);
   const userid = useSelector((state) => state.user.userid);
   const yourGames = useSelector((state) => state.games.yourGames);
   const invitationsToGames = useSelector(
@@ -29,7 +31,6 @@ export default function MainPage() {
     (state) => state.games.gamesYouHaveJoined
   );
 
-  const [active, seActive] = useState(true);
 
   useEffect(() => {
     dispatch(showYoyrGame());
@@ -60,7 +61,6 @@ export default function MainPage() {
               value: "are invited",
             })
           );
-          console.log("DeleteInvitationChannel", value);
         }}
       />
 
@@ -150,15 +150,15 @@ export default function MainPage() {
         </div>
 
         <div className="main__row">
-          {active ? (
+          {!activeForm ? (
             <button
               className="main__btn-create"
-              onClick={() => seActive(!active)}
+              onClick={() => dispatch(changeActveFormAction(true))}
             >
               Створити нову гру
             </button>
           ) : (
-            <CreateGame seActive={seActive} />
+            <CreateGame />
           )}
         </div>
       </div>
