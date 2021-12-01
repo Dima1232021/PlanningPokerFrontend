@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { API_URL } from "../../config";
+import React from "react";
 import { ActionCable } from "react-actioncable-provider";
 import CreateGame from "./createGame/CreateGame";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  showYoyrGame,
-  deleteYoyrGame,
-  showingYourInvitationsToGames,
-  joinTheGame,
-  // showTheGamesYouHaveJoined,
-  declineInvitation,
-} from "../../actions/Game";
 import {
   changeActveFormAction,
   addGameInvitationAction,
@@ -18,25 +9,12 @@ import {
 } from "../../reducers/gamesReducer";
 
 import "./main.scss";
+import InformationForms from "./InformationForms";
 
 export default function MainPage() {
   const dispatch = useDispatch();
   const activeForm = useSelector((state) => state.games.activeForm);
   const userid = useSelector((state) => state.user.userid);
-  const yourGames = useSelector((state) => state.games.yourGames);
-  const invitationsToGames = useSelector(
-    (state) => state.games.invitationsToGames
-  );
-  const gamesYouHaveJoined = useSelector(
-    (state) => state.games.gamesYouHaveJoined
-  );
-
-
-  useEffect(() => {
-    dispatch(showYoyrGame());
-    dispatch(showingYourInvitationsToGames());
-    // dispatch(showTheGamesYouHaveJoined());
-  }, []);
 
   return (
     <div className="main">
@@ -55,99 +33,12 @@ export default function MainPage() {
           user: userid,
         }}
         onReceived={(value) => {
-          dispatch(
-            deleteInvitationAction({
-              invitationId: value.invitation_id,
-              value: "are invited",
-            })
-          );
+          dispatch(deleteInvitationAction(value.invitation_id));
         }}
       />
 
       <div className="container">
-        <div className="main__row">
-          <div className="main__games">
-            <div className="main__title">
-              <h2>Інформація по іграм</h2>
-            </div>
-
-            <div className="main__block block">
-              <p className="block__text">Ігри які ви створили</p>
-              <ul className="block__list">
-                {yourGames.map((game) => {
-                  return (
-                    <li key={game.id} className="block__link">
-                      <span>{game.name_game}</span>
-                      <div>
-                        <button>До гри</button>
-                        <button
-                          onClick={() => dispatch(deleteYoyrGame(game.id))}
-                        >
-                          Видалити
-                        </button>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            <div className="main__block block">
-              <p className="block__text">Ігри до яких вас запрошують</p>
-              <ul className="block__list">
-                {invitationsToGames.map((game) => {
-                  return (
-                    <li key={game.invitation_id} className="block__link">
-                      <span>{game.game_name}</span>
-                      <div>
-                        <button onClick={() => dispatch(joinTheGame(game))}>
-                          Приєднатися
-                        </button>
-                        <button
-                          onClick={() =>
-                            dispatch(
-                              declineInvitation(
-                                game.invitation_id,
-                                "are invited"
-                              )
-                            )
-                          }
-                        >
-                          Відмовитися
-                        </button>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            {/* <div className="main__block block">
-              <p className="block__text">Ігри до яких ви приєдналися</p>
-              <ul className="block__list">
-                {gamesYouHaveJoined.map((game) => {
-                  return (
-                    <li key={game.game_id} className="block__link">
-                      <span>{game.game_name}</span>
-                      <div>
-                        <button>До гри</button>
-                        <button
-                          onClick={() =>
-                            dispatch(
-                              declineInvitation(game.invitation_id, "joined")
-                            )
-                          }
-                        >
-                          Видалити
-                        </button>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div> */}
-          </div>
-        </div>
+        <InformationForms />
 
         <div className="main__row">
           {!activeForm ? (

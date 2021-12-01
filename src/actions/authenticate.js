@@ -29,7 +29,7 @@ export function login(email, password, addError) {
           }
         })
       )
-      .catch((error) => console.log("Сервер не відповідає"));
+      .catch((error) => addError("The server does not respond"));
   };
 }
 

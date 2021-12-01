@@ -6,8 +6,8 @@ import {
   deleteYourtGameAction,
   addGamesInvitationsAction,
   addTheGameYouJoined,
-  // addGamesYouHaveJoined,
   deleteInvitationAction,
+  leaveTheGameAction,
 } from "../reducers/gamesReducer";
 
 export function createGame(nameGame, users, stories, justDriving) {
@@ -73,7 +73,7 @@ export function showingYourInvitationsToGames() {
   };
 }
 
-export function joinTheGame({ invitation_id, game_id }) {
+export function joinTheGame(game_id, invitation_id = false) {
   return (dispatch) => {
     fetch(`${API_URL}/game/join_the_game`, {
       credentials: "include",
@@ -81,31 +81,55 @@ export function joinTheGame({ invitation_id, game_id }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ invitation_id, game_id }),
+      body: JSON.stringify({ game_id, invitation_id }),
     }).then((value) =>
       value.json().then((data) => {
-        console.log(data);
         if (data.join_the_game) {
-          dispatch(addTheGameYouJoined(data.game));
+          dispatch(addTheGameYouJoined(data));
         }
       })
     );
   };
 }
 
-// export function showTheGamesYouHaveJoined() {
-//   return (dispatch) => {
-//     fetch(`${API_URL}/game/games_you_have_joined`, {
-//       credentials: "include",
-//     }).then((value) =>
-//       value.json().then((data) => {
-//         dispatch(addGamesYouHaveJoined(data));
-//       })
-//     );
-//   };
-// }
+export function searchGameYouHaveJoined() {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/search_game_you_have_joined`, {
+      credentials: "include",
+    }).then((value) =>
+      value.json().then((data) => {
+        if (data.join_the_game) {
+          dispatch(addTheGameYouJoined(data));
+        }
+      })
+    );
+  };
+}
 
-export function declineInvitation(invitationId, value) {
+export function leaveTheGame(game) {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/leave_the_game`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        game_id: game.id,
+        invitation_id: game.invitation_id,
+      }),
+    }).then((value) =>
+      value.json().then((data) => {
+        console.log(data);
+        if (data.leavet_he_game) {
+          dispatch(leaveTheGameAction());
+        }
+      })
+    );
+  };
+}
+
+export function declineInvitation(invitationId) {
   return (dispatch) => {
     fetch(`${API_URL}/game/delete_invited`, {
       credentials: "include",
@@ -117,7 +141,7 @@ export function declineInvitation(invitationId, value) {
     }).then((date1) =>
       date1.json().then((data2) => {
         if (data2.delete_invited) {
-          dispatch(deleteInvitationAction({ invitationId, value }));
+          dispatch(deleteInvitationAction({ invitationId }));
         }
       })
     );
