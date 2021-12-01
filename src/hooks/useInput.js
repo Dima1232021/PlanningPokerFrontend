@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { useValidation } from "./useValidation";
+import { useAddErrors } from "./useAddErrors";
 
-export const useInput = (initialValue, validations) => {
+export const useInput = (initialValue, validations, fieldName) => {
+  let { addError } = useAddErrors();
   const [value, setValue] = useState(initialValue);
-  const [isDirty, setDirty] = useState(false);
-  const valid = useValidation(value, validations);
 
-  const onChange = (e) => setValue(e.target.value);
+  const valid = useValidation(value, validations, fieldName);
 
-  const onBlur = (e) => setDirty(true);
+  const onChange = (e) => {
+    return setValue(e.target.value);
+  };
+
+  const outputError = () => {
+    valid.messageError.map(({ _, message }) => {
+      addError(message);
+    });
+  };
 
   return {
     onChange,
-    onBlur,
+    outputError,
+    setValue,
     value,
-    isDirty,
+
     ...valid,
   };
 };

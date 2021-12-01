@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import AuthForm from "./authForm/AuthForm";
+
 import "./auth.scss";
-import AuthForm from "./AuthForm";
 
 export default function AuthenticatePage() {
   const [auth, setAuth] = useState("logIn");

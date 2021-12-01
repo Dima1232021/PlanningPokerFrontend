@@ -7,17 +7,16 @@ const ADD_GAMES_INVITATIONS = "ADD_GAMES_INVITATIONS";
 const ADD_GAME_INVITATION = "ADD_GAME_INVITATION";
 
 const ADD_THE_GAME_YOU_JOINED = "ADD_THE_GAME_YOU_JOINED";
-const ADD_GAMES_YOU_HAVE_JOINED = "ADD_GAMES_YOU_HAVE_JOINED";
+// const ADD_GAMES_YOU_HAVE_JOINED = "ADD_GAMES_YOU_HAVE_JOINED";
 
 const DELETE_YOUR_GAME = "DELETE_YOUR_GAME";
 const DELETE_INVITATION = "DELETE_INVITATION";
 
 const defaultState = {
   activeForm: false,
-  error: "",
   yourGames: [],
   invitationsToGames: [],
-  gamesYouHaveJoined: [],
+  gameYouHaveJoined: {},
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -54,20 +53,13 @@ export const gamesReducer = (state = defaultState, action) => {
       }
 
     case ADD_THE_GAME_YOU_JOINED:
-      let invitationsToGames = state.invitationsToGames.filter(
-        (value) => value.invitation_id !== action.payload.invitation_id
-      );
-      return {
-        ...state,
-        gamesYouHaveJoined: [...state.gamesYouHaveJoined, action.payload],
-        invitationsToGames,
-      };
+      return { ...state, gameYouHaveJoined:  action.payload};
 
-    case ADD_GAMES_YOU_HAVE_JOINED:
-      return {
-        ...state,
-        gamesYouHaveJoined: action.payload,
-      };
+    // case ADD_GAMES_YOU_HAVE_JOINED:
+    // return {
+    //   ...state,
+    //   gamesYouHaveJoined: action.payload,
+    // };
 
     case DELETE_INVITATION:
       if (action.payload.value === "are invited") {
@@ -117,10 +109,10 @@ export const addTheGameYouJoined = (payload) => ({
   payload: payload,
 });
 
-export const addGamesYouHaveJoined = (payload) => ({
-  type: ADD_GAMES_YOU_HAVE_JOINED,
-  payload: payload,
-});
+// export const addGamesYouHaveJoined = (payload) => ({
+//   type: ADD_GAMES_YOU_HAVE_JOINED,
+//   payload: payload,
+// });
 
 export const deleteYourtGameAction = (payload) => ({
   type: DELETE_YOUR_GAME,

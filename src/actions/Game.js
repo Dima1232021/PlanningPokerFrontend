@@ -6,7 +6,7 @@ import {
   deleteYourtGameAction,
   addGamesInvitationsAction,
   addTheGameYouJoined,
-  addGamesYouHaveJoined,
+  // addGamesYouHaveJoined,
   deleteInvitationAction,
 } from "../reducers/gamesReducer";
 
@@ -73,7 +73,7 @@ export function showingYourInvitationsToGames() {
   };
 }
 
-export function joinTheGame({ invitation_id, game_id, game_name }) {
+export function joinTheGame({ invitation_id, game_id }) {
   return (dispatch) => {
     fetch(`${API_URL}/game/join_the_game`, {
       credentials: "include",
@@ -84,25 +84,26 @@ export function joinTheGame({ invitation_id, game_id, game_name }) {
       body: JSON.stringify({ invitation_id, game_id }),
     }).then((value) =>
       value.json().then((data) => {
+        console.log(data);
         if (data.join_the_game) {
-          dispatch(addTheGameYouJoined({ invitation_id, game_id, game_name }));
+          dispatch(addTheGameYouJoined(data.game));
         }
       })
     );
   };
 }
 
-export function showTheGamesYouHaveJoined() {
-  return (dispatch) => {
-    fetch(`${API_URL}/game/games_you_have_joined`, {
-      credentials: "include",
-    }).then((value) =>
-      value.json().then((data) => {
-        dispatch(addGamesYouHaveJoined(data));
-      })
-    );
-  };
-}
+// export function showTheGamesYouHaveJoined() {
+//   return (dispatch) => {
+//     fetch(`${API_URL}/game/games_you_have_joined`, {
+//       credentials: "include",
+//     }).then((value) =>
+//       value.json().then((data) => {
+//         dispatch(addGamesYouHaveJoined(data));
+//       })
+//     );
+//   };
+// }
 
 export function declineInvitation(invitationId, value) {
   return (dispatch) => {

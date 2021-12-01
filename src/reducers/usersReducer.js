@@ -1,7 +1,6 @@
 const ADD_USERS = "ADD_USERS";
 
 const defaultState = {
-  error: "",
   users: [],
 };
 

@@ -1,21 +1,20 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-export const useValidation = (value, validations) => {
+export const useValidation = (value, validations, fieldName) => {
   const [maxLength, setMaxLength] = useState(false);
   const [minLength, setMinLength] = useState(false);
   const [emailError, setEmailError] = useState(false);
-  const [isEmpty, setEmpty] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState(false);
 
   const [messageError, setMessageError] = useState([]);
-  const [inputValid, setInputValid] = useState(false);
+  const [isValid, setValid] = useState(false);
 
-  function addMessageError(error, message) {
-    setMessageError((val) => [...val, { error, message }]);
+  function addMessageError(idError, message) {
+    setMessageError((val) => [...val, { idError, message }]);
   }
-  function deleteMessageError(val) {
-    let arr = messageError.filter((item) => item.error !== val);
-    setMessageError(arr);
+
+  function deleteMessageError(idError) {
+    setMessageError((vaд) => vaд.filter((item) => item.idError !== idError));
   }
 
   useEffect(() => {
@@ -26,7 +25,7 @@ export const useValidation = (value, validations) => {
             !maxLength &&
               addMessageError(
                 1,
-                `Поле не може містить більше ніж ${validations[validation]} символів`
+                `Поле ${fieldName}: не може містить більше ніж ${validations[validation]} символів`
               );
             setMaxLength(true);
           } else {
@@ -40,22 +39,12 @@ export const useValidation = (value, validations) => {
             !minLength &&
               addMessageError(
                 2,
-                `Поле не може містить менше ніж ${validations[validation]} символів`
+                `Поле ${fieldName}: не може містить менше ніж ${validations[validation]} символів`
               );
             setMinLength(true);
           } else {
             minLength && deleteMessageError(2);
             setMinLength(false);
-          }
-          break;
-
-        case "isEmpty":
-          if (value.length) {
-            deleteMessageError(10);
-            setEmpty(false);
-          } else {
-            !isEmpty && addMessageError(10, "Поле не може бути пустим");
-            setEmpty(true);
           }
           break;
 
@@ -67,14 +56,19 @@ export const useValidation = (value, validations) => {
             emailError && deleteMessageError(4);
             setEmailError(false);
           } else {
-            !emailError && addMessageError(4, "Некоректний Email");
+            !emailError &&
+              addMessageError(
+                4,
+                `Поле ${fieldName}: введено некоректний Email`
+              );
             setEmailError(true);
           }
           break;
 
         case "passwordConfirmation":
           if (validations[validation] !== value) {
-            !passwordConfirmation && addMessageError(5, "Паролі не збігаються");
+            !passwordConfirmation &&
+              addMessageError(5, `Поле ${fieldName}: пароль не збігається`);
             setPasswordConfirmation(true);
           } else {
             passwordConfirmation && deleteMessageError(5);
@@ -83,23 +77,18 @@ export const useValidation = (value, validations) => {
           break;
       }
     }
-  }, [value]);
+  }, [value, validations]);
 
   useEffect(() => {
-    if (messageError.length) {
-      setInputValid(false);
-    } else {
-      setInputValid(true);
-    }
+    !messageError.length ? setValid(true) : setValid(false);
   }, [messageError]);
 
   return {
     emailError,
-    isEmpty,
     minLength,
     maxLength,
     passwordConfirmation,
-    inputValid,
     messageError,
+    isValid,
   };
 };

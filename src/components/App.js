@@ -6,6 +6,7 @@ import MainPage from "./MainPage/MainPage";
 import AuthenticatePage from "./AuthenticatePage/AuthenticatePage";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
+import OutputErrors from "./OutputErrors";
 import { logged_in } from "../actions/authenticate";
 
 import "./app.scss";
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className="wrapper">
+      <OutputErrors />
       <Header />
       {loggedIn ? (
         <Switch>

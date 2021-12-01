@@ -4,7 +4,7 @@ import {
   deleteUserDataAction,
 } from "../reducers/userReducer";
 
-export function login(email, password) {
+export function login(email, password, addError) {
   return (dispatch) => {
     fetch(`${API_URL}/authenticate/login`, {
       credentials: "include",
@@ -24,6 +24,8 @@ export function login(email, password) {
           console.log(data);
           if (data.logged_in) {
             dispatch(addUserDataAction(data));
+          } else {
+            addError(data.message);
           }
         })
       )

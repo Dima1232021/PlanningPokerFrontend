@@ -8,7 +8,7 @@ import {
   deleteYoyrGame,
   showingYourInvitationsToGames,
   joinTheGame,
-  showTheGamesYouHaveJoined,
+  // showTheGamesYouHaveJoined,
   declineInvitation,
 } from "../../actions/Game";
 import {
@@ -35,7 +35,7 @@ export default function MainPage() {
   useEffect(() => {
     dispatch(showYoyrGame());
     dispatch(showingYourInvitationsToGames());
-    dispatch(showTheGamesYouHaveJoined());
+    // dispatch(showTheGamesYouHaveJoined());
   }, []);
 
   return (
@@ -122,7 +122,7 @@ export default function MainPage() {
               </ul>
             </div>
 
-            <div className="main__block block">
+            {/* <div className="main__block block">
               <p className="block__text">Ігри до яких ви приєдналися</p>
               <ul className="block__list">
                 {gamesYouHaveJoined.map((game) => {
@@ -145,7 +145,7 @@ export default function MainPage() {
                   );
                 })}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
 
