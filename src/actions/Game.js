@@ -100,7 +100,6 @@ export function searchGameYouHaveJoined() {
       credentials: "include",
     }).then((value) =>
       value.json().then((data) => {
-        console.log(data);
         if (data.join_the_game) {
           dispatch(addTheGameYouJoined(data));
         }
