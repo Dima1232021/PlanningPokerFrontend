@@ -2,6 +2,7 @@ import { API_URL } from "../config";
 import {
   addUserDataAction,
   deleteUserDataAction,
+  changeLoaderAuthAction,
 } from "../reducers/userReducer";
 
 export function login(email, password, addError) {
@@ -64,19 +65,23 @@ export function create(username, email, password, password_confirmation) {
 
 export function logged_in() {
   return (dispatch) => {
+    dispatch(changeLoaderAuthAction(true));
     fetch(`${API_URL}/authenticate/logged_in`, {
       credentials: "include",
       method: "GET",
     })
       .then((value) =>
         value.json().then((data) => {
-          console.log(data);
           if (data.logged_in) {
             dispatch(addUserDataAction(data));
           }
+          dispatch(changeLoaderAuthAction(false));
         })
       )
-      .catch((error) => console.log("Сервер не відповідає"));
+      .catch((error) => {
+        console.log("Сервер не відповідає");
+        dispatch(changeLoaderAuthAction(false));
+      });
   };
 }
 

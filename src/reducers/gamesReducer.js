@@ -1,3 +1,4 @@
+const CHANGE_LOADER_GAME = "CHANGE_LOADER_GAME";
 const CHANGE_ACTIVE_FORM = "CHANGE_ACTIVE_FORM";
 
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
@@ -13,6 +14,7 @@ const DELETE_INVITATION = "DELETE_INVITATION";
 const LEAVE_THE_GAME = "LEAVE_THE_GAME";
 
 const defaultState = {
+  loaderGame: false,
   activeForm: false,
   yourGames: [],
   invitationsToGames: [],
@@ -22,6 +24,9 @@ const defaultState = {
 
 export const gamesReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case CHANGE_LOADER_GAME:
+      return { ...state, loaderGame: action.payload };
+
     case CHANGE_ACTIVE_FORM:
       return { ...state, activeForm: action.payload };
 
@@ -75,6 +80,11 @@ export const gamesReducer = (state = defaultState, action) => {
       return state;
   }
 };
+
+export const changeLoaderGameAction = (payload) => ({
+  type: CHANGE_LOADER_GAME,
+  payload: payload,
+});
 
 export const changeActveFormAction = (payload) => ({
   type: CHANGE_ACTIVE_FORM,

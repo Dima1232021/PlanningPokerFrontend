@@ -5,7 +5,6 @@ import {
   deleteYoyrGame,
   showingYourInvitationsToGames,
   joinTheGame,
-  searchGameYouHaveJoined,
   declineInvitation,
 } from "../../actions/Game";
 
@@ -19,7 +18,6 @@ export default function InformationForms() {
   useEffect(() => {
     dispatch(showYoyrGame());
     dispatch(showingYourInvitationsToGames());
-    dispatch(searchGameYouHaveJoined());
   }, []);
 
   return (

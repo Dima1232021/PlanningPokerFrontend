@@ -1,5 +1,6 @@
 import { API_URL } from "../config";
 import {
+  changeLoaderGameAction,
   changeActveFormAction,
   addYourtGameAction,
   addYourtGamesAction,
@@ -94,13 +95,16 @@ export function joinTheGame(game_id, invitation_id = false) {
 
 export function searchGameYouHaveJoined() {
   return (dispatch) => {
+    dispatch(changeLoaderGameAction(true));
     fetch(`${API_URL}/game/search_game_you_have_joined`, {
       credentials: "include",
     }).then((value) =>
       value.json().then((data) => {
+        console.log(data);
         if (data.join_the_game) {
           dispatch(addTheGameYouJoined(data));
         }
+        dispatch(changeLoaderGameAction(false));
       })
     );
   };
