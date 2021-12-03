@@ -1,3 +1,54 @@
 .game {
   flex: 1 1 auto;
+  display: flex;
+
+  &__column {
+    // display: flex;
+
+    &:nth-child(1) {
+      flex: 1 0 auto;
+      background-color: chocolate;
+    }
+    &:nth-child(2) {
+      // display: none;
+      flex: 0 0 20%;
+      background-color: rgb(255, 106, 0);
+    }
+  }
+
+  &__header {
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: cornflowerblue;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 142%;
+    text-align: center;
+  }
+}
+
+.menu {
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 5px;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 142%;
+    text-align: center;
+  }
+
+  button {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 3px 5px;
+    border-radius: 4px;
+  }
 }
