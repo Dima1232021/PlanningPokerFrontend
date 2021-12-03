@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showUser } from "../../../actions/users";
 import { createGame } from "../../../actions/Game";
 import { changeActveFormAction } from "../../../reducers/gamesReducer";
+import UsersBlock from "../../usersBlock/UsersBlock";
 import List from "./List";
 import Cheks from "./Cheks";
 
@@ -61,12 +62,24 @@ export default function CreateGame({ seActive }) {
           <p className="block__text">
             Виберіть користувачів щоб запросити їх до гри
           </p>
-          <List data={users} fan={addUserState} nameBtn="Додати" />
+          <UsersBlock
+            value={users}
+            keyValue={["id"]}
+            name={["username"]}
+            nameBtn="Додати"
+            setValue={addUserState}
+          />
         </div>
 
         <div className="create-game__block block">
           <p className="block__text">Користувачі яких ви вибрали</p>
-          <List data={addUser} fan={deleteUserState} nameBtn="Видалити" />
+          <UsersBlock
+            value={addUser}
+            keyValue={["id"]}
+            name={["username"]}
+            nameBtn="Видалити"
+            setValue={deleteUserState}
+          />
         </div>
 
         <div className="create-game__block block">
@@ -88,18 +101,12 @@ export default function CreateGame({ seActive }) {
 
         <div className="create-game__block block">
           <p className="block__text">Історії які ви створили</p>
-          <ul className="block__list">
-            {addStory.map((value, index) => {
-              return (
-                <li key={index} className="block__link">
-                  <span>{value}</span>
-                  <button onClick={() => deleteStoryState(value)}>
-                    Видалити
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+
+          <UsersBlock
+            value={addStory}
+            nameBtn="Видалити"
+            setValue={deleteStoryState}
+          />
         </div>
 
         <div className="create-game__block block">

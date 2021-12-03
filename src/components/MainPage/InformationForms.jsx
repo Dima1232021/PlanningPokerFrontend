@@ -7,6 +7,7 @@ import {
   joinTheGame,
   declineInvitation,
 } from "../../actions/Game";
+import UsersBlock from "../usersBlock/UsersBlock";
 
 export default function InformationForms() {
   const dispatch = useDispatch();
@@ -20,6 +21,22 @@ export default function InformationForms() {
     dispatch(showingYourInvitationsToGames());
   }, []);
 
+  function deleteGame(game) {
+    dispatch(deleteYoyrGame(game.id));
+  }
+
+  function declineInv(game) {
+    dispatch(declineInvitation(game.invitation_id));
+  }
+
+  function join(game) {
+    if (!game.invitation_id) {
+      dispatch(joinTheGame(game.id));
+    } else {
+      dispatch(joinTheGame(game.game_id, game.invitation_id));
+    }
+  }
+
   return (
     <div className="main__row">
       <div className="main__games">
@@ -29,52 +46,28 @@ export default function InformationForms() {
 
         <div className="main__block block">
           <p className="block__text">Ігри які ви створили</p>
-          <ul className="block__list">
-            {yourGames.map((game) => {
-              return (
-                <li key={game.id} className="block__link">
-                  <span>{game.name_game}</span>
-                  <div>
-                    <button onClick={() => dispatch(joinTheGame(game.id))}>
-                      До гри
-                    </button>
-                    <button onClick={() => dispatch(deleteYoyrGame(game.id))}>
-                      Видалити
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <UsersBlock
+            value={yourGames}
+            keyValue={["id"]}
+            name={["name_game"]}
+            nameBtn="До гри"
+            nameBtn2="Видалити"
+            setValue={join}
+            setValue2={deleteGame}
+          />
         </div>
 
         <div className="main__block block">
           <p className="block__text">Ігри до яких вас запрошують</p>
-          <ul className="block__list">
-            {invitationsToGames.map((game) => {
-              return (
-                <li key={game.invitation_id} className="block__link">
-                  <span>{game.game_name}</span>
-                  <div>
-                    <button
-                      onClick={() =>
-                        dispatch(joinTheGame(game.game_id, game.invitation_id))
-                      }
-                    >
-                      До гри
-                    </button>
-                    <button
-                      onClick={() =>
-                        dispatch(declineInvitation(game.invitation_id))
-                      }
-                    >
-                      Відмовитися
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <UsersBlock
+            value={invitationsToGames}
+            keyValue={["invitation_id"]}
+            name={["game_name"]}
+            nameBtn="До гри"
+            nameBtn2="Відмовитися"
+            setValue={join}
+            setValue2={declineInv}
+          />
         </div>
       </div>
     </div>

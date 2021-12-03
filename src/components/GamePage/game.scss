@@ -146,4 +146,27 @@
     font-size: 14px;
     line-height: 16px;
   }
+
+  .usersBlock {
+    margin-top: 10px;
+
+    &__list {
+      max-height: 200px;
+    }
+
+    &__link {
+      background-color: #1c3b55;
+      margin-bottom: 5px;
+      padding: 5px;
+      span {
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      button {
+        padding: 2px 3px;
+        margin-left: 15px;
+      }
+    }
+  }
 }

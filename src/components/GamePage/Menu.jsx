@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { leaveTheGame } from "../../actions/Game";
 import MenuBlock from "../menuBlock/MenuBlock";
+import UsersBlock from "../usersBlock/UsersBlock";
 
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
+  console.log(game);
 
   const [players, setPlayers] = useState("Гравці");
 
   function leave() {
     dispatch(leaveTheGame(game));
+  }
+
+  function deleteUser(user) {
+    console.log(user);
   }
 
   return (
@@ -39,6 +45,13 @@ export default function Menu({ active, setActive }) {
               btn2="Запросити"
               value={players}
               setValue={setPlayers}
+            />
+            <UsersBlock
+              value={game.players}
+              keyValue={"user_id"}
+              name={"user_name"}
+              nameBtn="Видалити"
+              setValue={deleteUser}
             />
           </div>
         </div>

@@ -37,17 +37,19 @@
     margin-top: 20px;
     border-radius: 8px;
 
-    .block {
+    .usersBlock {
       &__link {
         background-color: #1c3b55;
 
         div {
-          display: flex;
-          flex-direction: column;
+          margin-left: 20px;
         }
 
-        button:nth-child(1) {
-          margin-bottom: 5px;
+        button {
+          margin: 0px 0px;
+          &:nth-child(2) {
+            margin-left: 10px;
+          }
         }
       }
     }
