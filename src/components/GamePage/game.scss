@@ -1,40 +1,69 @@
 .game {
   flex: 1 1 auto;
   display: flex;
+  position: relative;
 
   &__column {
-    // display: flex;
-
     &:nth-child(1) {
       flex: 1 0 auto;
       background-color: chocolate;
     }
+
     &:nth-child(2) {
-      // display: none;
+      position: absolute;
+      display: flex;
+      right: 0px;
+      transition: 0.3s;
       width: 320px;
-      background-color: rgb(48, 48, 48);
+      height: 100%;
+      background-color: rgba(0, 255, 255, 0);
+      &.none {
+        top: 0px;
+        right: -290px;
+        transition: 0.3s;
+      }
     }
   }
 
   &__header {
-    padding: 5px 15px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 5px 15px;
     background-color: rgb(194, 100, 237);
   }
 
-  &__title {
+  &__title,
+  &__btn {
     font-size: 20px;
     line-height: 142%;
     text-align: center;
+  }
+
+  &__btn {
+    padding: 20px 0px;
+    width: 30px;
+    border-radius: 8px 0px 0px 8px;
   }
 }
 
 .menu {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px 5px;
+  background-color: rgba(0, 255, 255, 0);
+
+  &__column {
+    &:nth-child(1) {
+      width: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: rgba(220, 20, 60, 0);
+    }
+    &:nth-child(2) {
+      padding: 5px 10px;
+      width: 290px;
+      background-color: rgb(48, 48, 48);
+    }
+  }
 
   &__row {
     flex: 0 0 100%;
