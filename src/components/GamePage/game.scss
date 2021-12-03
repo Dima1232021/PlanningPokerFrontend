@@ -12,7 +12,7 @@
     &:nth-child(2) {
       // display: none;
       flex: 0 0 20%;
-      background-color: rgb(255, 106, 0);
+      background-color: rgb(48, 48, 48);
     }
   }
 
@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: cornflowerblue;
+    background-color: rgb(194, 100, 237);
   }
 
   &__title {
@@ -32,11 +32,11 @@
 }
 
 .menu {
+  padding: 10px 5px;
   &__row {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 10px 5px;
   }
 
   &__title {
@@ -50,5 +50,13 @@
     line-height: 20px;
     padding: 3px 5px;
     border-radius: 4px;
+  }
+}
+.block-users {
+  background-color: #3a80ba;
+  &__text {
+    font-size: 18px;
+    line-height: 20px;
+    border-radius: 8px;
   }
 }

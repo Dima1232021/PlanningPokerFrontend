@@ -61,7 +61,7 @@ export default function AuthForm({ auth }) {
     }
   }
 
-  if (auth === "logIn") {
+  if (auth === "Log in") {
     return (
       <>
         <h2 className="auth__title">Log in</h2>

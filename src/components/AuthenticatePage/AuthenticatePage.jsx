@@ -2,24 +2,20 @@ import React, { useState } from "react";
 import AuthForm from "./authForm/AuthForm";
 
 import "./auth.scss";
+import MenuBlock from "../MenuBlock/MenuBlock";
 
 export default function AuthenticatePage() {
-  const [auth, setAuth] = useState("logIn");
-
-  let classname = (value) =>
-    value === auth ? "auth__link active" : "auth__link";
+  const [auth, setAuth] = useState("Log in");
 
   return (
     <div className="auth">
       <div className="auth__form">
-        <ul className="auth__menu">
-          <li className={classname("logIn")} onClick={() => setAuth("logIn")}>
-            Log in
-          </li>
-          <li className={classname("signUp")} onClick={() => setAuth("signUp")}>
-            Sign up
-          </li>
-        </ul>
+        <MenuBlock
+          btn1="Log in"
+          btn2="Sign up"
+          value={auth}
+          setValue={setAuth}
+        />
 
         <AuthForm auth={auth} />
       </div>
