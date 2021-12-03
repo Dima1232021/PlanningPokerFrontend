@@ -16,11 +16,14 @@ export default function Menu({ active, setActive }) {
   return (
     <div className="game__menu menu">
       <div className="menu__column">
-        <button className="game__btn" onClick={() => setActive((val) => !val)}>
+        <button
+          className="menu__btn-active"
+          onClick={() => setActive((val) => !val)}
+        >
           {active ? ">>" : "<<"}
         </button>
       </div>
-      
+
       <div className="menu__column">
         <div className="menu__row">
           <h2 className="menu__title">Menu</h2>

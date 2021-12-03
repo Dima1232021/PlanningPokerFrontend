@@ -5,8 +5,8 @@
 
   &__column {
     &:nth-child(1) {
-      flex: 1 0 auto;
-      background-color: chocolate;
+      flex: 0 0 100%;
+      background-color: rgb(187, 133, 94);
     }
 
     &:nth-child(2) {
@@ -16,7 +16,7 @@
       transition: 0.3s;
       width: 320px;
       height: 100%;
-      background-color: rgba(0, 255, 255, 0);
+      background-color: #ffffff00;
       &.none {
         top: 0px;
         right: -290px;
@@ -25,30 +25,71 @@
     }
   }
 
-  &__header {
-    display: flex;
-    padding: 5px 15px;
-    background-color: rgb(194, 100, 237);
+  &__header,
+  &__form {
+    transition: 0.3s;
+    &.active {
+      transition: 0.3s;
+      padding-right: 315px;
+    }
   }
 
-  &__title,
-  &__btn {
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5px 15px;
+    background-color: #1c3b55;
+  }
+
+  &__form.active {
+    padding-right: 335px;
+  }
+
+  &__title {
     font-size: 20px;
     line-height: 142%;
     text-align: center;
   }
 
-  &__btn {
-    padding: 20px 0px;
-    width: 30px;
-    border-radius: 8px 0px 0px 8px;
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 14px;
+    line-height: 16px;
+
+    b {
+      margin-right: 5px;
+    }
   }
+
+  @media (max-width: 767.98px) {
+    &__header,
+    &__form {
+      &.active {
+        padding-right: 15px;
+      }
+    }
+    &__form.active {
+      padding-right: 35px;
+    }
+
+    &__title,
+    &__text {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+.form {
+  padding: 5px 35px;
 }
 
 .menu {
   display: flex;
   flex-wrap: wrap;
-  background-color: rgba(0, 255, 255, 0);
+  background-color: #ffffff00;
 
   &__column {
     &:nth-child(1) {
@@ -56,7 +97,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background-color: rgba(220, 20, 60, 0);
+      background-color: #ffffff00;
     }
     &:nth-child(2) {
       padding: 5px 10px;
@@ -72,11 +113,17 @@
     align-items: flex-start;
     margin-bottom: 10px;
   }
-
-  &__title {
+  &__title,
+  &__btn-active {
     font-size: 20px;
     line-height: 142%;
     text-align: center;
+  }
+
+  &__btn-active {
+    padding: 20px 0px;
+    width: 30px;
+    border-radius: 8px 0px 0px 8px;
   }
 
   &__btn-leave {
