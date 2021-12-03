@@ -5,7 +5,6 @@ import { showUser } from "../../../actions/users";
 import { createGame } from "../../../actions/Game";
 import { changeActveFormAction } from "../../../reducers/gamesReducer";
 import UsersBlock from "../../usersBlock/UsersBlock";
-import List from "./List";
 import Cheks from "./Cheks";
 
 import "./createGame.scss";

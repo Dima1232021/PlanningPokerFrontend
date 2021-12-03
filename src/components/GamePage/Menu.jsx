@@ -46,13 +46,15 @@ export default function Menu({ active, setActive }) {
               value={players}
               setValue={setPlayers}
             />
-            <UsersBlock
-              value={game.players}
-              keyValue={"user_id"}
-              name={"user_name"}
-              nameBtn="Видалити"
-              setValue={deleteUser}
-            />
+            {players === "Гравці" ? (
+              <UsersBlock
+                value={game.players}
+                keyValue={"user_id"}
+                name={"user_name"}
+                nameBtn="Видалити"
+                setValue={deleteUser}
+              />
+            ) : null}
           </div>
         </div>
       </div>
