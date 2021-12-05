@@ -7,12 +7,12 @@ import UsersBlock from "../usersBlock/UsersBlock";
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
-  console.log(game);
+  const invitationId = useSelector((state) => state.games.invitationId);
 
   const [players, setPlayers] = useState("Гравці");
 
   function leave() {
-    dispatch(leaveTheGame(game));
+    dispatch(leaveTheGame(game, invitationId));
   }
 
   function deleteUser(user) {

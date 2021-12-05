@@ -1,5 +1,6 @@
 const CHANGE_LOADER_GAME = "CHANGE_LOADER_GAME";
 const CHANGE_ACTIVE_FORM = "CHANGE_ACTIVE_FORM";
+const CHANGE_GAME_YOU_HAVE_JOINED = "CHANGE_GAME_YOU_HAVE_JOINED";
 
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
@@ -20,6 +21,7 @@ const defaultState = {
   invitationsToGames: [],
   gameYouHaveJoined: {},
   inTheGame: false,
+  invitationId: null,
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -59,23 +61,40 @@ export const gamesReducer = (state = defaultState, action) => {
       }
 
     case ADD_THE_GAME_YOU_JOINED:
-      let game = action.payload.game;
-      game.invitation_id = action.payload.invitation_id;
       return {
         ...state,
-        gameYouHaveJoined: game,
+        gameYouHaveJoined: action.payload.game,
+        invitationId: action.payload.invitation_id,
         inTheGame: true,
       };
 
     case LEAVE_THE_GAME:
-      return { ...state, gameYouHaveJoined: {}, inTheGame: false };
+      return {
+        ...state,
+        gameYouHaveJoined: {},
+        inTheGame: false,
+        invitationId: null,
+      };
 
     case DELETE_INVITATION:
       let invitationsToGames = state.invitationsToGames.filter(
-        (value) => value.invitation_id !== action.payload.invitationId
+        (value) => value.invitation_id !== action.payload
       );
-      return { ...state, invitationsToGames };
 
+      if (action.payload === state.invitationId) {
+        return {
+          ...state,
+          invitationsToGames,
+          gameYouHaveJoined: {},
+          inTheGame: false,
+          invitationId: null,
+        };
+      } else {
+        return { ...state, invitationsToGames };
+      }
+
+    case CHANGE_GAME_YOU_HAVE_JOINED:
+      return { ...state, gameYouHaveJoined: action.payload };
     default:
       return state;
   }
@@ -88,6 +107,11 @@ export const changeLoaderGameAction = (payload) => ({
 
 export const changeActveFormAction = (payload) => ({
   type: CHANGE_ACTIVE_FORM,
+  payload: payload,
+});
+
+export const changeGameYouHaveJoinedAction = (payload) => ({
+  type: CHANGE_GAME_YOU_HAVE_JOINED,
   payload: payload,
 });
 

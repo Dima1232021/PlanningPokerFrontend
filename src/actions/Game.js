@@ -22,6 +22,7 @@ export function createGame(nameGame, users, stories, justDriving) {
       body: JSON.stringify({ nameGame, users, stories, justDriving }),
     }).then((value) =>
       value.json().then((data) => {
+        // console.log(data);
         if (data.status === "created") {
           dispatch(addYourtGameAction(data.game), changeActveFormAction(false));
           dispatch(changeActveFormAction(false));
@@ -85,6 +86,7 @@ export function joinTheGame(game_id, invitation_id = false) {
       body: JSON.stringify({ game_id, invitation_id }),
     }).then((value) =>
       value.json().then((data) => {
+        // console.log(data);
         if (data.join_the_game) {
           dispatch(addTheGameYouJoined(data));
         }
@@ -109,7 +111,7 @@ export function searchGameYouHaveJoined() {
   };
 }
 
-export function leaveTheGame(game) {
+export function leaveTheGame(game, invitationId) {
   return (dispatch) => {
     fetch(`${API_URL}/game/leave_the_game`, {
       credentials: "include",
@@ -119,7 +121,7 @@ export function leaveTheGame(game) {
       },
       body: JSON.stringify({
         game_id: game.id,
-        invitation_id: game.invitation_id,
+        invitation_id: invitationId,
       }),
     }).then((value) =>
       value.json().then((data) => {

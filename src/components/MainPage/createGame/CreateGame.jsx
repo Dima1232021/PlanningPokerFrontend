@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { ActionCable } from "react-actioncable-provider";
+import React, { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { showUser } from "../../../actions/users";
 import { createGame } from "../../../actions/Game";
 import { changeActveFormAction } from "../../../reducers/gamesReducer";
 import UsersBlock from "../../usersBlock/UsersBlock";
@@ -15,14 +14,9 @@ export default function CreateGame({ seActive }) {
 
   const [nameGame, setNameGame] = useState("");
   const [justDriving, setJustDriving] = useState(true);
-  const [numberUsers, setNumberUsers] = useState(null);
   const [textStory, setTextStory] = useState("");
   const [addUser, setAddUser] = useState([]);
   const [addStory, setAddStory] = useState([]);
-
-  useEffect(() => {
-    dispatch(showUser());
-  }, [numberUsers]);
 
   function createNewGame() {
     dispatch(createGame(nameGame, addUser, addStory, justDriving));
@@ -45,15 +39,6 @@ export default function CreateGame({ seActive }) {
 
   return (
     <div className="create-game">
-      {
-        <ActionCable
-          channel={{ channel: "ShowUsersChannel" }}
-          onReceived={(num) => {
-            setNumberUsers(num);
-          }}
-        />
-      }
-
       <h2 className="create-game__title">Форма створення нової гри</h2>
 
       <div className="create-game__form">

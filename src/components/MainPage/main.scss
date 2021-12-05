@@ -42,13 +42,18 @@
         background-color: #1c3b55;
 
         div {
-          margin-left: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: flex-end;
+          margin-left: 10px;
         }
 
         button {
-          margin: 0px 0px;
-          &:nth-child(2) {
-            margin-left: 10px;
+          margin: 2px 5px;
+          &:nth-child(1) {
+            // margin-right: 10px;
+            // margin-bottom: 5px;
           }
         }
       }
