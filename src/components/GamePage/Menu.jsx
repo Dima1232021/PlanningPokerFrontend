@@ -8,6 +8,7 @@ export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
   const invitationId = useSelector((state) => state.games.invitationId);
+  const userId = useSelector((state) => state.user.userid);
 
   const [players, setPlayers] = useState("Гравці");
 
@@ -38,23 +39,39 @@ export default function Menu({ active, setActive }) {
           </button>
         </div>
 
-        <div className="menu__row">
-          <div className="menu__invited-users">
-            <MenuBlock
-              btn1="Гравці"
-              btn2="Запросити"
-              value={players}
-              setValue={setPlayers}
-            />
-            {players === "Гравці" ? (
-              <UsersBlock
-                value={game.players}
-                keyValue={"user_id"}
-                name={"user_name"}
-                nameBtn="Видалити"
-                setValue={deleteUser}
+        {userId === game.driving.user_id && (
+          <div className="menu__row">
+            <div className="menu__users">
+              <MenuBlock
+                btn1="Гравці"
+                btn2="Запросити"
+                value={players}
+                setValue={setPlayers}
               />
-            ) : null}
+              {players === "Гравці" ? (
+                <>
+                  <p className="menu__text">Запрошені користувачі</p>
+                  <UsersBlock
+                    value={game.players}
+                    keyValue={"user_id"}
+                    name={"user_name"}
+                    nameBtn="Видалити"
+                    setValue={deleteUser}
+                  />
+                </>
+              ) : null}
+            </div>
+          </div>
+        )}
+
+        <div className="menu__row">
+          <div className="menu__users">
+            <p className="menu__text">Зараз у грі</p>
+            <UsersBlock
+              value={game.users_joined}
+              keyValue={"user_id"}
+              name={"user_name"}
+            />
           </div>
         </div>
       </div>

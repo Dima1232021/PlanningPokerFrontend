@@ -10,8 +10,6 @@ export default function GamePage() {
 
   const [active, setActive] = useState(true);
 
-  console.log("GamePage", game);
-
   return (
     <div className="game">
       <div className="game__column">
