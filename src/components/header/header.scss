@@ -16,6 +16,7 @@
   &__block {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
   }
 
@@ -28,7 +29,7 @@
 
   &__btn-log {
     font-size: 16px;
-    line-height: 142%;
+    line-height: 18px;
     border-radius: 8px;
     padding: 7px 15px;
     color: #3a80ba;
@@ -46,6 +47,15 @@
     &__title {
       font-size: 24px;
       line-height: 28px;
+    }
+    &__username {
+      margin: 0px 5px 0px 10px;
+    }
+
+    &__btn-log {
+      font-size: 14px;
+      line-height: 16px;
+      padding: 4px 7px;
     }
   }
 }

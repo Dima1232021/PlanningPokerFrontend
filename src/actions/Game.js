@@ -86,7 +86,6 @@ export function joinTheGame(game_id, invitation_id = false) {
       body: JSON.stringify({ game_id, invitation_id }),
     }).then((value) =>
       value.json().then((data) => {
-        // console.log(data);
         if (data.join_the_game) {
           dispatch(addTheGameYouJoined(data));
         }
@@ -143,11 +142,28 @@ export function declineInvitation(invitationId) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ invitation_id: invitationId }),
-    }).then((date1) =>
-      date1.json().then((data2) => {
-        if (data2.delete_invited) {
-          dispatch(deleteInvitationAction({ invitationId }));
+    }).then((value) =>
+      value.json().then((data) => {
+        if (data.delete_invited) {
+          dispatch(deleteInvitationAction(invitationId));
         }
+      })
+    );
+  };
+}
+
+export function chooseStory(storyId, gameId) {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/selected_story`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ storyId, gameId }),
+    }).then((value) =>
+      value.json().then((data) => {
+        // console.log("chooseAStory", data);
       })
     );
   };

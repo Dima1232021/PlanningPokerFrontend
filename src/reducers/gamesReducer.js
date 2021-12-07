@@ -22,6 +22,8 @@ const defaultState = {
   gameYouHaveJoined: {},
   inTheGame: false,
   invitationId: null,
+  stories: [],
+  gameId: null,
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -48,24 +50,19 @@ export const gamesReducer = (state = defaultState, action) => {
       return { ...state, invitationsToGames: action.payload };
 
     case ADD_GAME_INVITATION:
-      let value = state.invitationsToGames.find(
-        (element) => element.game_id === action.payload.game_id
-      );
-      if (!value) {
-        return {
-          ...state,
-          invitationsToGames: [...state.invitationsToGames, action.payload],
-        };
-      } else {
-        return state;
-      }
+      return {
+        ...state,
+        invitationsToGames: [...state.invitationsToGames, action.payload],
+      };
 
     case ADD_THE_GAME_YOU_JOINED:
       return {
         ...state,
+        gameId: action.payload.game.id,
         gameYouHaveJoined: action.payload.game,
         invitationId: action.payload.invitation_id,
         inTheGame: true,
+        stories: action.payload.stories,
       };
 
     case LEAVE_THE_GAME:
@@ -74,6 +71,8 @@ export const gamesReducer = (state = defaultState, action) => {
         gameYouHaveJoined: {},
         inTheGame: false,
         invitationId: null,
+        stories: [],
+        gameId: null,
       };
 
     case DELETE_INVITATION:
@@ -88,13 +87,14 @@ export const gamesReducer = (state = defaultState, action) => {
           gameYouHaveJoined: {},
           inTheGame: false,
           invitationId: null,
+          gameId: null,
         };
       } else {
         return { ...state, invitationsToGames };
       }
-
     case CHANGE_GAME_YOU_HAVE_JOINED:
       return { ...state, gameYouHaveJoined: action.payload };
+
     default:
       return state;
   }

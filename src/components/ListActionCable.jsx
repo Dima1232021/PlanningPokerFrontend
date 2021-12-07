@@ -1,20 +1,18 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
 import { useDispatch, useSelector } from "react-redux";
-import { showUser } from "../actions/users";
 import {
   changeGameYouHaveJoinedAction,
   addGameInvitationAction,
   deleteInvitationAction,
 } from "../reducers/gamesReducer";
+import { addUserAction } from "../reducers/usersReducer";
 
 export default function ListActionCable() {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.user.logged_in);
-  const inTheGame = useSelector((state) => state.games.inTheGame);
-
   const userid = useSelector((state) => state.user.userid);
-  const game = useSelector((state) => state.games.gameYouHaveJoined);
+  const gameId = useSelector((state) => state.games.gameId);
 
   if (loggedIn) {
     return (
@@ -25,6 +23,7 @@ export default function ListActionCable() {
             user: userid,
           }}
           onReceived={(value) => {
+            console.log(value);
             dispatch(addGameInvitationAction(value));
           }}
         />
@@ -39,19 +38,16 @@ export default function ListActionCable() {
         />
         <ActionCable
           channel={{ channel: "ShowUsersChannel" }}
-          onReceived={() => {
-            dispatch(showUser());
+          onReceived={(data) => {
+            dispatch(addUserAction(data));
           }}
         />
-        {inTheGame && (
-          <ActionCable
-            channel={{ channel: "GameChannel", game_id: game.id }}
-            onReceived={(data) => {
-              dispatch(changeGameYouHaveJoinedAction(data));
-              console.log("ActionCable", data);
-            }}
-          />
-        )}
+        <ActionCable
+          channel={{ channel: "GameChannel", game_id: gameId }}
+          onReceived={(data) => {
+            dispatch(changeGameYouHaveJoinedAction(data));
+          }}
+        />
       </>
     );
   }

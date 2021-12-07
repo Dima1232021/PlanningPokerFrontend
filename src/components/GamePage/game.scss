@@ -5,6 +5,8 @@
 
   &__column {
     &:nth-child(1) {
+      display: flex;
+      flex-direction: column;
       flex: 0 0 100%;
       background-color: rgb(187, 133, 94);
     }
@@ -17,6 +19,7 @@
       width: 320px;
       height: 100%;
       background-color: #ffffff00;
+
       &.none {
         top: 0px;
         right: -290px;
@@ -30,7 +33,7 @@
     transition: 0.3s;
     &.active {
       transition: 0.3s;
-      padding-right: 315px;
+      padding-right: 290px;
     }
   }
 
@@ -38,12 +41,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 5px 15px;
+    padding: 5px 35px;
     background-color: #1c3b55;
-  }
 
-  &__form.active {
-    padding-right: 335px;
+    &.active {
+      padding-right: 325px;
+    }
   }
 
   &__title {
@@ -65,17 +68,19 @@
   }
 
   @media (max-width: 767.98px) {
-    &__header,
     &__form {
+      padding: 0px;
       &.active {
-        padding-right: 15px;
+        padding: 0px;
       }
     }
-    &__form.active {
-      padding-right: 35px;
+    &__header {
+      padding: 10px;
+      &.active {
+        padding: 10px;
+      }
     }
-
-    &__title,
+    &__form &__title,
     &__text {
       flex: 0 0 100%;
     }
@@ -83,7 +88,96 @@
 }
 
 .form {
-  padding: 5px 35px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__row {
+    &:nth-child(2) {
+      flex: 1 1 auto;
+    }
+  }
+
+  &__users {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  &__user {
+    flex: 0 0 22%;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #3a80ba;
+  }
+  &__username {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  &__answer {
+    span {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+
+  &__player-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: #3a80ba;
+  }
+
+  &__btn-answer {
+    padding: 7px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    color: #1a80ba;
+  }
+
+  &__list {
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__link {
+    width: 6.9%;
+    padding: 5% 0px 5%;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: #014d88;
+    transition: 0.5s;
+
+    &:hover {
+      transition: 0.5s;
+      position: relative;
+      top: -10px;
+      -webkit-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    &__link {
+      width: 15%;
+      &:nth-child(-n + 6) {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 
 .menu {
@@ -92,6 +186,7 @@
   background-color: #ffffff00;
 
   &__column {
+    height: 100%;
     &:nth-child(1) {
       width: 30px;
       display: flex;
@@ -100,19 +195,23 @@
       background-color: #ffffff00;
     }
     &:nth-child(2) {
+      display: flex;
+      flex-direction: column;
       padding: 5px 10px;
       width: 290px;
       background-color: rgb(48, 48, 48);
+      overflow-y: auto;
     }
   }
 
   &__row {
-    flex: 0 0 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 10px;
   }
+
   &__title,
   &__btn-active {
     font-size: 20px;
@@ -129,12 +228,16 @@
   &__btn-leave {
     font-size: 16px;
     line-height: 20px;
+    font-weight: bold;
     padding: 3px 5px;
     border-radius: 4px;
+    color: rgb(255, 254, 254);
+    background-color: rgba(255, 38, 0, 0.829);
   }
 
-  &__users {
-    flex: 1 0 auto;
+  &__users,
+  &__storyes {
+    flex: 0 0 100%;
     border-radius: 8px;
     padding: 5px;
     background-color: #3a80ba;
@@ -172,6 +275,33 @@
         padding: 2px 3px;
         margin-left: 15px;
       }
+    }
+  }
+
+  .storiesBlock {
+    &__list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    &__link {
+      background-color: #1c3b55;
+      margin-bottom: 5px;
+      padding: 5px;
+      span {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      button {
+        padding: 2px 4px;
+        &:nth-child(2) {
+          margin-left: 10px;
+        }
+      }
+    }
+    &__row {
+      margin-bottom: 10px;
     }
   }
 }
