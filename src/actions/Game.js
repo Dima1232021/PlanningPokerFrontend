@@ -154,16 +154,14 @@ export function declineInvitation(invitationId) {
 }
 
 export function startAPoll(storyId, gameId) {
-  return (dispatch) => {
-    fetch(`${API_URL}/game/start_a_poll`, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ storyId, gameId }),
-    });
-  };
+  fetch(`${API_URL}/game/start_a_poll`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ storyId, gameId }),
+  });
 }
 export function finishAPoll(gameId) {
   // return (dispatch) => {

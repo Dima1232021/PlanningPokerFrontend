@@ -1,6 +1,7 @@
 const CHANGE_LOADER_GAME = "CHANGE_LOADER_GAME";
 const CHANGE_ACTIVE_FORM = "CHANGE_ACTIVE_FORM";
 const CHANGE_GAME_YOU_HAVE_JOINED = "CHANGE_GAME_YOU_HAVE_JOINED";
+const CHANGE_HISTORY_NUMBER = "CHANGE_HISTORY_NUMBER";
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
 const ADD_GAMES_INVITATIONS = "ADD_GAMES_INVITATIONS";
@@ -22,7 +23,7 @@ const defaultState = {
   stories: [],
   answers: {},
   gameId: null,
-  gg: {},
+  historyNumber: 0,
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -90,19 +91,21 @@ export const gamesReducer = (state = defaultState, action) => {
           invitationId: null,
           gameId: null,
         };
-      } else {
-        return { ...state, invitationsToGames };
       }
+      return { ...state, invitationsToGames };
+
     case CHANGE_GAME_YOU_HAVE_JOINED:
       return { ...state, gameYouHaveJoined: action.payload };
 
     case ADD_ANSWERS:
-      console.log(" case ADD_ANSWERS", action.payload);
       return {
         ...state,
         gameYouHaveJoined: action.payload.game,
         answers: action.payload.answers,
       };
+
+    case CHANGE_HISTORY_NUMBER:
+      return { ...state, historyNumber: action.payload };
 
     default:
       return state;
@@ -121,6 +124,11 @@ export const changeActveFormAction = (payload) => ({
 
 export const changeGameYouHaveJoinedAction = (payload) => ({
   type: CHANGE_GAME_YOU_HAVE_JOINED,
+  payload: payload,
+});
+
+export const changeHistoryNumberAction = (payload) => ({
+  type: CHANGE_HISTORY_NUMBER,
   payload: payload,
 });
 
