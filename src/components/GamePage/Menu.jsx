@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { leaveTheGame, chooseStory } from "../../actions/Game";
+import { leaveTheGame } from "../../actions/Game";
 import UsersBlock from "../usersBlock/UsersBlock";
 import StoriesBlock from "../storiesBlock/StoriesBlock";
 
@@ -15,10 +15,6 @@ export default function Menu({ active, setActive }) {
 
   function leave() {
     dispatch(leaveTheGame(game, invitationId));
-  }
-
-  function story({ id }) {
-    dispatch(chooseStory(id, game.id));
   }
 
   return (
@@ -48,9 +44,8 @@ export default function Menu({ active, setActive }) {
                 value={stories}
                 keyValue={"id"}
                 name={"body"}
-                nameBtn="Poll"
+                nameBtn="Edit"
                 nameBtn2="Remove"
-                setValue={story}
               />
             </div>
           </div>
@@ -68,6 +63,7 @@ export default function Menu({ active, setActive }) {
             <p className="menu__text">Online</p>
             <UsersBlock
               value={game.users_joined}
+              // value={game.players}
               keyValue={"user_id"}
               name={"user_name"}
             />

@@ -86,6 +86,7 @@ export function joinTheGame(game_id, invitation_id = false) {
       body: JSON.stringify({ game_id, invitation_id }),
     }).then((value) =>
       value.json().then((data) => {
+        console.log(data);
         if (data.join_the_game) {
           dispatch(addTheGameYouJoined(data));
         }
@@ -152,18 +153,43 @@ export function declineInvitation(invitationId) {
   };
 }
 
-export function chooseStory(storyId, gameId) {
+export function startAPoll(storyId, gameId) {
   return (dispatch) => {
-    fetch(`${API_URL}/game/selected_story`, {
+    fetch(`${API_URL}/game/start_a_poll`, {
       credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ storyId, gameId }),
+    });
+  };
+}
+export function finishAPoll(gameId) {
+  // return (dispatch) => {
+  fetch(`${API_URL}/game/finish_a_poll`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId }),
+  });
+  // };
+}
+
+export function giveAnAnswer(storyId, answer) {
+  return (dispatch) => {
+    fetch(`${API_URL}/game/give_an_answer`, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ storyId, answer }),
     }).then((value) =>
       value.json().then((data) => {
-        // console.log("chooseAStory", data);
+        console.log(data);
       })
     );
   };

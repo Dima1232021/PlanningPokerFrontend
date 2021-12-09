@@ -1,15 +1,12 @@
 const CHANGE_LOADER_GAME = "CHANGE_LOADER_GAME";
 const CHANGE_ACTIVE_FORM = "CHANGE_ACTIVE_FORM";
 const CHANGE_GAME_YOU_HAVE_JOINED = "CHANGE_GAME_YOU_HAVE_JOINED";
-
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
-
 const ADD_GAMES_INVITATIONS = "ADD_GAMES_INVITATIONS";
 const ADD_GAME_INVITATION = "ADD_GAME_INVITATION";
-
 const ADD_THE_GAME_YOU_JOINED = "ADD_THE_GAME_YOU_JOINED";
-
+const ADD_ANSWERS = "ADD_ANSWERS";
 const DELETE_YOUR_GAME = "DELETE_YOUR_GAME";
 const DELETE_INVITATION = "DELETE_INVITATION";
 const LEAVE_THE_GAME = "LEAVE_THE_GAME";
@@ -23,7 +20,9 @@ const defaultState = {
   inTheGame: false,
   invitationId: null,
   stories: [],
+  answers: {},
   gameId: null,
+  gg: {},
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -63,6 +62,7 @@ export const gamesReducer = (state = defaultState, action) => {
         invitationId: action.payload.invitation_id,
         inTheGame: true,
         stories: action.payload.stories,
+        answers: action.payload.answers,
       };
 
     case LEAVE_THE_GAME:
@@ -72,6 +72,7 @@ export const gamesReducer = (state = defaultState, action) => {
         inTheGame: false,
         invitationId: null,
         stories: [],
+        answers: {},
         gameId: null,
       };
 
@@ -94,6 +95,14 @@ export const gamesReducer = (state = defaultState, action) => {
       }
     case CHANGE_GAME_YOU_HAVE_JOINED:
       return { ...state, gameYouHaveJoined: action.payload };
+
+    case ADD_ANSWERS:
+      console.log(" case ADD_ANSWERS", action.payload);
+      return {
+        ...state,
+        gameYouHaveJoined: action.payload.game,
+        answers: action.payload.answers,
+      };
 
     default:
       return state;
@@ -137,6 +146,11 @@ export const addGameInvitationAction = (payload) => ({
 
 export const addTheGameYouJoined = (payload) => ({
   type: ADD_THE_GAME_YOU_JOINED,
+  payload: payload,
+});
+
+export const addAnswersAction = (payload) => ({
+  type: ADD_ANSWERS,
   payload: payload,
 });
 

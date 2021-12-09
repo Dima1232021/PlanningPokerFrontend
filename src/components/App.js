@@ -14,6 +14,7 @@ import "./app.scss";
 function App() {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.user.logged_in);
+  const inTheGame = useSelector((state) => state.games.inTheGame);
 
   useEffect(() => {
     dispatch(logged_in());
@@ -31,8 +32,9 @@ function App() {
       <ListActionCable />
       <OutputErrors />
       <Header />
+      {/* {!inTheGame && <Header />} */}
       <Routes />
-      <Footer />
+      {!inTheGame && <Footer />}
     </div>
   );
 }

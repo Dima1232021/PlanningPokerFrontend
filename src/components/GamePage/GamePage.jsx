@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Form from "./Form";
+import Form from "./form/Form";
 import Menu from "./Menu";
 
 import "./game.scss";
@@ -15,13 +15,13 @@ export default function GamePage() {
     <>
       <div className="game">
         <div className="game__column">
-          <div className={`game__header ${active && "active"}`}>
+          {/* <div className={`game__header ${active && "active"}`}>
             <h2 className="game__title">{game.name_game}</h2>
             <p className="game__text">
               <b>Driving:</b>
               {game.driving.user_name}
             </p>
-          </div>
+          </div>  */}
           <Form active={active} />
         </div>
 
