@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import FormPlayerCards from "./FormPlayerCards";
-
 import FormStory from "./FormStory";
 import FormUsers from "./FormUsers";
+
+import "./form.scss";
 
 export default function Form({ active }) {
   const game = useSelector((state) => state.games.gameYouHaveJoined);

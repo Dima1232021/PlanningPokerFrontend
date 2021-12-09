@@ -5,10 +5,11 @@ import { startAPoll, finishAPoll } from "../../../actions/Game";
 
 export default function FormStory({ isEmpty }) {
   const dispatch = useDispatch();
+  const game = useSelector((state) => state.games.gameYouHaveJoined);
   const historyNumber = useSelector((state) => state.games.historyNumber);
   const stories = useSelector((state) => state.games.stories);
   const gameId = useSelector((state) => state.games.gameId);
-  console.log(stories);
+  const userid = useSelector((state) => state.user.userid);
 
   function subtractHistoryNumber() {
     historyNumber > 0 && dispatch(changeHistoryNumberAction(historyNumber - 1));
@@ -24,33 +25,47 @@ export default function FormStory({ isEmpty }) {
   function finishPull() {
     finishAPoll(gameId);
   }
+
   return (
     <div className="form__story">
-      <div className="form__row">
-      {/* {!stories? <h3 className="form__title">Т</h3>} */}
-        <div>
-          {!isEmpty && <h3 className="form__title">Опитування розпочалося</h3>}
-        </div>
+      {!stories.length ? (
+        <h3 className="form__title-error">
+          Here will be your stories when you add them
+        </h3>
+      ) : (
+        <>
+          <div className="form__column">
+            {!isEmpty && <h3 className="form__title">The poll has begun</h3>}
+            <p className="form__text">
+              <span>{`Story ${historyNumber + 1}`}</span>
+              {stories[historyNumber].body}
+            </p>
+          </div>
+          <div className="form__column">
+            {stories.length > 2 && (
+              <button className="form__arrow" onClick={subtractHistoryNumber}>
+                &#9650;
+              </button>
+            )}
+            {game.driving.user_id === userid &&
+              (isEmpty ? (
+                <button onClick={startPull} className="form__btn-poll">
+                  Start poll
+                </button>
+              ) : (
+                <button onClick={finishPull} className="form__btn-poll">
+                  Finish poll
+                </button>
+              ))}
 
-        <nav className="form__navigation">
-          <h3 className="form__title">{`Story ${historyNumber + 1}`}</h3>
-          <button className="form__arrow" onClick={subtractHistoryNumber}>
-            &#171;
-          </button>
-          {isEmpty ? (
-            <button onClick={startPull}>Start a poll</button>
-          ) : (
-            <button onClick={finishPull}>Finish a poll</button>
-          )}
-          <button className="form__arrow" onClick={addHistoryNumber}>
-            &#187;
-          </button>
-        </nav>
-      </div>
-
-      <p className="form__text">
-        {stories && stories[historyNumber] && stories[historyNumber].body}
-      </p>
+            {stories.length > 2 && (
+              <button className="form__arrow" onClick={addHistoryNumber}>
+                &#9660;
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

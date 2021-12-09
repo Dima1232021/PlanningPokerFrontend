@@ -31,8 +31,8 @@ function App() {
     <div className="wrapper">
       <ListActionCable />
       <OutputErrors />
-      <Header />
-      {/* {!inTheGame && <Header />} */}
+      {/* <Header /> */}
+      {!inTheGame && <Header />}
       <Routes />
       {!inTheGame && <Footer />}
     </div>
