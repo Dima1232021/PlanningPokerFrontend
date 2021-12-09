@@ -30,8 +30,7 @@
     flex: 0 0 48%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
     background-color: #3a80ba;
     padding: 15px 20px;
     margin-top: 20px;
@@ -52,8 +51,6 @@
         button {
           margin: 2px 5px;
           &:nth-child(1) {
-            // margin-right: 10px;
-            // margin-bottom: 5px;
           }
         }
       }

@@ -37,6 +37,9 @@
 
     &:nth-child(-n + 2) {
       flex: 0 0 49%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
   }
 }
@@ -74,7 +77,6 @@
   }
 
   &__text {
-    flex: 0 0 100%;
     text-align: center;
     margin-bottom: 10px;
     color: #fff;
