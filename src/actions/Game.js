@@ -177,18 +177,12 @@ export function finishAPoll(gameId) {
 }
 
 export function giveAnAnswer(storyId, answer) {
-  return (dispatch) => {
-    fetch(`${API_URL}/game/give_an_answer`, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ storyId, answer }),
-    }).then((value) =>
-      value.json().then((data) => {
-        console.log(data);
-      })
-    );
-  };
+  fetch(`${API_URL}/game/give_an_answer`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ storyId, answer }),
+  });
 }
