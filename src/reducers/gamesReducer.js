@@ -114,7 +114,7 @@ export const gamesReducer = (state = defaultState, action) => {
           ...state,
           stories: action.payload.stories,
           answers: action.payload.answers,
-          historyNumber: 0
+          historyNumber: 0,
         };
       }
       return {

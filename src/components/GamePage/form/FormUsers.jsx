@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function FormUsers({ isEmpty }) {
-  const dispatch = useDispatch();
   const { players, users_joined, id_players_responded } = useSelector(
     (state) => state.games.gameYouHaveJoined
   );
