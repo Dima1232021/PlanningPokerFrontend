@@ -25,7 +25,7 @@ export const useValidation = (value, validations, fieldName) => {
             !maxLength &&
               addMessageError(
                 1,
-                `Поле ${fieldName}: не може містить більше ніж ${validations[validation]} символів`
+                `${fieldName} field: cannot contain more than ${validations[validation]} characters`
               );
             setMaxLength(true);
           } else {
@@ -39,7 +39,7 @@ export const useValidation = (value, validations, fieldName) => {
             !minLength &&
               addMessageError(
                 2,
-                `Поле ${fieldName}: не може містить менше ніж ${validations[validation]} символів`
+                `${fieldName} field: cannot contain less than ${validations[validation]} characters`
               );
             setMinLength(true);
           } else {
@@ -57,10 +57,7 @@ export const useValidation = (value, validations, fieldName) => {
             setEmailError(false);
           } else {
             !emailError &&
-              addMessageError(
-                4,
-                `Поле ${fieldName}: введено некоректний Email`
-              );
+              addMessageError(4, `${fieldName} field: Invalid Email entered`);
             setEmailError(true);
           }
           break;
@@ -68,7 +65,7 @@ export const useValidation = (value, validations, fieldName) => {
         case "passwordConfirmation":
           if (validations[validation] !== value) {
             !passwordConfirmation &&
-              addMessageError(5, `Поле ${fieldName}: пароль не збігається`);
+              addMessageError(5, `${fieldName} field: password does not match`);
             setPasswordConfirmation(true);
           } else {
             passwordConfirmation && deleteMessageError(5);

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useInput } from "../../../hooks/useInput";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createGame } from "../../../actions/Game";
@@ -12,14 +13,24 @@ export default function CreateGame({ seActive }) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
 
-  const [nameGame, setNameGame] = useState("");
+  const nameGame = useInput(
+    "",
+    { minLength: 5, maxLength: 50 },
+    "Enter a name for the game"
+  );
+  const textStory = useInput(
+    "",
+    { minLength: 10, maxLength: 300 },
+    "Enter history"
+  );
+
   const [justDriving, setJustDriving] = useState(true);
-  const [textStory, setTextStory] = useState("");
   const [addUser, setAddUser] = useState([]);
   const [addStory, setAddStory] = useState([]);
 
   function createNewGame() {
-    dispatch(createGame(nameGame, addUser, addStory, justDriving));
+    nameGame.isValid &&
+      dispatch(createGame(nameGame.value, addUser, addStory, justDriving));
   }
 
   function addUserState(user) {
@@ -69,15 +80,20 @@ export default function CreateGame({ seActive }) {
           <div className="block__row">
             <textarea
               className="block__testarea"
-              value={textStory}
-              onChange={(event) => setTextStory(event.target.value)}
+              value={textStory.value}
+              onChange={(e) => textStory.onChange(e)}
               placeholder="Enter history"
+              onBlur={textStory.outputError}
             ></textarea>
             <button
               className="block__btn-create"
               onClick={() => {
-                setAddStory((value) => [...value, textStory]);
-                setTextStory("");
+                if (textStory.isValid) {
+                  {
+                    setAddStory((value) => [...value, textStory.value]);
+                    textStory.setValue("");
+                  }
+                }
               }}
             >
               Create
@@ -99,8 +115,9 @@ export default function CreateGame({ seActive }) {
           <input
             type="text"
             placeholder="Enter a name for the game"
-            value={nameGame}
-            onChange={(event) => setNameGame(event.target.value)}
+            value={nameGame.value}
+            onChange={(e) => nameGame.onChange(e)}
+            onBlur={nameGame.outputError}
             className="block__input"
           />
 
