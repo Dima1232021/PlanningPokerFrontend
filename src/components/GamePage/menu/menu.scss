@@ -33,6 +33,7 @@
   }
 
   &__title,
+  &__modal-title,
   &__btn-active {
     font-size: 20px;
     line-height: 142%;
@@ -114,14 +115,61 @@
       }
 
       button {
-        padding: 2px 4px;
+        padding: 3px 7px;
+        background-color: #3a80ba;
+        color: #fff;
+        font-weight: bold;
         &:nth-child(2) {
           margin-left: 10px;
+          background-color: rgba(255, 38, 0, 0.829);
         }
       }
     }
     &__row {
       margin-bottom: 10px;
     }
+  }
+
+  &__modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  &__modal-title {
+    flex: 0 0 100%;
+  }
+  &__textarea {
+    flex: 0 0 100%;
+    margin: 30px 0px 15px;
+    resize: none;
+    height: 150px;
+    font-size: 16px;
+    line-height: 18px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    height: 300px;
+  }
+
+  &__btn-сhange {
+    font-size: 20px;
+    line-height: 22px;
+    padding: 8px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    background: #3a80ba;
+    margin-left: 15px;
+  }
+
+  &__btn-create {
+    font-size: 16px;
+    line-height: 18px;
+    width: 100%;
+    margin-top: 10px;
+    font-weight: 600;
+    background-color: rgb(0, 187, 16);
+    color: #fff;
+    padding: 7px 0px;
+    border-radius: 8px;
   }
 }

@@ -6,6 +6,7 @@ import {
   addGameInvitationAction,
   deleteInvitationAction,
   addAnswersAction,
+  addStoryAction,
 } from "../reducers/gamesReducer";
 import { addUserAction } from "../reducers/usersReducer";
 
@@ -53,6 +54,12 @@ export default function ListActionCable() {
           channel={{ channel: "AnswersChannel", game_id: gameId }}
           onReceived={(data) => {
             dispatch(addAnswersAction(data));
+          }}
+        />
+        <ActionCable
+          channel={{ channel: "StoriesChannel", game_id: gameId }}
+          onReceived={(data) => {
+            dispatch(addStoryAction(data));
           }}
         />
       </>

@@ -89,11 +89,10 @@ export default function CreateGame({ seActive }) {
               className="block__btn-create"
               onClick={() => {
                 if (textStory.isValid) {
-                  {
-                    setAddStory((value) => [...value, textStory.value]);
-                    textStory.setValue("");
-                  }
+                  setAddStory((value) => [...value, textStory.value]);
+                  return textStory.setValue("");
                 }
+                return textStory.outputError();
               }}
             >
               Create

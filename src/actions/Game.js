@@ -186,3 +186,35 @@ export function giveAnAnswer(storyId, answer) {
     body: JSON.stringify({ storyId, answer }),
   });
 }
+
+export function addHistory(gameId, body) {
+  fetch(`${API_URL}/game/add_history`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId, body }),
+  });
+}
+export function editHistory(gameId, storyId, body) {
+  fetch(`${API_URL}/game/edit_history`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId, storyId, body }),
+  });
+}
+
+export function deleteHistory(gameId, storyId) {
+  fetch(`${API_URL}/game/delete_history`, {
+    credentials: "include",
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId, storyId, }),
+  });
+}

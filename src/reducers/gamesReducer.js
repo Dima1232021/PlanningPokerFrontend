@@ -8,6 +8,7 @@ const ADD_GAMES_INVITATIONS = "ADD_GAMES_INVITATIONS";
 const ADD_GAME_INVITATION = "ADD_GAME_INVITATION";
 const ADD_THE_GAME_YOU_JOINED = "ADD_THE_GAME_YOU_JOINED";
 const ADD_ANSWERS = "ADD_ANSWERS";
+const ADD_STORY = "ADD_STORY";
 const DELETE_YOUR_GAME = "DELETE_YOUR_GAME";
 const DELETE_INVITATION = "DELETE_INVITATION";
 const LEAVE_THE_GAME = "LEAVE_THE_GAME";
@@ -107,6 +108,20 @@ export const gamesReducer = (state = defaultState, action) => {
     case CHANGE_HISTORY_NUMBER:
       return { ...state, historyNumber: action.payload };
 
+    case ADD_STORY:
+      if (action.payload.answers) {
+        return {
+          ...state,
+          stories: action.payload.stories,
+          answers: action.payload.answers,
+          historyNumber: 0
+        };
+      }
+      return {
+        ...state,
+        stories: action.payload.stories,
+      };
+
     default:
       return state;
   }
@@ -159,6 +174,10 @@ export const addTheGameYouJoined = (payload) => ({
 
 export const addAnswersAction = (payload) => ({
   type: ADD_ANSWERS,
+  payload: payload,
+});
+export const addStoryAction = (payload) => ({
+  type: ADD_STORY,
   payload: payload,
 });
 
