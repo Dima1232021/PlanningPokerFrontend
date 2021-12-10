@@ -18,15 +18,17 @@ export default function FormUsers({ isEmpty }) {
             let user = game.players.find(
               (player) => player.user_id === value.user_id
             );
-            return (
-              <div className="form__user" key={user.user_id}>
-                <h3 className="form__username">{user.user_name}</h3>
-                <div className="form__answer">
-                  <span>Answer:</span>
-                  {value.body}
+            if (user) {
+              return (
+                <div className="form__user" key={user.user_id}>
+                  <h3 className="form__username">{user.user_name}</h3>
+                  <div className="form__answer">
+                    <span>Answer:</span>
+                    {value.body}
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            }
           })
         ) : (
           <h3 className="form__title-error">There are no answers yet</h3>
