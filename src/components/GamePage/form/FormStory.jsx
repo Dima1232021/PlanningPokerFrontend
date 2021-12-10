@@ -35,35 +35,49 @@ export default function FormStory({ isEmpty }) {
       ) : (
         <>
           <div className="form__column">
-            {!isEmpty && <h3 className="form__title">The poll has begun</h3>}
-            <p className="form__text">
-              <span>{`Story ${historyNumber + 1}`}</span>
-              {stories[historyNumber].body}
-            </p>
-          </div>
-          <div className="form__column">
-            {stories.length > 1 && (
-              <button className="form__arrow" onClick={subtractHistoryNumber}>
-                &#9650;
-              </button>
+            {isEmpty ? (
+              <p className="form__text">
+                <span>{`Story ${historyNumber + 1}`}</span>
+                {stories[historyNumber].body}
+              </p>
+            ) : (
+              <>
+                <h3 className="form__title">The poll has begun</h3>
+                <p className="form__text">
+                  <span>{`Story ${
+                    stories.map((x) => x.id).indexOf(game.selected_story.id) + 1
+                  }`}</span>
+                  {game.selected_story.body}
+                </p>
+              </>
             )}
-            {game.driving.user_id === userid &&
-              (isEmpty ? (
-                <button onClick={startPull} className="form__btn-poll">
-                  Start poll
-                </button>
-              ) : (
-                <button onClick={finishPull} className="form__btn-poll">
-                  Finish poll
-                </button>
-              ))}
+          </div>
 
-            {stories.length > 1 && (
-              <button className="form__arrow" onClick={addHistoryNumber}>
-                &#9660;
-              </button>
-            )}
-          </div>
+          {(game.driving.user_id === userid || !!isEmpty) && (
+            <div className="form__column">
+              {stories.length > 1 && isEmpty && (
+                <button className="form__arrow" onClick={subtractHistoryNumber}>
+                  &#9650;
+                </button>
+              )}
+              {game.driving.user_id === userid &&
+                (isEmpty ? (
+                  <button onClick={startPull} className="form__btn-poll">
+                    Start poll
+                  </button>
+                ) : (
+                  <button onClick={finishPull} className="form__btn-poll finish">
+                    Finish poll
+                  </button>
+                ))}
+
+              {stories.length > 1 && isEmpty && (
+                <button className="form__arrow" onClick={addHistoryNumber}>
+                  &#9660;
+                </button>
+              )}
+            </div>
+          )}
         </>
       )}
     </div>

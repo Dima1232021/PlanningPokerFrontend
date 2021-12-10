@@ -1,0 +1,127 @@
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff00;
+
+  &__column {
+    height: 100%;
+    &:nth-child(1) {
+      width: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #ffffff00;
+    }
+    &:nth-child(2) {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      padding: 5px 10px;
+      width: 290px;
+      background-color: rgb(48, 48, 48);
+      overflow-y: auto;
+    }
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  &__title,
+  &__btn-active {
+    font-size: 20px;
+    line-height: 142%;
+    text-align: center;
+  }
+
+  &__btn-active {
+    padding: 20px 0px;
+    width: 30px;
+    border-radius: 8px 0px 0px 8px;
+  }
+
+  &__btn-leave {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: rgb(255, 254, 254);
+    background-color: rgba(255, 38, 0, 0.829);
+  }
+
+  &__users,
+  &__storyes {
+    flex: 0 0 100%;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #3a80ba;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 5px;
+  }
+
+  .menu-block__link {
+    padding: 3px 5px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 10px;
+  }
+
+  .usersBlock {
+    &__list {
+      max-height: 200px;
+    }
+
+    &__link {
+      background-color: #1c3b55;
+      margin-bottom: 5px;
+      padding: 5px;
+      span {
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      button {
+        padding: 2px 3px;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .storiesBlock {
+    &__list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    &__link {
+      background-color: #1c3b55;
+      margin-bottom: 5px;
+      padding: 5px;
+      span {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      button {
+        padding: 2px 4px;
+        &:nth-child(2) {
+          margin-left: 10px;
+        }
+      }
+    }
+    &__row {
+      margin-bottom: 10px;
+    }
+  }
+}
