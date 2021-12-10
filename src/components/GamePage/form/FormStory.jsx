@@ -42,7 +42,7 @@ export default function FormStory({ isEmpty }) {
             </p>
           </div>
           <div className="form__column">
-            {stories.length > 2 && (
+            {stories.length > 1 && (
               <button className="form__arrow" onClick={subtractHistoryNumber}>
                 &#9650;
               </button>
@@ -58,7 +58,7 @@ export default function FormStory({ isEmpty }) {
                 </button>
               ))}
 
-            {stories.length > 2 && (
+            {stories.length > 1 && (
               <button className="form__arrow" onClick={addHistoryNumber}>
                 &#9660;
               </button>

@@ -20,7 +20,7 @@ export default function CreateGame({ seActive }) {
   );
   const textStory = useInput(
     "",
-    { minLength: 10, maxLength: 300 },
+    { minLength: 10, maxLength: 1000 },
     "Enter history"
   );
 

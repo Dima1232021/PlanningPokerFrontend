@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { leaveTheGame } from "../../actions/Game";
-import UsersBlock from "../usersBlock/UsersBlock";
-import StoriesBlock from "../storiesBlock/StoriesBlock";
+import { leaveTheGame } from "../../../actions/Game";
+import UsersBlock from "../../usersBlock/UsersBlock";
+import StoriesBlock from "../../storiesBlock/StoriesBlock";
 
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
@@ -10,8 +10,6 @@ export default function Menu({ active, setActive }) {
   const stories = useSelector((state) => state.games.stories);
   const invitationId = useSelector((state) => state.games.invitationId);
   const userId = useSelector((state) => state.user.userid);
-
-  // console.log(game);
 
   function leave() {
     dispatch(leaveTheGame(game, invitationId));
