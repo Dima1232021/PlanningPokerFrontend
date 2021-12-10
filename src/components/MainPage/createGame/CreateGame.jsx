@@ -39,56 +39,58 @@ export default function CreateGame({ seActive }) {
 
   return (
     <div className="create-game">
-      <h2 className="create-game__title">Форма створення нової гри</h2>
+      <h2 className="create-game__title">The form of creating the game</h2>
 
       <div className="create-game__form">
         <div className="create-game__block block">
-          <p className="block__text">
-            Виберіть користувачів щоб запросити їх до гри
-          </p>
+          <p className="block__text">Select users to invite them to the game</p>
           <UsersBlock
             value={users}
             keyValue={["id"]}
             name={["username"]}
-            nameBtn="Додати"
+            nameBtn="Add"
             setValue={addUserState}
           />
         </div>
 
         <div className="create-game__block block">
-          <p className="block__text">Користувачі яких ви вибрали</p>
+          <p className="block__text">The users you have selected</p>
           <UsersBlock
             value={addUser}
             keyValue={["id"]}
             name={["username"]}
-            nameBtn="Видалити"
+            nameBtn="Remove"
             setValue={deleteUserState}
           />
         </div>
 
         <div className="create-game__block block">
-          <p className="block__text">Створіть істрорію</p>
+          <p className="block__text">Create stories</p>
           <div className="block__row">
             <textarea
               className="block__testarea"
               value={textStory}
               onChange={(event) => setTextStory(event.target.value)}
+              placeholder="Enter history"
             ></textarea>
             <button
               className="block__btn-create"
-              onClick={() => setAddStory((value) => [...value, textStory])}
+              onClick={() => {
+                setAddStory((value) => [...value, textStory]);
+                setTextStory("");
+              }}
             >
-              Створити
+              Create
             </button>
           </div>
         </div>
 
         <div className="create-game__block block">
-          <p className="block__text">Історії які ви створили</p>
+          <p className="block__text">Stories you have created</p>
 
           <UsersBlock
             value={addStory}
-            nameBtn="Видалити"
+            nameBtn="Remove"
             setValue={deleteStoryState}
           />
         </div>
@@ -96,23 +98,23 @@ export default function CreateGame({ seActive }) {
         <div className="create-game__block block">
           <input
             type="text"
-            placeholder="Введіть назву гри"
+            placeholder="Enter a name for the game"
             value={nameGame}
             onChange={(event) => setNameGame(event.target.value)}
             className="block__input"
           />
 
-          <div className="block__row">
+          <div className="block__container">
             <Cheks justDriving={justDriving} setJustDriving={setJustDriving} />
-            <div>
+            <div className="block__row">
               <button
                 onClick={() => dispatch(changeActveFormAction(false))}
                 className="block__btn-exit"
               >
-                Відмінити
+                Cancel
               </button>
               <button className="block__btn-create" onClick={createNewGame}>
-                Створити гру
+                Create a game
               </button>
             </div>
           </div>

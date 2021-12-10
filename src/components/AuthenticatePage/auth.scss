@@ -36,8 +36,8 @@
 
   &__input,
   &__btn {
-    flex: 1 0 100%;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 8px;
     padding: 10px 15px;
   }
 
@@ -61,5 +61,37 @@
       -webkit-box-shadow: -1px 4px 4px #000000;
       box-shadow: -1px 4px 4px #00000052;
     }
+  }
+
+  @media (max-width: 767.98px) {
+    .menu-block__link {
+      padding: 10px 35px;
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    &__title {
+      font-size: 28px;
+      line-height: 32px;
+      margin-top: 15px;
+    }
+
+    &__input,
+    &__btn {
+      width: 100%;
+      padding: 5px 10px;
+    }
+
+    &__input {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    &__btn {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  
   }
 }

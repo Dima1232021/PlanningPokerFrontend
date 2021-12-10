@@ -21,7 +21,7 @@ export default function MainPage() {
               className="main__btn-create"
               onClick={() => dispatch(changeActveFormAction(true))}
             >
-              Створити нову гру
+              Create a new game
             </button>
           ) : (
             <CreateGame />

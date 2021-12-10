@@ -3,7 +3,7 @@ import React from "react";
 export default function Cheks({ justDriving, setJustDriving }) {
   return (
     <div className="block__form-check">
-      <p className="block__text">Виберіть ким ви хотіли бути у грі</p>
+      <p className="block__text">Choose who you wanted to be in the game</p>
       <div className="block__check">
         <input
           className="block__radio"
@@ -13,7 +13,7 @@ export default function Cheks({ justDriving, setJustDriving }) {
           id="Radios1"
         />
         <label className="block__label" htmlFor="Radios1">
-          Просто ведучий
+          Only presenters
         </label>
       </div>
       <div className="block__check">
@@ -25,7 +25,7 @@ export default function Cheks({ justDriving, setJustDriving }) {
           id="Radios2"
         />
         <label className="block__label" htmlFor="Radios2">
-          Ведучим та гравцем
+          Leader and player
         </label>
       </div>
     </div>

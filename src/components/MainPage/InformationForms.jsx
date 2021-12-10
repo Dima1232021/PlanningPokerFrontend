@@ -41,30 +41,30 @@ export default function InformationForms() {
     <div className="main__row">
       <div className="main__games">
         <div className="main__title">
-          <h2>Інформація по іграм</h2>
+          <h2>Information on games</h2>
         </div>
 
         <div className="main__block block">
-          <p className="block__text">Ігри які ви створили</p>
+          <p className="block__text">Games you have created</p>
           <UsersBlock
             value={yourGames}
             keyValue={["id"]}
             name={["name_game"]}
-            nameBtn="До гри"
-            nameBtn2="Видалити"
+            nameBtn="Enter"
+            nameBtn2="Remove"
             setValue={join}
             setValue2={deleteGame}
           />
         </div>
 
         <div className="main__block block">
-          <p className="block__text">Ігри до яких вас запрошують</p>
+          <p className="block__text">Games to which you are invited</p>
           <UsersBlock
             value={invitationsToGames}
             keyValue={["invitation_id"]}
             name={["game_name"]}
-            nameBtn="До гри"
-            nameBtn2="Відмовитися"
+            nameBtn="Enter"
+            nameBtn2="Refuse"
             setValue={join}
             setValue2={declineInv}
           />
