@@ -24,17 +24,22 @@ export function login(email, password, addError) {
         value.json().then((data) => {
           console.log(data);
           if (data.logged_in) {
-            dispatch(addUserDataAction(data));
-          } else {
-            addError(data.message);
+            return dispatch(addUserDataAction(data));
           }
+          return addError(data.error);
         })
       )
       .catch((error) => addError("The server does not respond"));
   };
 }
 
-export function create(username, email, password, password_confirmation) {
+export function create(
+  username,
+  email,
+  password,
+  password_confirmation,
+  addError
+) {
   return (dispatch) => {
     fetch(`${API_URL}/authenticate/create`, {
       credentials: "include",
@@ -55,11 +60,12 @@ export function create(username, email, password, password_confirmation) {
         value.json().then((data) => {
           console.log(data);
           if (data.logged_in) {
-            dispatch(addUserDataAction(data));
+            return dispatch(addUserDataAction(data));
           }
+          return addError(data.error);
         })
       )
-      .catch((error) => console.log("Сервер не відповідає"));
+      .catch((error) => addError("The server does not respond"));
   };
 }
 

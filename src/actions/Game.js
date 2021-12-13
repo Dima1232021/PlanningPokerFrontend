@@ -75,7 +75,7 @@ export function showingYourInvitationsToGames() {
   };
 }
 
-export function joinTheGame(game_id, invitation_id = false) {
+export function joinTheGame(game_id, invitation_id) {
   return (dispatch) => {
     fetch(`${API_URL}/game/join_the_game`, {
       credentials: "include",
@@ -215,6 +215,6 @@ export function deleteHistory(gameId, storyId) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ gameId, storyId, }),
+    body: JSON.stringify({ gameId, storyId }),
   });
 }

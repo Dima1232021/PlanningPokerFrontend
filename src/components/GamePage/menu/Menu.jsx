@@ -13,6 +13,7 @@ import Modal from "../../Modal/Modal";
 
 import "./menu.scss";
 import ModelStory from "./ModelStory";
+import MenuBlock from "../../menuBlock/MenuBlock";
 
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function Menu({ active, setActive }) {
   const stories = useSelector((state) => state.games.stories);
   const invitationId = useSelector((state) => state.games.invitationId);
   const userId = useSelector((state) => state.user.userid);
+  const [infoPlayers, setInfoPlayers] = useState("Players online");
   const [activeModalEditStory, setActiveModalEditStory] = useState(false);
   const [activeModalAddStory, setActiveModalAddStory] = useState(false);
   const [storyId, setStoryId] = useState(null);
@@ -105,12 +107,25 @@ export default function Menu({ active, setActive }) {
 
         <div className="menu__row">
           <div className="menu__users">
-            <p className="menu__text">Online</p>
-            <UsersBlock
-              value={game.users_joined}
-              keyValue={"user_id"}
-              name={"user_name"}
+            <MenuBlock
+              btn1="Players online"
+              btn2="All players"
+              value={infoPlayers}
+              setValue={setInfoPlayers}
             />
+            {infoPlayers == "Players online" ? (
+              <UsersBlock
+                value={game.users_joined}
+                keyValue={"user_id"}
+                name={"user_name"}
+              />
+            ) : (
+              <UsersBlock
+                value={game.players}
+                keyValue={"user_id"}
+                name={"user_name"}
+              />
+            )}
           </div>
         </div>
       </div>

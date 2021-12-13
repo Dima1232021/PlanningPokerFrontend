@@ -51,7 +51,13 @@ export default function AuthForm({ auth }) {
       passwordConf.isValid
     ) {
       dispatch(
-        create(username.value, email.value, password.value, passwordConf.value)
+        create(
+          username.value,
+          email.value,
+          password.value,
+          passwordConf.value,
+          addError
+        )
       );
     } else {
       username.outputError();
