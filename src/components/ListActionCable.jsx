@@ -35,6 +35,7 @@ export default function ListActionCable() {
             user: userid,
           }}
           onReceived={(value) => {
+            console.log(value);
             dispatch(deleteInvitationAction(value.invitation_id));
           }}
         />
@@ -47,18 +48,21 @@ export default function ListActionCable() {
         <ActionCable
           channel={{ channel: "GameChannel", game_id: gameId }}
           onReceived={(data) => {
+            console.log(value);
             dispatch(changeGameYouHaveJoinedAction(data));
           }}
         />
         <ActionCable
           channel={{ channel: "AnswersChannel", game_id: gameId }}
           onReceived={(data) => {
+            console.log(value);
             dispatch(addAnswersAction(data));
           }}
         />
         <ActionCable
           channel={{ channel: "StoriesChannel", game_id: gameId }}
           onReceived={(data) => {
+            console.log(value);
             dispatch(addStoryAction(data));
           }}
         />

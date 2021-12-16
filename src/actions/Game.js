@@ -164,7 +164,6 @@ export function startAPoll(storyId, gameId) {
   });
 }
 export function finishAPoll(gameId) {
-  // return (dispatch) => {
   fetch(`${API_URL}/game/finish_a_poll`, {
     credentials: "include",
     method: "POST",
@@ -173,7 +172,6 @@ export function finishAPoll(gameId) {
     },
     body: JSON.stringify({ gameId }),
   });
-  // };
 }
 
 export function giveAnAnswer(storyId, answer) {
