@@ -9,6 +9,7 @@ import { logged_in } from "../actions/authenticate";
 import { searchGameYouHaveJoined } from "../actions/Game";
 import { showUser } from "../actions/users";
 
+import axios from "axios";
 import "./app.scss";
 
 function App() {

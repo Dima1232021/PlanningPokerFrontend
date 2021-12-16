@@ -2,9 +2,9 @@ import React from "react";
 import CreateGame from "./createGame/CreateGame";
 import { useDispatch, useSelector } from "react-redux";
 import { changeActveFormAction } from "../../reducers/gamesReducer";
+import InformationForms from "./InformationForms";
 
 import "./main.scss";
-import InformationForms from "./InformationForms";
 
 export default function MainPage() {
   const dispatch = useDispatch();
