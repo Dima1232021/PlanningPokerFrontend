@@ -5,6 +5,7 @@ import FormStory from "./FormStory";
 import FormUsers from "./FormUsers";
 
 import "./form.scss";
+import Timer from "./Timer";
 
 export default function Form({ active }) {
   const game = useSelector((state) => state.games.gameYouHaveJoined);
@@ -28,6 +29,9 @@ export default function Form({ active }) {
 
       <div className="form__row">
         <FormStory isEmpty={isEmpty} />
+      </div>
+      <div className="form__row">
+        <Timer />
       </div>
 
       <div className="form__row">
