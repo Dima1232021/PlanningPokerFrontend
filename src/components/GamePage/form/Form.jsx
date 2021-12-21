@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import FormPlayerCards from "./FormPlayerCards";
 import FormStory from "./FormStory";
 import FormUsers from "./FormUsers";
+import FormMenu from "./FormMenu";
+import Timer from "./Timer";
 
 import "./form.scss";
-import Timer from "./Timer";
 
 export default function Form({ active }) {
   const game = useSelector((state) => state.games.gameYouHaveJoined);
@@ -25,6 +26,10 @@ export default function Form({ active }) {
             {game.driving.user_name}
           </p>
         </div>
+      </div>
+
+      <div className="form__row">
+        <FormMenu />
       </div>
 
       <div className="form__row">

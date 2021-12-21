@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import useInterval from "../../../hooks/useInterval";
 
 export default function Timer() {
-  const idInterval = useRef();
-  //   const [currentTime, setCurrentTime] = useState(null);
   const [completionTime, setCompletionTime] = useState(null);
   const [countdown, setСountdown] = useState(60);
 
@@ -42,21 +40,19 @@ export default function Timer() {
   }
   return (
     <div className="timer">
-      <p>{countdown}</p>
+      <p className="timer__time">Timer: {countdown}</p>
 
-      <button onClick={addTime} className="form__btn-answer">
+      <button onClick={addTime} className="timer__btn">
         +30c
       </button>
 
-      <button onClick={subtractTime} className="form__btn-answer">
+      <button onClick={subtractTime} className="timer__btn">
         -30c
       </button>
 
-      <button onClick={start} className="form__btn-answer">
-        Start
-      </button>
-
-      <button>Pause</button>
+      {/* <button onClick={start} className="timer__btn">
+        Start Poll
+      </button> */}
     </div>
   );
 }

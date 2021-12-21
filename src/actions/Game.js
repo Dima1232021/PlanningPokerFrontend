@@ -218,3 +218,14 @@ export function deleteHistory(gameId, storyId) {
     body: JSON.stringify({ gameId, storyId }),
   });
 }
+
+export function setTimer(gameId, storyId, body) {
+  fetch(`${API_URL}/game/edit_history`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId, storyId, body }),
+  });
+}

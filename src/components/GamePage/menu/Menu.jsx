@@ -14,6 +14,8 @@ import Modal from "../../Modal/Modal";
 import "./menu.scss";
 import ModelStory from "./ModelStory";
 import MenuBlock from "../../menuBlock/MenuBlock";
+import Switch from "../../switch/Switch";
+import MenuGame from "./MenuGame/MenuGame";
 
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
@@ -127,6 +129,10 @@ export default function Menu({ active, setActive }) {
               />
             )}
           </div>
+        </div>
+
+        <div className="menu__row">
+          <MenuGame />
         </div>
       </div>
 

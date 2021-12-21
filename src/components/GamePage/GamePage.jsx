@@ -9,7 +9,7 @@ export default function GamePage() {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
 
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
 
   return (
     <div className="game">

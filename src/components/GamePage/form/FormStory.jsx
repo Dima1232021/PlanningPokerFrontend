@@ -19,9 +19,6 @@ export default function FormStory({ isEmpty }) {
       dispatch(changeHistoryNumberAction(historyNumber + 1));
   }
 
-  function startPull() {
-    startAPoll(stories[historyNumber].id, gameId);
-  }
   function finishPull() {
     finishAPoll(gameId);
   }
@@ -37,16 +34,16 @@ export default function FormStory({ isEmpty }) {
           <div className="form__column">
             {isEmpty ? (
               <p className="form__text">
-                <span>{`Story ${historyNumber + 1}`}</span>
+                {/* <span>{`Story ${historyNumber + 1}`}</span> */}
                 {stories[historyNumber].body}
               </p>
             ) : (
               <>
                 <h3 className="form__title">The poll has begun</h3>
                 <p className="form__text">
-                  <span>{`Story ${
+                  {/* <span>{`Story ${
                     stories.map((x) => x.id).indexOf(game.selected_story.id) + 1
-                  }`}</span>
+                  }`}</span> */}
                   {game.selected_story.body}
                 </p>
               </>
@@ -57,23 +54,20 @@ export default function FormStory({ isEmpty }) {
             <div className="form__column">
               {stories.length > 1 && isEmpty && (
                 <button className="form__arrow" onClick={subtractHistoryNumber}>
-                  &#9650;
+                  &#9664;
                 </button>
               )}
-              {game.driving.user_id === userid &&
-                (isEmpty ? (
-                  <button onClick={startPull} className="form__btn-poll">
-                    Start poll
-                  </button>
-                ) : (
-                  <button onClick={finishPull} className="form__btn-poll finish">
-                    Finish poll
-                  </button>
-                ))}
+              {isEmpty ? (
+                <p className="form__info">{`Story ${historyNumber + 1}`}</p>
+              ) : (
+                <p className="form__info">{`Story ${
+                  stories.map((x) => x.id).indexOf(game.selected_story.id) + 1
+                }`}</p>
+              )}
 
               {stories.length > 1 && isEmpty && (
                 <button className="form__arrow" onClick={addHistoryNumber}>
-                  &#9660;
+                  &#9654;
                 </button>
               )}
             </div>

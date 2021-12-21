@@ -67,7 +67,8 @@
   &__text {
     font-size: 16px;
     line-height: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
   }
 
   .menu-block__link {
@@ -171,5 +172,18 @@
     color: #fff;
     padding: 7px 0px;
     border-radius: 8px;
+  }
+
+  &__game {
+    flex: 0 0 100%;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #3a80ba;
+  }
+  &__choice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
   }
 }
