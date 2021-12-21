@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startAPoll, finishAPoll } from "../../../actions/Game";
+import { startAPoll, finishAPoll } from "../../../../actions/Game";
+
+import "./formMenu.scss";
 
 export default function FormMenu() {
   const stories = useSelector((state) => state.games.stories);
@@ -11,7 +13,7 @@ export default function FormMenu() {
     startAPoll(stories[historyNumber].id, gameId);
   }
 
-  function finishPull() {
+  function flipCards() {
     finishAPoll(gameId);
   }
   return (
@@ -19,10 +21,9 @@ export default function FormMenu() {
       <button onClick={startPull} className="form__btn-answer">
         Start Poll
       </button>
-      <button onClick={finishPull} className="form__btn-answer">
-        Finish Poll
+      <button className="form__btn-answer" onClick={flipCards}>
+        Flip Cards
       </button>
-      <button className="form__btn-answer">Flip Cards</button>
       <button className="form__btn-answer">Reset Cards</button>
     </div>
   );

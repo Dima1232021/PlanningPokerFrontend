@@ -75,7 +75,7 @@ export function showingYourInvitationsToGames() {
   };
 }
 
-export function joinTheGame(game_id, invitation_id) {
+export function joinTheGame(game_id, addError) {
   return (dispatch) => {
     fetch(`${API_URL}/game/join_the_game`, {
       credentials: "include",
@@ -83,15 +83,17 @@ export function joinTheGame(game_id, invitation_id) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ game_id, invitation_id }),
-    }).then((value) =>
-      value.json().then((data) => {
-        console.log(data);
-        if (data.join_the_game) {
-          dispatch(addTheGameYouJoined(data));
-        }
-      })
-    );
+      body: JSON.stringify({ game_id }),
+    })
+      .then((value) =>
+        value.json().then((data) => {
+          if (data.join_the_game) {
+            return dispatch(addTheGameYouJoined(data));
+          }
+          return addError("Games not found");
+        })
+      )
+      .catch((error) => addError("The server does not respond"));
   };
 }
 
@@ -164,8 +166,7 @@ export function startAPoll(storyId, gameId) {
   });
 }
 export function finishAPoll(gameId) {
-  // return (dispatch) => {
-  fetch(`${API_URL}/game/finish_a_poll`, {
+  fetch(`${API_URL}/game/flip_card`, {
     credentials: "include",
     method: "POST",
     headers: {
@@ -173,7 +174,6 @@ export function finishAPoll(gameId) {
     },
     body: JSON.stringify({ gameId }),
   });
-  // };
 }
 
 export function giveAnAnswer(storyId, answer) {
@@ -216,16 +216,5 @@ export function deleteHistory(gameId, storyId) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ gameId, storyId }),
-  });
-}
-
-export function setTimer(gameId, storyId, body) {
-  fetch(`${API_URL}/game/edit_history`, {
-    credentials: "include",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ gameId, storyId, body }),
   });
 }

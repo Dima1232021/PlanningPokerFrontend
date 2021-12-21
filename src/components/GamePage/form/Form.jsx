@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import FormPlayerCards from "./FormPlayerCards";
 import FormStory from "./FormStory";
 import FormUsers from "./FormUsers";
-import FormMenu from "./FormMenu";
-import Timer from "./Timer";
+// import FormMenu from "./FormMenu/FormMenu.jsx";
 
 import "./form.scss";
 
@@ -28,15 +27,10 @@ export default function Form({ active }) {
         </div>
       </div>
 
-      <div className="form__row">
-        <FormMenu />
-      </div>
+      <div className="form__row">{/* <FormMenu /> */}</div>
 
       <div className="form__row">
         <FormStory isEmpty={isEmpty} />
-      </div>
-      <div className="form__row">
-        <Timer />
       </div>
 
       <div className="form__row">

@@ -8,6 +8,7 @@ import {
   declineInvitation,
 } from "../../actions/Game";
 import UsersBlock from "../usersBlock/UsersBlock";
+import { useAddErrors } from "../../hooks/useAddErrors";
 
 export default function InformationForms() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function InformationForms() {
   const invitationsToGames = useSelector(
     (state) => state.games.invitationsToGames
   );
+  const { addError } = useAddErrors();
 
   useEffect(() => {
     dispatch(showYoyrGame());
@@ -31,9 +33,9 @@ export default function InformationForms() {
 
   function join(game) {
     if (!game.invitation_id) {
-      dispatch(joinTheGame(game.id));
+      dispatch(joinTheGame(game.id, addError));
     } else {
-      dispatch(joinTheGame(game.game_id, game.invitation_id));
+      dispatch(joinTheGame(game.game_id, addError));
     }
   }
 

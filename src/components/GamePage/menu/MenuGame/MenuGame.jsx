@@ -18,18 +18,6 @@ export default function MenuGame() {
         </p>
         <Switch value={isToggled} setValue={setToggled} />
       </div>
-      <div className="menu-game__row">
-        <p className="menu-game__text">Timer</p>
-        <Switch value={isToggled} setValue={setToggled} />
-      </div>
-      {isToggled && (
-        <div className="menu-game__row">
-          <p className="menu-game__text">
-            Allow cards to be flipped automatically at the end of time
-          </p>
-          <Switch value={isToggled} setValue={setToggled} />
-        </div>
-      )}
     </div>
   );
 }
