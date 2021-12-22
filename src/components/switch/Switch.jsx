@@ -4,11 +4,7 @@ import "./switch.scss";
 export default function Switch({ value, setValue }) {
   return (
     <label className="switch">
-      <input
-        type="checkbox"
-        checked={value}
-        onChange={() => setValue(!value)}
-      />
+      <input type="checkbox" checked={value} onChange={setValue} />
       <span className="slider round"></span>
     </label>
   );

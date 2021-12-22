@@ -31,8 +31,8 @@ export default function ListActionCable() {
         />
         <ActionCable
           channel={{
-            channel: "DeleteInvitationChannel",
-            user: userid,
+            channel: "DeleteGameChannel",
+            userid,
           }}
           onReceived={(value) => {
             dispatch(deleteInvitationAction(value.invitation_id));
