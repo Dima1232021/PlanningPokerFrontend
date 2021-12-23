@@ -2,6 +2,8 @@ const CHANGE_LOADER_GAME = "CHANGE_LOADER_GAME";
 const CHANGE_ACTIVE_FORM = "CHANGE_ACTIVE_FORM";
 const CHANGE_GAME_YOU_HAVE_JOINED = "CHANGE_GAME_YOU_HAVE_JOINED";
 const CHANGE_HISTORY_NUMBER = "CHANGE_HISTORY_NUMBER";
+const CHANGE_INVITED_PLAYERS = "CHANGE_INVITED_PLAYERS";
+const CHANGE_PLAYERS_ONLINE = "CHANGE_PLAYERS_ONLINE";
 const ADD_YOUR_GAME = "ADD_YOUR_GAME";
 const ADD_YOUR_GAMES = "ADD_YOUR_GAMES";
 const ADD_GAMES_INVITATIONS = "ADD_GAMES_INVITATIONS";
@@ -25,6 +27,8 @@ const defaultState = {
   answers: {},
   gameId: null,
   historyNumber: 0,
+  invitedPlayers: [],
+  playersOnline: [],
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -65,6 +69,8 @@ export const gamesReducer = (state = defaultState, action) => {
         inTheGame: true,
         stories: action.payload.stories,
         answers: action.payload.answers,
+        invitedPlayers: action.payload.invited_players,
+        playersOnline: action.payload.players_online,
       };
 
     case LEAVE_THE_GAME:
@@ -122,6 +128,12 @@ export const gamesReducer = (state = defaultState, action) => {
         stories: action.payload.stories,
       };
 
+    case CHANGE_INVITED_PLAYERS:
+      return { ...state, invitedPlayers: action.payload };
+
+    case CHANGE_PLAYERS_ONLINE:
+      return { ...state, playersOnline: action.payload };
+
     default:
       return state;
   }
@@ -144,6 +156,16 @@ export const changeGameYouHaveJoinedAction = (payload) => ({
 
 export const changeHistoryNumberAction = (payload) => ({
   type: CHANGE_HISTORY_NUMBER,
+  payload: payload,
+});
+
+export const changeInvitedPlayersAction = (payload) => ({
+  type: CHANGE_INVITED_PLAYERS,
+  payload: payload,
+});
+
+export const changePlayersOnlineAction = (payload) => ({
+  type: CHANGE_PLAYERS_ONLINE,
   payload: payload,
 });
 

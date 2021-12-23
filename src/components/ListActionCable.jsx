@@ -7,6 +7,8 @@ import {
   deleteInvitationAction,
   addAnswersAction,
   addStoryAction,
+  changeInvitedPlayersAction,
+  changePlayersOnlineAction,
 } from "../reducers/gamesReducer";
 import { addUserAction } from "../reducers/usersReducer";
 
@@ -48,6 +50,25 @@ export default function ListActionCable() {
           channel={{ channel: "GameChannel", game_id: gameId }}
           onReceived={(data) => {
             dispatch(changeGameYouHaveJoinedAction(data));
+          }}
+        />
+        <ActionCable
+          channel={{ channel: "ChangeInvitationsChannel", game_id: gameId }}
+          onReceived={(data) => {
+            dispatch(changeInvitedPlayersAction(data));
+          }}
+        />
+        <ActionCable
+          channel={{ channel: "ChangePlayersOnlineChannel", game_id: gameId }}
+          onReceived={(data) => {
+            dispatch(changePlayersOnlineAction(data));
+          }}
+        />
+        <ActionCable
+          channel={{ channel: "DeleteInvitedChannel", game_id: gameId }}
+          onReceived={(data) => {
+            dispatch(changeInvitedPlayersAction(data.invited_players));
+            dispatch(changePlayersOnlineAction(data.players_online));
           }}
         />
         <ActionCable
