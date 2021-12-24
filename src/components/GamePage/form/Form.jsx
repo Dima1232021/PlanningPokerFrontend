@@ -3,17 +3,13 @@ import { useSelector } from "react-redux";
 import FormPlayerCards from "./FormPlayerCards";
 import FormStory from "./FormStory";
 import FormUsers from "./FormUsers";
-// import FormMenu from "./FormMenu/FormMenu.jsx";
+import FormMenu from "./FormMenu/FormMenu.jsx";
 
 import "./form.scss";
 
 export default function Form({ active }) {
   const game = useSelector((state) => state.games.gameYouHaveJoined);
-  const [isEmpty, setEmpty] = useState(true);
-
-  useEffect(() => {
-    setEmpty(Object.keys(game.selected_story).length === 0);
-  }, [game]);
+  const userid = useSelector((state) => state.user.userid);
 
   return (
     <div className={`game__form form ${active && "active"}`}>
@@ -27,18 +23,22 @@ export default function Form({ active }) {
         </div>
       </div>
 
-      <div className="form__row">{/* <FormMenu /> */}</div>
+      {game.driving.user_id === userid && (
+        <div className="form__row">
+          <FormMenu />
+        </div>
+      )}
 
       <div className="form__row">
-        <FormStory isEmpty={isEmpty} />
+        <FormStory />
       </div>
 
       <div className="form__row">
-        <FormUsers isEmpty={isEmpty} />
+        <FormUsers />
       </div>
 
       <div className="form__row">
-        <FormPlayerCards isEmpty={isEmpty} />
+        <FormPlayerCards />
       </div>
     </div>
   );

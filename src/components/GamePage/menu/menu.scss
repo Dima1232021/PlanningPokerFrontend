@@ -4,19 +4,17 @@
   background-color: #ffffff00;
 
   &__column {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     &:nth-child(1) {
       width: 30px;
-      display: flex;
-      flex-direction: column;
       justify-content: center;
       background-color: #ffffff00;
     }
     &:nth-child(2) {
       position: relative;
       z-index: 3;
-      display: flex;
-      flex-direction: column;
       padding: 5px 10px;
       width: 290px;
       background-color: rgb(48, 48, 48);
@@ -33,14 +31,13 @@
   }
 
   &__title,
-  &__modal-title,
-  &__btn-active {
+  &__btn-menu {
     font-size: 20px;
     line-height: 142%;
     text-align: center;
   }
 
-  &__btn-active {
+  &__btn-menu {
     padding: 20px 0px;
     width: 30px;
     border-radius: 8px 0px 0px 8px;
@@ -54,21 +51,6 @@
     border-radius: 4px;
     color: rgb(255, 254, 254);
     background-color: rgba(255, 38, 0, 0.829);
-  }
-
-  &__users,
-  &__storyes {
-    flex: 0 0 100%;
-    border-radius: 8px;
-    padding: 5px;
-    background-color: #3a80ba;
-  }
-
-  &__text {
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 10px;
-    font-weight: bold;
   }
 
   .menu-block__link {
@@ -172,18 +154,5 @@
     color: #fff;
     padding: 7px 0px;
     border-radius: 8px;
-  }
-
-  &__game {
-    flex: 0 0 100%;
-    border-radius: 8px;
-    padding: 5px;
-    background-color: #3a80ba;
-  }
-  &__choice {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
   }
 }

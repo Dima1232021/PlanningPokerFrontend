@@ -1,69 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useInput } from "../../../hooks/useInput";
-import {
-  leaveTheGame,
-  addHistory,
-  editHistory,
-  deleteHistory,
-} from "../../../actions/Game";
-import UsersBlock from "../../usersBlock/UsersBlock";
-import StoriesBlock from "../../storiesBlock/StoriesBlock";
-import Modal from "../../Modal/Modal";
-
-import "./menu.scss";
-import ModelStory from "./ModelStory";
-import MenuBlock from "../../menuBlock/MenuBlock";
-import Switch from "../../switch/Switch";
+import { leaveTheGame } from "../../../actions/Game";
 import MenuGame from "./MenuGame/MenuGame";
 import MenuPlayers from "./MenuPlayers/MenuPlayers";
+import MenuStories from "./MenuStories/MenuStories";
+
+import "./menu.scss";
 
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
-  const gameId = useSelector((state) => state.games.gameId);
-  const stories = useSelector((state) => state.games.stories);
   const invitationId = useSelector((state) => state.games.invitationId);
-  const userId = useSelector((state) => state.user.userid);
-
-  const [activeModalEditStory, setActiveModalEditStory] = useState(false);
-  const [activeModalAddStory, setActiveModalAddStory] = useState(false);
-  const [storyId, setStoryId] = useState(null);
-
-  const textStory = useInput(
-    "",
-    { minLength: 10, maxLength: 1000 },
-    "Enter history"
-  );
 
   function leave() {
     dispatch(leaveTheGame(game, invitationId));
-  }
-
-  function editStory(value = false) {
-    if (value) {
-      setStoryId(value.id);
-      textStory.setValue(value.body);
-      return setActiveModalEditStory(true);
-    }
-    editHistory(gameId, storyId, textStory.value);
-    return textStory.setValue("");
-  }
-
-  function addStory() {
-    addHistory(gameId, textStory.value);
-    textStory.setValue("");
-  }
-
-  function removeStory(value) {
-    deleteHistory(gameId, value.id);
   }
 
   return (
     <div className="game__menu menu">
       <div className="menu__column">
         <button
-          className="menu__btn-active"
+          className="menu__btn-menu"
           onClick={() => setActive((val) => !val)}
         >
           {active ? ">>" : "<<"}
@@ -79,33 +36,7 @@ export default function Menu({ active, setActive }) {
         </div>
 
         <div className="menu__row">
-          <div className="menu__storyes">
-            {userId === game.driving.user_id ? (
-              <>
-                <p className="menu__text">Stories</p>
-                <StoriesBlock
-                  value={stories}
-                  keyValue={"id"}
-                  name={"body"}
-                  nameBtn="Edit"
-                  nameBtn2="Remove"
-                  setValue={editStory}
-                  setValue2={removeStory}
-                />
-                <button
-                  className="menu__btn-create"
-                  onClick={() => setActiveModalAddStory(true)}
-                >
-                  Create a story
-                </button>
-              </>
-            ) : (
-              <>
-                <p className="menu__text">Stories</p>
-                <StoriesBlock value={stories} keyValue={"id"} name={"body"} />
-              </>
-            )}
-          </div>
+          <MenuStories />
         </div>
 
         <div className="menu__row">
@@ -116,23 +47,6 @@ export default function Menu({ active, setActive }) {
           <MenuGame />
         </div>
       </div>
-
-      <ModelStory
-        title="History editing form"
-        textStory={textStory}
-        active={activeModalEditStory}
-        setActive={setActiveModalEditStory}
-        setValue={editStory}
-        nameBtn="Сhange"
-      />
-      <ModelStory
-        title="Create a story"
-        textStory={textStory}
-        active={activeModalAddStory}
-        setActive={setActiveModalAddStory}
-        setValue={addStory}
-        nameBtn="Create"
-      />
     </div>
   );
 }

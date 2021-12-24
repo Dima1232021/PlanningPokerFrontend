@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeHistoryNumberAction } from "../../../reducers/gamesReducer";
-import { startAPoll, finishAPoll } from "../../../actions/Game";
 
-export default function FormStory({ isEmpty }) {
+export default function FormStory() {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
   const historyNumber = useSelector((state) => state.games.historyNumber);
   const stories = useSelector((state) => state.games.stories);
-  const gameId = useSelector((state) => state.games.gameId);
-  const userid = useSelector((state) => state.user.userid);
 
   function subtractHistoryNumber() {
     historyNumber > 0 && dispatch(changeHistoryNumberAction(historyNumber - 1));
@@ -17,10 +14,6 @@ export default function FormStory({ isEmpty }) {
   function addHistoryNumber() {
     historyNumber < stories.length - 1 &&
       dispatch(changeHistoryNumberAction(historyNumber + 1));
-  }
-
-  function finishPull() {
-    finishAPoll(gameId);
   }
 
   return (
@@ -32,46 +25,37 @@ export default function FormStory({ isEmpty }) {
       ) : (
         <>
           <div className="form__column">
-            {isEmpty ? (
-              <p className="form__text">
-                {/* <span>{`Story ${historyNumber + 1}`}</span> */}
-                {stories[historyNumber].body}
-              </p>
+            {!game.poll ? (
+              <p className="form__text">{stories[historyNumber].body}</p>
             ) : (
               <>
                 <h3 className="form__title">The poll has begun</h3>
-                <p className="form__text">
-                  {/* <span>{`Story ${
-                    stories.map((x) => x.id).indexOf(game.selected_story.id) + 1
-                  }`}</span> */}
-                  {game.selected_story.body}
-                </p>
+                <p className="form__text">{game.history_poll.body}</p>
               </>
             )}
           </div>
 
-          {(game.driving.user_id === userid || !!isEmpty) && (
-            <div className="form__column">
-              {stories.length > 1 && isEmpty && (
-                <button className="form__arrow" onClick={subtractHistoryNumber}>
-                  &#9664;
-                </button>
-              )}
-              {isEmpty ? (
-                <p className="form__info">{`Story ${historyNumber + 1}`}</p>
-              ) : (
-                <p className="form__info">{`Story ${
-                  stories.map((x) => x.id).indexOf(game.selected_story.id) + 1
-                }`}</p>
-              )}
+          <div className="form__column">
+            {stories.length > 1 && !game.poll && (
+              <button className="form__arrow" onClick={subtractHistoryNumber}>
+                &#9664;
+              </button>
+            )}
 
-              {stories.length > 1 && isEmpty && (
-                <button className="form__arrow" onClick={addHistoryNumber}>
-                  &#9654;
-                </button>
-              )}
-            </div>
-          )}
+            {!game.poll ? (
+              <p className="form__info">{`Story ${historyNumber + 1}`}</p>
+            ) : (
+              <p className="form__info">{`Story ${
+                stories.map((x) => x.id).indexOf(game.history_poll.id) + 1
+              }`}</p>
+            )}
+
+            {stories.length > 1 && !game.poll && (
+              <button className="form__arrow" onClick={addHistoryNumber}>
+                &#9654;
+              </button>
+            )}
+          </div>
         </>
       )}
     </div>
