@@ -11,14 +11,16 @@ export default function FormPlayerCards() {
   const [checkPlayer, setCheckPlayer] = useState(false);
 
   useEffect(() => {
-    setCheckPlayer(playersOnline.find((value) => value.id === userid).player);
+    let findPlayer = playersOnline.find((value) => value.id === userid);
+    findPlayer && setCheckPlayer(findPlayer.player);
   }, [playersOnline]);
 
   function addAnswer() {
-    if (String(valueCard) !== "null" && game.selected_story.id) {
-      giveAnAnswer(game.selected_story.id, valueCard);
+    if (String(valueCard) !== "null" && game.poll) {
+      giveAnAnswer(game.history_poll.id, valueCard);
     }
   }
+
   return (
     <div className="form__player-cards">
       {game.poll && checkPlayer && (

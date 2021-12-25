@@ -176,6 +176,16 @@ export function finishAPoll(gameId) {
     body: JSON.stringify({ gameId }),
   });
 }
+export function resetAPoll(storyId, gameId) {
+  fetch(`${API_URL}/game/reset_cards`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ storyId, gameId }),
+  });
+}
 
 export function giveAnAnswer(storyId, answer) {
   fetch(`${API_URL}/game/give_an_answer`, {

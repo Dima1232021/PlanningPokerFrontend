@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { startAPoll, finishAPoll } from "../../../../actions/Game";
+import { useSelector } from "react-redux";
+import { startAPoll, finishAPoll, resetAPoll } from "../../../../actions/Game";
 
 import "./formMenu.scss";
 
@@ -16,15 +16,21 @@ export default function FormMenu() {
   function flipCards() {
     finishAPoll(gameId);
   }
+
+  function resetCards() {
+    resetAPoll(stories[historyNumber].id, gameId);
+  }
   return (
-    <div className="form__menu">
+    <div className="form-menu">
       <button onClick={startPull} className="form__btn-answer">
         Start Poll
       </button>
       <button className="form__btn-answer" onClick={flipCards}>
         Flip Cards
       </button>
-      <button className="form__btn-answer">Reset Cards</button>
+      <button className="form__btn-answer" onClick={resetCards}>
+        Reset Cards
+      </button>
     </div>
   );
 }
