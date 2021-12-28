@@ -6,13 +6,7 @@ export default function FormUsers() {
   const historyNumber = useSelector((state) => state.games.historyNumber);
   const stories = useSelector((state) => state.games.stories);
   const answers = useSelector((state) => state.games.answers);
-  const playersOnline = useSelector((state) => state.games.playersOnline);
-
-  const [players, setPlayers] = useState([]);
-
-  useEffect(() => {
-    setPlayers(playersOnline.filter((player) => player.player === true));
-  }, [playersOnline]);
+  const players = useSelector((state) => state.games.players);
 
   let answersToHistory = stories.length && answers[stories[historyNumber].id];
 
@@ -34,7 +28,7 @@ export default function FormUsers() {
         ) : (
           <h3 className="form__title-error">There are no answers yet</h3>
         )
-      ) : players.length ? (
+      ) : (
         players.map((playr) => {
           let answer = game.id_players_answers.find(
             (playerId) => playerId === playr.id
@@ -49,10 +43,6 @@ export default function FormUsers() {
             </div>
           );
         })
-      ) : (
-        <h3 className="form__title-error">
-          The players didn't come into the game or you didn't invite anyone
-        </h3>
       )}
     </div>
   );

@@ -8,9 +8,14 @@ export default function FormMenu() {
   const stories = useSelector((state) => state.games.stories);
   const historyNumber = useSelector((state) => state.games.historyNumber);
   const gameId = useSelector((state) => state.games.gameId);
+  const players = useSelector((state) => state.games.players);
 
   function startPull() {
-    startAPoll(stories[historyNumber].id, gameId);
+    console.log(players);
+    // if() {
+
+    // }
+    //  startAPoll(stories[historyNumber].id, gameId);
   }
 
   function flipCards() {

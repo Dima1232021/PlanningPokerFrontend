@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import Form from "./form/Form";
 import Menu from "./menu/Menu";
 
 import "./game.scss";
 
 export default function GamePage() {
-  const dispatch = useDispatch();
-  const game = useSelector((state) => state.games.gameYouHaveJoined);
-
   const [active, setActive] = useState(true);
 
   return (
