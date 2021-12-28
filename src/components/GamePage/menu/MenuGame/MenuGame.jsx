@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import Switch from "../../../switch/Switch";
 import { useDispatch, useSelector } from "react-redux";
+import { changeHostSettings } from "../../../../actions/Game";
 import "./menuGame.scss";
 
 export default function MenuGame() {
-  const player = useSelector(
-    (state) => state.games.gameYouHaveJoined.driving.player
-  );
+  const invitedPlayers = useSelector((state) => state.games.invitedPlayers);
+  const gameId = useSelector((state) => state.games.gameId);
+  const userid = useSelector((state) => state.user.userid);
+
+  const { player } = invitedPlayers.find((user) => user.id == userid);
 
   function changes() {
     console.log("gg");
+    changeHostSettings(gameId);
   }
 
   return (

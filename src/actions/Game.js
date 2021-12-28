@@ -229,3 +229,14 @@ export function deleteHistory(gameId, storyId) {
     body: JSON.stringify({ gameId, storyId }),
   });
 }
+
+export function changeHostSettings(gameId) {
+  fetch(`${API_URL}/game/change_host_settings`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId }),
+  });
+}
