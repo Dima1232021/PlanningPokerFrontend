@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import Switch from "../../../switch/Switch";
 import { useDispatch, useSelector } from "react-redux";
 import { changeHostSettings } from "../../../../actions/Game";
+import { useAddErrors } from "../../../../hooks/useAddErrors";
 import "./menuGame.scss";
 
 export default function MenuGame() {
-  const invitedPlayers = useSelector((state) => state.games.invitedPlayers);
+  const { addError } = useAddErrors();
+  const game = useSelector((state) => state.games.gameYouHaveJoined);
+  const playersOnline = useSelector((state) => state.games.playersOnline);
   const gameId = useSelector((state) => state.games.gameId);
   const userid = useSelector((state) => state.user.userid);
 
-  const { player } = invitedPlayers.find((user) => user.id == userid);
+  const { player } = playersOnline.find((user) => user.id == userid);
 
   function changes() {
-    console.log("gg");
-    changeHostSettings(gameId);
+    if (!game.poll) {
+      return changeHostSettings(gameId);
+    }
+
+    return addError("Change is possible only when there is no survey");
   }
 
   return (
