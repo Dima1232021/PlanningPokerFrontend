@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Switch from "../../../switch/Switch";
 import { useDispatch, useSelector } from "react-redux";
-import { changeHostSettings } from "../../../../actions/Game";
+import { playerSettings } from "../../../../actions/Game";
 import { useAddErrors } from "../../../../hooks/useAddErrors";
 import "./menuGame.scss";
 
@@ -14,12 +14,16 @@ export default function MenuGame() {
 
   const { player } = playersOnline.find((user) => user.id == userid);
 
-  function changes() {
+  function changePlayerSettings() {
     if (!game.poll) {
-      return changeHostSettings(gameId);
+      return playerSettings(gameId);
     }
 
     return addError("Change is possible only when there is no survey");
+  }
+
+  function changeCardrolloverSettings() {
+    console.log("asdf");
   }
 
   return (
@@ -27,15 +31,12 @@ export default function MenuGame() {
       <p className="menu-game__title">Game settings</p>
       <div className="menu-game__row">
         <p className="menu-game__text">Take part in the game</p>
-        <Switch value={player} setValue={changes} />
+        <Switch value={player} setValue={changePlayerSettings} />
       </div>
-      {/* <div className="menu-game__row">
-        <p className="menu-game__text">
-          Allow cards to be flipped automatically if all players respond to a
-          story
-        </p>
-        <Switch value={isToggled} setValue={setToggled} />
-      </div> */}
+      <div className="menu-game__row">
+        <p className="menu-game__text">Flip cards automatically</p>
+        <Switch value={true} setValue={changeCardrolloverSettings} />
+      </div>
     </div>
   );
 }

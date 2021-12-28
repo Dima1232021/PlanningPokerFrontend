@@ -230,8 +230,8 @@ export function deleteHistory(gameId, storyId) {
   });
 }
 
-export function changeHostSettings(gameId) {
-  fetch(`${API_URL}/game/change_host_settings`, {
+export function playerSettings(gameId) {
+  fetch(`${API_URL}/game/player_settings`, {
     credentials: "include",
     method: "POST",
     headers: {
