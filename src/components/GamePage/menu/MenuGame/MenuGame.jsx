@@ -12,7 +12,8 @@ export default function MenuGame() {
   const gameId = useSelector((state) => state.games.gameId);
   const userid = useSelector((state) => state.user.userid);
 
-  const { player } = playersOnline.find((user) => user.id == userid);
+  const dataDriving = playersOnline.find((user) => user.id == userid);
+  console.log("dataDriving:", dataDriving);
 
   function changePlayerSettings() {
     if (!game.poll) {
@@ -31,7 +32,7 @@ export default function MenuGame() {
       <p className="menu-game__title">Game settings</p>
       <div className="menu-game__row">
         <p className="menu-game__text">Take part in the game</p>
-        <Switch value={player} setValue={changePlayerSettings} />
+        <Switch value={dataDriving.player} setValue={changePlayerSettings} />
       </div>
       <div className="menu-game__row">
         <p className="menu-game__text">Flip cards automatically</p>

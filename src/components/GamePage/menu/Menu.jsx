@@ -10,6 +10,7 @@ import "./menu.scss";
 export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
+  const userid = useSelector((state) => state.user.userid);
   const invitationId = useSelector((state) => state.games.invitationId);
 
   function leave() {
@@ -43,9 +44,11 @@ export default function Menu({ active, setActive }) {
           <MenuPlayers />
         </div>
 
-        <div className="menu__row">
-          <MenuGame />
-        </div>
+        {game.driving.user_id === userid && (
+          <div className="menu__row">
+            <MenuGame />
+          </div>
+        )}
       </div>
     </div>
   );
