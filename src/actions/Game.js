@@ -52,7 +52,7 @@ export function deleteYoyrGame(gameId) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ game_id: gameId }),
+      body: JSON.stringify({ gameId }),
     }).then((value) =>
       value.json().then((data) => {
         if (data.delete_game) {
@@ -75,7 +75,7 @@ export function showingYourInvitationsToGames() {
   };
 }
 
-export function joinTheGame(game_id, addError) {
+export function joinTheGame(gameId, addError) {
   return (dispatch) => {
     fetch(`${API_URL}/game/join_the_game`, {
       credentials: "include",
@@ -83,7 +83,7 @@ export function joinTheGame(game_id, addError) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ game_id }),
+      body: JSON.stringify({ gameId }),
     })
       .then((value) =>
         value.json().then((data) => {
@@ -123,7 +123,7 @@ export function leaveTheGame(game, invitationId) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        game_id: game.id,
+        gameId: game.id,
         invitation_id: invitationId,
       }),
     }).then((value) =>
