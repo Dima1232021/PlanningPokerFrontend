@@ -27,14 +27,12 @@ const defaultState = {
   answers: {},
   gameId: null,
   historyNumber: 0,
-  invitedPlayers: [],
-  playersOnline: [],
-  player: [],
+  invitedUsers: [],
+  onlineUsers: [],
+  onlinePlayers: [],
 };
 
 export const gamesReducer = (state = defaultState, action) => {
-  const playersOnline = [];
-  const players = [];
   switch (action.type) {
     case CHANGE_LOADER_GAME:
       return { ...state, loaderGame: action.payload };
@@ -64,10 +62,6 @@ export const gamesReducer = (state = defaultState, action) => {
       };
 
     case ADD_THE_GAME_YOU_JOINED:
-      const playersOnline1 = action.payload.players_online;
-      const players1 = playersOnline1.filter(
-        (player) => player.player === true
-      );
       return {
         ...state,
         gameId: action.payload.game.id,
@@ -76,9 +70,9 @@ export const gamesReducer = (state = defaultState, action) => {
         inTheGame: true,
         stories: action.payload.stories,
         answers: action.payload.answers,
-        invitedPlayers: action.payload.invited_players,
-        playersOnline: playersOnline1,
-        players: players1,
+        invitedUsers: action.payload.invitedUsers,
+        onlineUsers: action.payload.onlineUsers,
+        onlinePlayers: action.payload.onlinePlayers,
       };
 
     case LEAVE_THE_GAME:
@@ -140,11 +134,12 @@ export const gamesReducer = (state = defaultState, action) => {
       return { ...state, invitedPlayers: action.payload };
 
     case CHANGE_PLAYERS_ONLINE:
-      const playersOnline2 = action.payload;
-      const players2 = playersOnline2.filter(
-        (player) => player.player === true
-      );
-      return { ...state, playersOnline: playersOnline2, players: players2 };
+      console.log("CHANGE_PLAYERS_ONLINE", action.payload);
+      return {
+        ...state,
+        onlineUsers: action.payload.onlineUsers,
+        onlinePlayers: action.payload.onlinePlayers,
+      };
 
     default:
       return state;
