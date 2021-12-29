@@ -6,8 +6,8 @@ import MenuBlock from "../../../menuBlock/MenuBlock";
 import "./menuPlayers.scss";
 
 export default function MenuPlayers() {
-  const invitedPlayers = useSelector((state) => state.games.invitedPlayers);
-  const playersOnline = useSelector((state) => state.games.playersOnline);
+  const invitedUsers = useSelector((state) => state.games.invitedUsers);
+  const onlineUsers = useSelector((state) => state.games.onlineUsers);
   const [infoPlayers, setInfoPlayers] = useState("In the game");
   return (
     <div className="menu-players">
@@ -18,9 +18,9 @@ export default function MenuPlayers() {
         setValue={setInfoPlayers}
       />
       {infoPlayers == "In the game" ? (
-        <UsersBlock value={playersOnline} keyValue={"id"} name={"username"} />
+        <UsersBlock value={onlineUsers} keyValue={"id"} name={"username"} />
       ) : (
-        <UsersBlock value={invitedPlayers} keyValue={"id"} name={"username"} />
+        <UsersBlock value={invitedUsers} keyValue={"id"} name={"username"} />
       )}
     </div>
   );
