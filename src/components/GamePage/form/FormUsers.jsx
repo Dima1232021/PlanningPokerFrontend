@@ -7,8 +7,11 @@ export default function FormUsers() {
   const stories = useSelector((state) => state.games.stories);
   const answers = useSelector((state) => state.games.answers);
   const onlinePlayers = useSelector((state) => state.games.onlinePlayers);
+  const [answersToHistory, setAnswersToHistory] = useState([]);
 
-  let answersToHistory = stories.length && answers[stories[historyNumber].id];
+  useEffect(() => {
+    setAnswersToHistory(stories.length && answers[stories[historyNumber].id]);
+  }, [historyNumber, answers]);
 
   return (
     <div className="form__users">
@@ -33,7 +36,6 @@ export default function FormUsers() {
           let answer = game.id_players_answers.find(
             (playerId) => playerId === playr.id
           );
-          console.log(answer);
           return (
             <div className="form__user" key={playr.id}>
               <h3 className="form__username">{playr.username}</h3>
