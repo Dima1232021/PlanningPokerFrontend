@@ -5,15 +5,14 @@ import { giveAnAnswer } from "../../../actions/Game";
 export default function FormPlayerCards() {
   const fibonacci = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, "pass"];
   const game = useSelector((state) => state.games.gameYouHaveJoined);
-  const playersOnline = useSelector((state) => state.games.playersOnline);
+  const onlinePlayers = useSelector((state) => state.games.onlinePlayers);
   const userid = useSelector((state) => state.user.userid);
   const [valueCard, setValueCard] = useState(null);
   const [checkPlayer, setCheckPlayer] = useState(false);
 
   useEffect(() => {
-    let findPlayer = playersOnline.find((value) => value.id === userid);
-    findPlayer && setCheckPlayer(findPlayer.player);
-  }, [playersOnline]);
+    setCheckPlayer(!!onlinePlayers.find((value) => value.id === userid));
+  }, [onlinePlayers]);
 
   function addAnswer() {
     if (String(valueCard) !== "null" && game.poll) {

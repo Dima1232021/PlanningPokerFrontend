@@ -6,7 +6,7 @@ export default function FormUsers() {
   const historyNumber = useSelector((state) => state.games.historyNumber);
   const stories = useSelector((state) => state.games.stories);
   const answers = useSelector((state) => state.games.answers);
-  const players = useSelector((state) => state.games.players);
+  const onlinePlayers = useSelector((state) => state.games.onlinePlayers);
 
   let answersToHistory = stories.length && answers[stories[historyNumber].id];
 
@@ -29,7 +29,7 @@ export default function FormUsers() {
           <h3 className="form__title-error">There are no answers yet</h3>
         )
       ) : (
-        players.map((playr) => {
+        onlinePlayers.map((playr) => {
           let answer = game.id_players_answers.find(
             (playerId) => playerId === playr.id
           );

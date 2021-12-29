@@ -8,10 +8,10 @@ export default function FormMenu() {
   const stories = useSelector((state) => state.games.stories);
   const historyNumber = useSelector((state) => state.games.historyNumber);
   const gameId = useSelector((state) => state.games.gameId);
-  const players = useSelector((state) => state.games.players);
+  const onlinePlayers = useSelector((state) => state.games.onlinePlayers);
 
   function startPull() {
-    console.log(players);
+    console.log(onlinePlayers);
     // if() {
 
     // }
