@@ -240,3 +240,14 @@ export function playerSettings(gameId) {
     body: JSON.stringify({ gameId }),
   });
 }
+
+export function changeCardFlipSettings(gameId) {
+  fetch(`${API_URL}/game/change_card_flip_settings`, {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId }),
+  });
+}

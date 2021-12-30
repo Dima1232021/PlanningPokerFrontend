@@ -24,7 +24,7 @@ export default function FormPlayerCards() {
     <div className="form__player-cards">
       {game.poll && checkPlayer && (
         <>
-          <button className="form__btn-answer" onClick={addAnswer}>
+          <button className="form__btn-answer" onClick={addAnswer} >
             Дати відповідь
           </button>
           <ul className="form__list">

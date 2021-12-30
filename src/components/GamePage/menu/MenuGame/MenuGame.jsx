@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Switch from "../../../switch/Switch";
 import { useSelector } from "react-redux";
-import { playerSettings } from "../../../../actions/Game";
+import {
+  playerSettings,
+  changeCardFlipSettings,
+} from "../../../../actions/Game";
 import { useAddErrors } from "../../../../hooks/useAddErrors";
 import "./menuGame.scss";
 
@@ -26,8 +29,8 @@ export default function MenuGame() {
     return addError("Change is possible only when there is no survey");
   }
 
-  function changeCardrolloverSettings() {
-    console.log("asdf");
+  function changesettingsCardFlip() {
+    changeCardFlipSettings(gameId);
   }
 
   return (
@@ -39,7 +42,10 @@ export default function MenuGame() {
       </div>
       <div className="menu-game__row">
         <p className="menu-game__text">Flip cards automatically</p>
-        <Switch value={true} setValue={changeCardrolloverSettings} />
+        <Switch
+          value={game.flipСardsAutomatically}
+          setValue={changesettingsCardFlip}
+        />
       </div>
     </div>
   );
