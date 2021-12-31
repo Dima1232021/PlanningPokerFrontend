@@ -21,7 +21,7 @@ export default function MenuStories() {
   const [activeModalAddStory, setActiveModalAddStory] = useState(false);
   const [storyId, setStoryId] = useState(null);
 
-  const textStory = useInput("", { minLength: 1 }, "Enter history");
+  const textStory = useInput("", {}, "Enter history");
 
   useEffect(() => {
     !activeModalEditStory && !activeModalAddStory && textStory.setValue("");

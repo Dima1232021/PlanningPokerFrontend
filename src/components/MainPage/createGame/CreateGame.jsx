@@ -13,16 +13,8 @@ export default function CreateGame({ seActive }) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
 
-  const nameGame = useInput(
-    "",
-    { minLength: 5, maxLength: 50 },
-    "Enter a name for the game"
-  );
-  const textStory = useInput(
-    "",
-    { minLength: 10, maxLength: 1000 },
-    "Enter history"
-  );
+  const nameGame = useInput("", {}, "Enter a name for the game");
+  const textStory = useInput("", {}, "Enter history");
 
   const [justDriving, setJustDriving] = useState(true);
   const [addUser, setAddUser] = useState([]);
