@@ -76,7 +76,6 @@
       flex-wrap: wrap;
       flex: 1 1 auto;
       overflow-y: auto;
-      justify-content: center;
     }
     &:nth-child(2) {
       position: relative;
@@ -211,6 +210,21 @@
     &__name-game,
     &__driving {
       flex: 0 0 100%;
+    }
+
+    &__story {
+      flex-direction: column;
+    }
+
+    &__column {
+      &:nth-child(1) {
+        order: 2;
+      }
+      &:nth-child(2) {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+      }
     }
 
     &__user {

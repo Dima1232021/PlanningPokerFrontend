@@ -9,22 +9,32 @@ export default function FormPlayerCards() {
   const userid = useSelector((state) => state.user.userid);
   const [valueCard, setValueCard] = useState(null);
   const [checkPlayer, setCheckPlayer] = useState(false);
+  const [checkId, setCheckId] = useState(false);
 
   useEffect(() => {
     setCheckPlayer(!!onlinePlayers.find((value) => value.id === userid));
   }, [onlinePlayers]);
 
+  useEffect(() => {
+    setCheckId(!!game.id_players_answers.find((id) => id === userid));
+  }, [game]);
+
   function addAnswer() {
-    if (String(valueCard) !== "null" && game.poll) {
+    if (String(valueCard) !== "null" && game.poll && !checkId) {
       giveAnAnswer(game.history_poll.id, valueCard);
+      setValueCard(null);
     }
   }
 
   return (
     <div className="form__player-cards">
-      {game.poll && checkPlayer && (
+      {game.poll && checkPlayer && !checkId && (
         <>
-          <button className="form__btn-answer" onClick={addAnswer} >
+          <button
+            className="form__btn-answer"
+            onClick={addAnswer}
+            disabled={checkId}
+          >
             Дати відповідь
           </button>
           <ul className="form__list">

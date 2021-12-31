@@ -8,7 +8,13 @@ import "./menuPlayers.scss";
 export default function MenuPlayers() {
   const invitedUsers = useSelector((state) => state.games.invitedUsers);
   const onlineUsers = useSelector((state) => state.games.onlineUsers);
+  const gameId = useSelector((state) => state.games.gameId);
   const [infoPlayers, setInfoPlayers] = useState("In the game");
+
+  function expelPlayer(user) {
+    console.log("gameId", gameId, "userId", user.id);
+  }
+
   return (
     <div className="menu-players">
       <MenuBlock
@@ -20,7 +26,13 @@ export default function MenuPlayers() {
       {infoPlayers == "In the game" ? (
         <UsersBlock value={onlineUsers} keyValue={"id"} name={"username"} />
       ) : (
-        <UsersBlock value={invitedUsers} keyValue={"id"} name={"username"} />
+        <UsersBlock
+          value={invitedUsers}
+          keyValue={"id"}
+          name={"username"}
+          nameBtn="Expel"
+          setValue={expelPlayer}
+        />
       )}
     </div>
   );

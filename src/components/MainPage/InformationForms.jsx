@@ -16,6 +16,8 @@ export default function InformationForms() {
   const invitationsToGames = useSelector(
     (state) => state.games.invitationsToGames
   );
+  const userid = useSelector((state) => state.user.userid);
+
   const { addError } = useAddErrors();
 
   useEffect(() => {
@@ -27,8 +29,9 @@ export default function InformationForms() {
     dispatch(deleteYoyrGame(game.id));
   }
 
-  function declineInv(game) {
-    dispatch(declineInvitation(game.invitation_id));
+  function declineInv(data) {
+    console.log("gameId", data.game_id, "userId", userid);
+    // dispatch(declineInvitation(game.invitation_id));
   }
 
   function join(game) {
