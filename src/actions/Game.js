@@ -137,23 +137,15 @@ export function leaveTheGame(game, invitationId) {
   };
 }
 
-export function declineInvitation(invitationId) {
-  return (dispatch) => {
-    fetch(`${API_URL}/game/delete_invited`, {
-      credentials: "include",
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ invitation_id: invitationId }),
-    }).then((value) =>
-      value.json().then((data) => {
-        if (data.delete_invited) {
-          dispatch(deleteInvitationAction(invitationId));
-        }
-      })
-    );
-  };
+export function declineInvitation(gameId, userId) {
+  fetch(`${API_URL}/game/delete_invited`, {
+    credentials: "include",
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ gameId, userId }),
+  });
 }
 
 export function startAPoll(storyId, gameId) {

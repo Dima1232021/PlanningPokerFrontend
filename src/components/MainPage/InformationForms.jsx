@@ -30,8 +30,7 @@ export default function InformationForms() {
   }
 
   function declineInv(data) {
-    console.log("gameId", data.game_id, "userId", userid);
-    // dispatch(declineInvitation(game.invitation_id));
+    declineInvitation(data.game_id, userid);
   }
 
   function join(game) {

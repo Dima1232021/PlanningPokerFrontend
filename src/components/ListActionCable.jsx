@@ -65,10 +65,12 @@ export default function ListActionCable() {
           }}
         />
         <ActionCable
-          channel={{ channel: "DeleteInvitedChannel", game_id: gameId }}
+          channel={{ channel: "DeleteInvitedChannel", userid }}
           onReceived={(data) => {
-            dispatch(changeInvitedPlayersAction(data.invited_players));
-            dispatch(changePlayersOnlineAction(data.players_online));
+            console.log(data);
+            dispatch(deleteInvitationAction(data.invitationId));
+            // dispatch(changeInvitedPlayersAction(data.invited_players));
+            // dispatch(changePlayersOnlineAction(data.players_online));
           }}
         />
         <ActionCable

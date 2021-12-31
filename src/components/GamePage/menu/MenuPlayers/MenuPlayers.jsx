@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import UsersBlock from "../../../usersBlock/UsersBlock";
 import MenuBlock from "../../../menuBlock/MenuBlock";
+import { declineInvitation } from "../../../../actions/Game";
 
 import "./menuPlayers.scss";
 
@@ -12,7 +13,7 @@ export default function MenuPlayers() {
   const [infoPlayers, setInfoPlayers] = useState("In the game");
 
   function expelPlayer(user) {
-    console.log("gameId", gameId, "userId", user.id);
+    declineInvitation(gameId, user.id);
   }
 
   return (
