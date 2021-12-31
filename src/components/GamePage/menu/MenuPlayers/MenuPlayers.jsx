@@ -10,6 +10,7 @@ export default function MenuPlayers() {
   const invitedUsers = useSelector((state) => state.games.invitedUsers);
   const onlineUsers = useSelector((state) => state.games.onlineUsers);
   const gameId = useSelector((state) => state.games.gameId);
+  const userid = useSelector((state) => state.user.userid);
   const [infoPlayers, setInfoPlayers] = useState("In the game");
 
   function expelPlayer(user) {
@@ -27,13 +28,20 @@ export default function MenuPlayers() {
       {infoPlayers == "In the game" ? (
         <UsersBlock value={onlineUsers} keyValue={"id"} name={"username"} />
       ) : (
-        <UsersBlock
-          value={invitedUsers}
-          keyValue={"id"}
-          name={"username"}
-          nameBtn="Expel"
-          setValue={expelPlayer}
-        />
+        <div className="usersBlock">
+          <ul className="usersBlock__list">
+            {invitedUsers.map((val) => {
+              return (
+                <li key={val.id} className="usersBlock__link">
+                  <span>{val.username}</span>
+                  {val.id != userid && (
+                    <button onClick={() => expelPlayer(val)}>Expel</button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
     </div>
   );
