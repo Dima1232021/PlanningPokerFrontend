@@ -22,30 +22,35 @@ export default function FormMenu() {
   }, [historyNumber, answers]);
 
   function startPull() {
-    if (onlinePlayers.length) {
+    if (onlinePlayers.length && !game.poll && !checkAnswer && stories.length) {
       return startAPoll(stories[historyNumber].id, gameId);
     }
     return addError("No players found");
   }
 
   function flipCards() {
-    finishAPoll(gameId);
+    if (game.poll) {
+      finishAPoll(gameId);
+    }
   }
 
   function resetCards() {
-    resetAPoll(stories[historyNumber].id, gameId);
+    if (!game.poll || checkAnswer) {
+      resetAPoll(stories[historyNumber].id, gameId);
+    }
   }
   return (
     <div className="form-menu">
       <button
         onClick={startPull}
         className={`form-menu__btn-answer ${
-          (game.poll || checkAnswer) && "disabled"
+          (game.poll || checkAnswer || !stories.length) && "disabled"
         }`}
-        disabled={game.poll || checkAnswer}
+        disabled={game.poll || checkAnswer || !stories.length}
       >
         Start Poll
       </button>
+
       <button
         className={`form-menu__btn-answer ${!game.poll && "disabled"}`}
         onClick={flipCards}
@@ -53,6 +58,7 @@ export default function FormMenu() {
       >
         Flip Cards
       </button>
+
       <button
         className={`form-menu__btn-answer ${
           (game.poll || !checkAnswer) && "disabled"
