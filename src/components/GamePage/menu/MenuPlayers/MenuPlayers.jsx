@@ -9,6 +9,7 @@ import "./menuPlayers.scss";
 export default function MenuPlayers() {
   const invitedUsers = useSelector((state) => state.games.invitedUsers);
   const onlineUsers = useSelector((state) => state.games.onlineUsers);
+  const game = useSelector((state) => state.games.gameYouHaveJoined);
   const gameId = useSelector((state) => state.games.gameId);
   const userid = useSelector((state) => state.user.userid);
   const [infoPlayers, setInfoPlayers] = useState("In the game");
@@ -34,7 +35,7 @@ export default function MenuPlayers() {
               return (
                 <li key={val.id} className="usersBlock__link">
                   <span>{val.username}</span>
-                  {val.id != userid && (
+                  {val.id != userid && game.driving.user_id == userid && (
                     <button onClick={() => expelPlayer(val)}>Expel</button>
                   )}
                 </li>

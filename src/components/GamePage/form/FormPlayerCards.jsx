@@ -35,7 +35,7 @@ export default function FormPlayerCards() {
             onClick={addAnswer}
             disabled={checkId}
           >
-            Дати відповідь
+            Give an answer
           </button>
           <ul className="form__list">
             {fibonacci.map((card, index) => (
