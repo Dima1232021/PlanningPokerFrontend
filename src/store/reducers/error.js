@@ -9,12 +9,23 @@ const initialState = {
 export const errorReducers = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ERROR:
-      return { ...state, error: [...state.error, action.payload] };
+      return { ...state, errors: [...state.errors, action.payload] };
 
     case DELETE_ERROR:
-      const error = state.error.filter((err) => err.id === action.payload);
-      return { ...state, error};
+      const errors = state.errors.filter((err) => err.id !== action.payload);
+
+      return { ...state, errors };
+
     default:
       return state;
   }
 };
+
+export const addErrorAction = (payload) => ({
+  type: ADD_ERROR,
+  payload,
+});
+export const deleteErrorAction = (payload) => ({
+  type: DELETE_ERROR,
+  payload,
+});

@@ -3,6 +3,7 @@ const DELETE_ERROR = "DELETE_ERROR";
 
 const defaultState = {
   errors: [],
+  time: 2000,
 };
 
 export const errorsReducer = (state = defaultState, action) => {
@@ -11,7 +12,8 @@ export const errorsReducer = (state = defaultState, action) => {
       return { ...state, errors: [...state.errors, action.payload] };
 
     case DELETE_ERROR:
-      let errors = state.errors.filter((_, index) => index !== 0);
+      const errors = state.errors.filter((err) => err.id !== action.payload);
+
       return { ...state, errors };
 
     default:
@@ -24,6 +26,7 @@ export const addErrorAction = (payload) => ({
   payload: payload,
 });
 
-export const deleteErrorsAction = () => ({
+export const deleteErrorsAction = (payload) => ({
   type: DELETE_ERROR,
+  payload: payload,
 });

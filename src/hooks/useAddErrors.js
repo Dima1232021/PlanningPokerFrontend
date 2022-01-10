@@ -7,12 +7,12 @@ export function useAddErrors(value) {
   const { errors, time } = useSelector((state) => state.errors);
 
   const addError = (message) => {
-    const date = Date.now();
-    const arr = errors.find((value) => value === message);
+    let date = Date.now();
+    const arr = errors.find((value) => value.message === message);
 
     if (!arr) {
       dispatch(addErrorAction({ message, id: date }));
-      setTimeout(() => dispatch(deleteErrorsAction(date)), 5000);
+      // setTimeout(() => dispatch(deleteErrorsAction(date)), time);
     }
   };
 
