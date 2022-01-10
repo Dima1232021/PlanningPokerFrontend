@@ -5,33 +5,52 @@ import {
   changeLoaderAuthAction,
 } from "../reducers/userReducer";
 
-export function login(email, password, addError) {
+export const login = (email, password) => {
   return (dispatch) => {
-    fetch(`${API_URL}/authenticate/login`, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: {
-          email,
-          password,
+    try {
+      fetch(`${API_URL}/authenticate/login`, {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    })
-      .then((value) =>
-        value.json().then((data) => {
-          console.log(data);
-          if (data.logged_in) {
-            return dispatch(addUserDataAction(data));
-          }
-          return addError(data.error);
-        })
-      )
-      .catch((error) => addError("The server does not respond"));
+        body: JSON.stringify({ user: { email, password } }).then((value) =>
+          value.json().then((data) => {
+            console.log("authenticate", data);
+          })
+        ),
+      });
+    } catch (e) {}
   };
-}
+};
+
+// export function login(email, password, addError) {
+//   return (dispatch) => {
+//     fetch(`${API_URL}/authenticate/login`, {
+//       credentials: "include",
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         user: {
+//           email,
+//           password,
+//         },
+//       }),
+//     })
+// .then((value) =>
+//   value.json().then((data) => {
+//     console.log(data);
+//     if (data.logged_in) {
+//       return dispatch(addUserDataAction(data));
+//     }
+//     return addError(data.error);
+//   })
+// )
+//       .catch((error) => addError("The server does not respond"));
+//   };
+// }
 
 export function create(
   username,

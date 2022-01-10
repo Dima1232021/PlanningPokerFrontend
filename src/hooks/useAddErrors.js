@@ -1,18 +1,17 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addErrorAction, deleteErrorsAction } from "../reducers/errorsReducer";
+import { useSelector } from "react-redux";
+import { useActions } from "../hooks/useActions";
 
 export function useAddErrors(value) {
-  const dispatch = useDispatch();
-  const { errors, time } = useSelector((state) => state.errors);
+  const { addErrorAction, deleteErrorAction } = useActions();
+  const { error, timer } = useSelector((state) => state.error);
 
   const addError = (message) => {
-    let date = Date.now();
-    const arr = errors.find((value) => value.message === message);
+    const createId = Date.now() + Math.random();
+    const arr = error.find((value) => value.message === message);
 
     if (!arr) {
-      dispatch(addErrorAction({ message, id: date }));
-      // setTimeout(() => dispatch(deleteErrorsAction(date)), time);
+      addErrorAction({ message, id: createId });
+      setTimeout(() => deleteErrorAction(createId), timer);
     }
   };
 

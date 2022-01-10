@@ -9,33 +9,36 @@ import { logged_in } from "../actions/authenticate";
 import { searchGameYouHaveJoined } from "../actions/Game";
 import { showUser } from "../actions/users";
 
-import axios from "axios";
 import "./app.scss";
+import AuthenticatePage from "./AuthenticatePage/AuthenticatePage";
+import { useActions } from "../hooks/useActions";
 
 function App() {
-  const dispatch = useDispatch();
-  const loggedIn = useSelector((state) => state.user.logged_in);
-  const inTheGame = useSelector((state) => state.games.inTheGame);
+  // const dispatch = useDispatch();
+  // const loggedIn = useSelector((state) => state.user.logged_in);
+  // const inTheGame = useSelector((state) => state.games.inTheGame);
 
-  useEffect(() => {
-    dispatch(logged_in());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(logged_in());
+  // }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      dispatch(searchGameYouHaveJoined());
-      dispatch(showUser());
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     dispatch(searchGameYouHaveJoined());
+  //     dispatch(showUser());
+  //   }
+  // }, [loggedIn]);
 
   return (
     <div className="wrapper">
-      <ListActionCable />
+      {/* <ListActionCable /> */}
       <OutputErrors />
-      {/* <Header /> */}
-      {!inTheGame && <Header />}
-      <Routes />
-      {!inTheGame && <Footer />}
+
+      {/* {!inTheGame && <Header />} */}
+      <Header />
+      <AuthenticatePage />
+      <Footer />
+      {/* {!inTheGame && <Footer />} */}
     </div>
   );
 }

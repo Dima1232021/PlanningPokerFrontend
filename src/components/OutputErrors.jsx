@@ -1,26 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useActions } from "../hooks/useActions";
 import { deleteErrorsAction } from "../reducers/errorsReducer";
 
 export default function OutputErrors() {
-  const dispatch = useDispatch();
-  const errors = useSelector((state) => state.errors.errors);
-
-  function deleteError(id) {
-    dispatch(deleteErrorsAction(id));
-  }
+  // const dispatch = useDispatch();
+  const error = useSelector((state) => state.error.error);
+  const { deleteErrorAction } = useActions();
 
   return (
-    !!errors.length && (
+    !!error.length && (
       <div className="error">
         <ul className="error__list">
-          {errors.map((error) => {
+          {error.map((err, index) => {
             return (
-              <li key={error.id} className="error__link">
-                <div className="error__message">{error.message}</div>
+              <li key={index} className="error__link">
+                <div className="error__message">{err.message}</div>
                 <button
                   className="error__delete"
-                  onClick={() => deleteError(error.id)}
+                  onClick={() => deleteErrorAction(err.id)}
                 >
                   &#10060;
                 </button>

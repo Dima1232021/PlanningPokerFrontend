@@ -13,6 +13,8 @@ const rootReducer = combineReducers({
   errors: errorsReducer,
 });
 
+
+
 export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))

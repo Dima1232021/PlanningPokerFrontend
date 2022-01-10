@@ -1,5 +1,5 @@
-const SET_IS_AUTH = "SET_IS_AUTH";
-const SET_IS_LOADING = "SET_IS_LOADING";
+export const SET_IS_AUTH = "SET_IS_AUTH";
+export const SET_IS_LOADING = "SET_IS_LOADING";
 
 const initialState = {
   isAuth: false,
@@ -19,12 +19,3 @@ export const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setIsAuthAction = (payload) => ({
-  type: SET_IS_AUTH,
-  payload,
-});
-
-export const setIsLoadingAction = (payload) => ({
-  type: SET_IS_LOADING,
-  payload,
-});

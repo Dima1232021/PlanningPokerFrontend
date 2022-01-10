@@ -13,7 +13,7 @@ import {
 
 export function createGame(nameGame, users, stories, justDriving) {
   return (dispatch) => {
-    fetch(`${API_URL}/game/create`, {
+   fetch (`${API_URL}/game/create`, {
       credentials: "include",
       method: "POST",
       headers: {
