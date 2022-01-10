@@ -4,14 +4,15 @@ import { addErrorAction, deleteErrorsAction } from "../reducers/errorsReducer";
 
 export function useAddErrors(value) {
   const dispatch = useDispatch();
-  const errors = useSelector((state) => state.errors.errors);
+  const { errors, time } = useSelector((state) => state.errors);
 
   const addError = (message) => {
-    let arr = errors.find((value) => value === message);
+    const date = Date.now();
+    const arr = errors.find((value) => value === message);
 
     if (!arr) {
-      dispatch(addErrorAction(message));
-      setTimeout(() => dispatch(deleteErrorsAction()), 5000);
+      dispatch(addErrorAction({ message, id: date }));
+      setTimeout(() => dispatch(deleteErrorsAction(date)), 5000);
     }
   };
 

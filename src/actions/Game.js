@@ -22,7 +22,7 @@ export function createGame(nameGame, users, stories, justDriving) {
       body: JSON.stringify({ nameGame, users, stories, justDriving }),
     }).then((value) =>
       value.json().then((data) => {
-        // console.log(data);
+        console.log(data);
         if (data.status === "created") {
           dispatch(addYourtGameAction(data.game), changeActveFormAction(false));
           dispatch(changeActveFormAction(false));

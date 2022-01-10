@@ -7,10 +7,10 @@ export default function OutputErrors() {
     !!errors.length && (
       <div className="error">
         <ul className="error__list">
-          {errors.map((message, index) => {
+          {errors.map((error) => {
             return (
-              <li key={index} className="error__link">
-                {message}
+              <li key={error.id} className="error__link">
+                {error.message}
               </li>
             );
           })}
