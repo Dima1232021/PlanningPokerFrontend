@@ -6,7 +6,7 @@ import OutputErrors from "./OutputErrors";
 import { useActions } from "../hooks/useActions";
 import { useAddErrors } from "../hooks/useAddErrors";
 import "./app.scss";
-
+import { AppRouter } from "./AppRouter";
 
 function App() {
   const { addError } = useAddErrors();
@@ -30,7 +30,7 @@ function App() {
       <OutputErrors />
 
       <Header />
-  
+      <AppRouter />
       <Footer />
     </div>
   );
