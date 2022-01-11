@@ -1,26 +1,21 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Routes from "../routes";
-import ListActionCable from "./ListActionCable";
+import { useSelector } from "react-redux";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import OutputErrors from "./OutputErrors";
-import { logged_in } from "../actions/authenticate";
-import { searchGameYouHaveJoined } from "../actions/Game";
-import { showUser } from "../actions/users";
-
-import "./app.scss";
-import AuthenticatePage from "./AuthenticatePage/AuthenticatePage";
 import { useActions } from "../hooks/useActions";
+import { useAddErrors } from "../hooks/useAddErrors";
+import "./app.scss";
+
 
 function App() {
-  // const dispatch = useDispatch();
-  // const loggedIn = useSelector((state) => state.user.logged_in);
-  // const inTheGame = useSelector((state) => state.games.inTheGame);
+  const { addError } = useAddErrors();
+  const { loggedInAction } = useActions();
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
-  // useEffect(() => {
-  //   dispatch(logged_in());
-  // }, []);
+  useEffect(() => {
+    loggedInAction(addError);
+  }, []);
 
   // useEffect(() => {
   //   if (loggedIn) {
@@ -34,11 +29,9 @@ function App() {
       {/* <ListActionCable /> */}
       <OutputErrors />
 
-      {/* {!inTheGame && <Header />} */}
       <Header />
-      <AuthenticatePage />
+  
       <Footer />
-      {/* {!inTheGame && <Footer />} */}
     </div>
   );
 }

@@ -13,64 +13,71 @@ import {
 import { addUserAction } from "../reducers/usersReducer";
 
 export default function ListActionCable() {
-  const dispatch = useDispatch();
-  const loggedIn = useSelector((state) => state.user.logged_in);
-  const userid = useSelector((state) => state.user.userid);
+  // const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const userId = useSelector((state) => state.user.user.id);
   const gameId = useSelector((state) => state.games.gameId);
 
-  if (loggedIn) {
+  if (isAuth) {
     return (
       <>
         <ActionCable
           channel={{
             channel: "ShowingGameRequestsChannel",
-            user: userid,
+            userId,
           }}
-          onReceived={(value) => {
-            console.log(value);
-            dispatch(addGameInvitationAction(value));
+          onReceived={(data) => {
+            console.log(data);
+            // dispatch(addGameInvitationAction(data));
           }}
         />
         <ActionCable
           channel={{ channel: "ShowUsersChannel" }}
           onReceived={(data) => {
-            dispatch(addUserAction(data));
+            console.log(data);
+            // dispatch(addUserAction(data));
           }}
         />
         <ActionCable
-          channel={{ channel: "GameChannel", game_id: gameId }}
+          channel={{ channel: "GameChannel", gameId }}
           onReceived={(data) => {
-            dispatch(changeGameYouHaveJoinedAction(data));
+            console.log(data);
+            // dispatch(changeGameYouHaveJoinedAction(data));
           }}
         />
         <ActionCable
-          channel={{ channel: "ChangeInvitationsChannel", game_id: gameId }}
+          channel={{ channel: "ChangeInvitationsChannel", gameId }}
           onReceived={(data) => {
-            dispatch(changeInvitedPlayersAction(data));
+            console.log(data);
+            // dispatch(changeInvitedPlayersAction(data));
           }}
         />
         <ActionCable
-          channel={{ channel: "ChangePlayersOnlineChannel", game_id: gameId }}
+          channel={{ channel: "ChangePlayersOnlineChannel", gameId }}
           onReceived={(data) => {
-            dispatch(changePlayersOnlineAction(data));
+            console.log(data);
+            // dispatch(changePlayersOnlineAction(data));
           }}
         />
         <ActionCable
-          channel={{ channel: "DeleteInvitedChannel", userid }}
+          channel={{ channel: "DeleteInvitedChannel", userId }}
           onReceived={(data) => {
-            dispatch(deleteInvitationAction(data.invitationId));
+            console.log(data);
+            // dispatch(deleteInvitationAction(data.invitationId));
           }}
         />
         <ActionCable
-          channel={{ channel: "AnswersChannel", game_id: gameId }}
+          channel={{ channel: "AnswersChannel", gameId }}
           onReceived={(data) => {
-            dispatch(addAnswersAction(data));
+            console.log(data);
+            // dispatch(addAnswersAction(data));
           }}
         />
         <ActionCable
-          channel={{ channel: "StoriesChannel", game_id: gameId }}
+          channel={{ channel: "StoriesChannel", gameId }}
           onReceived={(data) => {
-            dispatch(addStoryAction(data));
+            console.log(data);
+            // dispatch(addStoryAction(data));
           }}
         />
       </>

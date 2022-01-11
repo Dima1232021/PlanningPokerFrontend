@@ -1,58 +1,76 @@
-import axios from "axios";
-import { API_URL } from "../../../config";
-import { SET_IS_LOADING, SET_IS_AUTH } from "./auth";
+import { SET_IS_LOADING, SET_IS_AUTH, SET_LOGOUT } from "./auth";
+import { bodyFetch } from "../../../config";
 
 export const authActionCreators = {
   setIsLoadingAction: (loading) => ({
     type: SET_IS_LOADING,
     payload: loading,
   }),
+
   setIsAuthAction: (user) => ({
     type: SET_IS_AUTH,
     payload: user,
   }),
-  loginAction: (email, password, addError) => (dispatch) => {
-    fetch(`${API_URL}/authenticate/login`, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: {
-          email,
-          password,
-        },
-      }),
-    })
+
+  setLogout: () => ({
+    type: SET_LOGOUT,
+  }),
+
+  loginAction: (loginData, addError) => (dispatch) => {
+    dispatch(authActionCreators.setIsLoadingAction(true));
+    fetch(...bodyFetch("/authenticate/login", loginData))
       .then((value) => value.json())
       .then((data) => {
-        console.log(data);
+        data.logged_in
+          ? dispatch(authActionCreators.setIsAuthAction())
+          : addError(data.error);
       })
-      .catch((e) => {
+      .catch(() => {
         addError("The server does not respond");
-      });
+      })
+      .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },
 
-  //   loginAction: (email, password, addError) => async (dispatch) => {
-  //     try {
-  //       dispatch(authActionCreators.setIsLoadingAction(true));
-  //       const response = await axios.post(
-  //         `${API_URL}/authenticate/login`,
-  //         {
-  //           user: { email, password },
-  //         },
-  //         {
-  //           withCredentials: true,
-  //           headers: {
-  //             "Access-Control-Allow-Origin": "*",
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-  //       console.log(response);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   },
+  createAction: (createData, addError) => (dispatch) => {
+    dispatch(authActionCreators.setIsLoadingAction(true));
+    fetch(...bodyFetch("/authenticate/create", createData))
+      .then((value) => value.json())
+      .then((data) =>
+        data.logged_in
+          ? dispatch(authActionCreators.setIsAuthAction(data.user))
+          : addError(data.error)
+      )
+      .catch(() => {
+        addError("The server does not respond");
+      })
+      .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
+  },
+
+  loggedInAction: (addError) => (dispatch) => {
+    dispatch(authActionCreators.setIsLoadingAction(true));
+    fetch(...bodyFetch("/authenticate/logged_in"))
+      .then((value) => value.json())
+      .then(
+        (data) =>
+          data.logged_in &&
+          dispatch(authActionCreators.setIsAuthAction(data.user))
+      )
+      .catch(() => {
+        addError("The server does not respond");
+      })
+      .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
+  },
+
+  logoutAction: (addError) => (dispatch) => {
+    dispatch(authActionCreators.setIsLoadingAction(true));
+    fetch(...bodyFetch("/authenticate/logout"))
+      .then((value) => value.json())
+      .then(
+        (data) => data.logged_out && dispatch(authActionCreators.setLogout())
+      )
+      .catch(() => {
+        addError("The server does not respond");
+      })
+      .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
+  },
 };

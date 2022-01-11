@@ -1,5 +1,6 @@
 export const SET_IS_AUTH = "SET_IS_AUTH";
 export const SET_IS_LOADING = "SET_IS_LOADING";
+export const SET_LOGOUT = "SET_LOGOUT";
 
 const initialState = {
   isAuth: false,
@@ -12,10 +13,16 @@ export const authReducer = (state = initialState, action) => {
     case SET_IS_LOADING:
       return { ...state, isLoading: action.payload };
     case SET_IS_AUTH:
-      return { ...state, isLoading: false, user: action.payload, isAuth: true };
+      return { ...state, user: action.payload, isAuth: true };
+
+    case SET_LOGOUT:
+      return {
+        ...state,
+        user: {},
+        isAuth: false,
+      };
 
     default:
       return state;
   }
 };
-

@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { create } from "../../../actions/authenticate";
+
 import { useInput } from "../../../hooks/useInput";
 import { useAddErrors } from "../../../hooks/useAddErrors";
 import Form from "./Form";
 import { useActions } from "../../../hooks/useActions";
 
 export default function AuthForm({ auth }) {
-  const dispatch = useDispatch();
-
-  const { loginAction } = useActions();
+  const { loginAction, createAction } = useActions();
   const { addError } = useAddErrors();
 
   const username = useInput("", { minLength: 5, maxLength: 16 }, "Username");
@@ -39,8 +36,7 @@ export default function AuthForm({ auth }) {
 
   function authLogIn() {
     if (email.isValid && password.isValid) {
-      loginAction(email.value, password.value, addError);
-      // dispatch(login(email.value, password.value, addError));
+      loginAction({ email: email.value, password: password.value }, addError);
     } else {
       email.outputError();
       password.outputError();
@@ -54,14 +50,14 @@ export default function AuthForm({ auth }) {
       password.isValid &&
       passwordConf.isValid
     ) {
-      dispatch(
-        create(
-          username.value,
-          email.value,
-          password.value,
-          passwordConf.value,
-          addError
-        )
+      createAction(
+        {
+          username: username.value,
+          email: email.value,
+          password: password.value,
+          passwordConf: passwordConf.value,
+        },
+        addError
       );
     } else {
       username.outputError();
