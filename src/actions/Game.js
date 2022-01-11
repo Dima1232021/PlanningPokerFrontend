@@ -13,7 +13,7 @@ import {
 
 export function createGame(nameGame, users, stories, justDriving) {
   return (dispatch) => {
-   fetch (`${API_URL}/game/create`, {
+    fetch(`${API_URL}/game/create`, {
       credentials: "include",
       method: "POST",
       headers: {
@@ -114,7 +114,7 @@ export function searchGameYouHaveJoined() {
   };
 }
 
-export function leaveTheGame(game, invitationId) {
+export function leaveTheGame(gameId) {
   return (dispatch) => {
     fetch(`${API_URL}/game/leave_the_game`, {
       credentials: "include",
@@ -123,8 +123,7 @@ export function leaveTheGame(game, invitationId) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        gameId: game.id,
-        invitation_id: invitationId,
+        gameId,
       }),
     }).then((value) =>
       value.json().then((data) => {

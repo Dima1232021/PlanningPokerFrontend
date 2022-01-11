@@ -21,15 +21,15 @@ const defaultState = {
   yourGames: [],
   invitationsToGames: [],
   gameYouHaveJoined: {},
-  inTheGame: false,
+  // inTheGame: false,
   invitationId: null,
-  stories: [],
-  answers: {},
-  gameId: null,
-  historyNumber: 0,
-  invitedUsers: [],
-  onlineUsers: [],
-  onlinePlayers: [],
+  // stories: [],
+  // answers: {},
+  // gameId: null,
+  // historyNumber: 0,
+  // invitedUsers: [],
+  // onlineUsers: [],
+  // onlinePlayers: [],
 };
 
 export const gamesReducer = (state = defaultState, action) => {

@@ -11,10 +11,9 @@ export default function Menu({ active, setActive }) {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.games.gameYouHaveJoined);
   const userid = useSelector((state) => state.user.userid);
-  const invitationId = useSelector((state) => state.games.invitationId);
 
   function leave() {
-    dispatch(leaveTheGame(game, invitationId));
+    dispatch(leaveTheGame(game.id));
   }
 
   return (

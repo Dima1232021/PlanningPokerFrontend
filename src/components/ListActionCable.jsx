@@ -32,13 +32,6 @@ export default function ListActionCable() {
           }}
         />
         <ActionCable
-          channel={{ channel: "ShowUsersChannel" }}
-          onReceived={(data) => {
-            console.log(data);
-            // dispatch(addUserAction(data));
-          }}
-        />
-        <ActionCable
           channel={{ channel: "GameChannel", gameId }}
           onReceived={(data) => {
             console.log(data);
