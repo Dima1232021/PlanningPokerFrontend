@@ -1,6 +1,8 @@
 const initialState = {
+  isLoader: false,
   inTheGame: false,
   gameId: null,
+  driving: {id: null, name: ''},
   historyNumber: 0,
   invitedUsers: [],
   onlineUsers: [],

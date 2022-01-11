@@ -1,10 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useActions } from "../hooks/useActions";
-import { deleteErrorsAction } from "../reducers/errorsReducer";
 
 export default function OutputErrors() {
-  // const dispatch = useDispatch();
   const error = useSelector((state) => state.error.error);
   const { deleteErrorAction } = useActions();
 

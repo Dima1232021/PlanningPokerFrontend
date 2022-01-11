@@ -16,20 +16,13 @@ const DELETE_INVITATION = "DELETE_INVITATION";
 const LEAVE_THE_GAME = "LEAVE_THE_GAME";
 
 const defaultState = {
-  loaderGame: false,
-  activeForm: false,
-  yourGames: [],
-  invitationsToGames: [],
-  gameYouHaveJoined: {},
-  // inTheGame: false,
-  invitationId: null,
-  // stories: [],
-  // answers: {},
-  // gameId: null,
-  // historyNumber: 0,
-  // invitedUsers: [],
-  // onlineUsers: [],
-  // onlinePlayers: [],
+ 
+  // activeForm: false,
+
+
+
+  // // invitationId: null,
+
 };
 
 export const gamesReducer = (state = defaultState, action) => {
@@ -66,7 +59,6 @@ export const gamesReducer = (state = defaultState, action) => {
         ...state,
         gameId: action.payload.game.id,
         gameYouHaveJoined: action.payload.game,
-        invitationId: action.payload.invitation_id,
         inTheGame: true,
         stories: action.payload.stories,
         answers: action.payload.answers,
@@ -80,28 +72,27 @@ export const gamesReducer = (state = defaultState, action) => {
         ...state,
         gameYouHaveJoined: {},
         inTheGame: false,
-        invitationId: null,
         stories: [],
         answers: {},
         gameId: null,
       };
 
-    case DELETE_INVITATION:
-      let invitationsToGames = state.invitationsToGames.filter(
-        (value) => value.invitation_id !== action.payload
-      );
+    // case DELETE_INVITATION:
+    //   let invitationsToGames = state.invitationsToGames.filter(
+    //     (value) => value.invitation_id !== action.payload
+    //   );
 
-      if (action.payload === state.invitationId) {
-        return {
-          ...state,
-          invitationsToGames,
-          gameYouHaveJoined: {},
-          inTheGame: false,
-          invitationId: null,
-          gameId: null,
-        };
-      }
-      return { ...state, invitationsToGames };
+    //   if (action.payload === state.invitationId) {
+    //     return {
+    //       ...state,
+    //       invitationsToGames,
+    //       gameYouHaveJoined: {},
+    //       inTheGame: false,
+    //       invitationId: null,
+    //       gameId: null,
+    //     };
+    //   }
+    //   return { ...state, invitationsToGames };
 
     case CHANGE_GAME_YOU_HAVE_JOINED:
       return { ...state, gameYouHaveJoined: action.payload };
