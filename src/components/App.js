@@ -8,19 +8,16 @@ import "./app.scss";
 
 function App() {
   const { addError } = useAddErrors();
-  const { loggedInAction } = useActions();
+  const { loggedInAction, gamesAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
 
   useEffect(() => {
     loggedInAction(addError);
   }, []);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     dispatch(searchGameYouHaveJoined());
-  //     dispatch(showUser());
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    isAuth && gamesAction(addError);
+  }, [isAuth]);
 
   return (
     <div className="wrapper">

@@ -6,6 +6,7 @@ import MainPage from "../pages/main/Main";
 import AuthPage from "../pages/auth/Auth";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
+import CreateGame from "../pages/createGame/CreateGame";
 
 export const AppRouter = () => {
   const { isAuth, isLoading } = useSelector((state) => state.auth);
@@ -20,7 +21,8 @@ export const AppRouter = () => {
       ) : isAuth ? (
         <Switch>
           <Route path="/" exact component={MainPage} />
-          <Redirect to="/" />
+          <Route path="/create_game" exact component={CreateGame} />
+          <Redirect to="/create_game" />
         </Switch>
       ) : (
         <Switch>
