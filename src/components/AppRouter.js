@@ -2,25 +2,29 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import Main from "../pages/Main";
-import Auth from "../pages/auth/Auth.jsx";
+import MainPage from "../pages/main/Main";
+import AuthPage from "../pages/auth/Auth";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 
 export const AppRouter = () => {
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, isLoading } = useSelector((state) => state.auth);
 
   return (
     <>
       <Header />
-      {isAuth ? (
+      {isLoading ? (
+        <div className="loader">
+          <div className="loader__row">Loading...</div>
+        </div>
+      ) : isAuth ? (
         <Switch>
-          <Route path="/" exact component={Main} />
+          <Route path="/" exact component={MainPage} />
           <Redirect to="/" />
         </Switch>
       ) : (
         <Switch>
-          <Route path="/authenticet" component={Auth} />
+          <Route path="/authenticet" component={AuthPage} />
           <Redirect to="/authenticet" />
         </Switch>
       )}

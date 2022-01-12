@@ -52,37 +52,6 @@ body,
   }
 }
 //</ОСНОВНАЯ СЕТКА>===========================================================================================================
-
-.block-users {
-}
-.error {
-  position: fixed;
-  z-index: 111;
-  width: 90%;
-  top: 20px;
-  left: 5%;
-
-  &__link {
-    background-color: #f8d8db;
-    border: 2px solid #c4817e;
-    border-radius: 8px;
-    padding: 7px 15px;
-    margin-bottom: 10px;
-    color: #be5248;
-    font-size: 20px;
-    line-height: 22px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  // &__message {
-
-  // }
-  &__delete {
-    background-color: #f8d8db;
-  }
-}
-
 .loader {
   flex: 1 1 auto;
   &__row {

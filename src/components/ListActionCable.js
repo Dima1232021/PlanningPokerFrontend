@@ -1,6 +1,6 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   changeGameYouHaveJoinedAction,
   addGameInvitationAction,
@@ -12,8 +12,7 @@ import {
 } from "../reducers/gamesReducer";
 import { addUserAction } from "../reducers/usersReducer";
 
-export default function ListActionCable() {
-  // const dispatch = useDispatch();
+const ListActionCable = () => {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const userId = useSelector((state) => state.user.user.id);
   const gameId = useSelector((state) => state.games.gameId);
@@ -77,4 +76,6 @@ export default function ListActionCable() {
     );
   }
   return null;
-}
+};
+
+export default ListActionCable;

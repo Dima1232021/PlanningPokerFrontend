@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { useInput } from "../../../hooks/useInput";
+
 
 import { useDispatch, useSelector } from "react-redux";
-import { createGame } from "../../../actions/Game";
-import { changeActveFormAction } from "../../../reducers/gamesReducer";
-import UsersBlock from "../../usersBlock/UsersBlock";
+import { createGame } from "../../actions/Game";
+// import { changeActveFormAction } from "../../../reducers/gamesReducer";
+// import UsersBlock from "../../usersBlock/UsersBlock";
 import Cheks from "./Cheks";
 
 import "./createGame.scss";
+import { useInput } from "../../hooks";
 
 export default function CreateGame({ seActive }) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
+  // const users = useSelector((state) => state.users.users);
 
   const nameGame = useInput("", {}, "Enter a name for the game");
   const textStory = useInput("", {}, "Enter history");
@@ -45,7 +46,7 @@ export default function CreateGame({ seActive }) {
       <h2 className="create-game__title">The form of creating the game</h2>
 
       <div className="create-game__form">
-        <div className="create-game__block block">
+        {/* <div className="create-game__block block">
           <p className="block__text">Select users to invite them to the game</p>
           <UsersBlock
             value={users}
@@ -65,7 +66,7 @@ export default function CreateGame({ seActive }) {
             nameBtn="Remove"
             setValue={deleteUserState}
           />
-        </div>
+        </div> */}
 
         <div className="create-game__block block">
           <p className="block__text">Create stories</p>
@@ -95,11 +96,11 @@ export default function CreateGame({ seActive }) {
         <div className="create-game__block block">
           <p className="block__text">Stories you have created</p>
 
-          <UsersBlock
+          {/* <UsersBlock
             value={addStory}
             nameBtn="Remove"
             setValue={deleteStoryState}
-          />
+          /> */}
         </div>
 
         <div className="create-game__block block">
@@ -115,12 +116,12 @@ export default function CreateGame({ seActive }) {
           <div className="block__container">
             <Cheks justDriving={justDriving} setJustDriving={setJustDriving} />
             <div className="block__row">
-              <button
+              {/* <button
                 onClick={() => dispatch(changeActveFormAction(false))}
                 className="block__btn-exit"
               >
                 Cancel
-              </button>
+              </button> */}
               <button className="block__btn-create" onClick={createNewGame}>
                 Create a game
               </button>

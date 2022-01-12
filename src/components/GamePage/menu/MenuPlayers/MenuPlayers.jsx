@@ -22,7 +22,6 @@ export default function MenuPlayers() {
 
   function addPlayer() {
     setActive(true);
-    console.log("addplayer");
   }
 
   return (

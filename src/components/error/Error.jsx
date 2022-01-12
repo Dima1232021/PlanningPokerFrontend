@@ -1,8 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useActions } from "../hooks/index";
+import { useActions } from "../../hooks/index";
+import "./error.scss";
 
-export default function OutputErrors() {
+export default function Error() {
   const error = useSelector((state) => state.error.error);
   const { deleteErrorAction } = useActions();
 
@@ -14,10 +15,7 @@ export default function OutputErrors() {
             return (
               <li key={err.id} className="error__link">
                 <div className="error__message">{err.message}</div>
-                <button
-                  className="error__delete"
-                  onClick={() => deleteErrorAction(err.id)}
-                >
+                <button className="error__delete" onClick={() => deleteErrorAction(err.id)}>
                   &#10060;
                 </button>
               </li>

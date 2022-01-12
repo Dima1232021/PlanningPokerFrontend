@@ -125,7 +125,6 @@ export const gamesReducer = (state = defaultState, action) => {
       return { ...state, invitedPlayers: action.payload };
 
     case CHANGE_PLAYERS_ONLINE:
-      console.log("CHANGE_PLAYERS_ONLINE", action.payload);
       if (action.payload.invitedUsers) {
         return {
           ...state,

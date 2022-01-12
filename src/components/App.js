@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import OutputErrors from "./OutputErrors";
+import Error from "./error/Error";
 import { useAddErrors } from "../hooks/index";
 import useActions from "../hooks/useActions";
-
 import { AppRouter } from "./AppRouter";
 import "./app.scss";
 
@@ -26,7 +25,7 @@ function App() {
   return (
     <div className="wrapper">
       {/* <ListActionCable /> */}
-      <OutputErrors />
+      <Error />
 
       <AppRouter />
     </div>

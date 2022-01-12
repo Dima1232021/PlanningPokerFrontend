@@ -22,7 +22,6 @@ export function createGame(nameGame, users, stories, justDriving) {
       body: JSON.stringify({ nameGame, users, stories, justDriving }),
     }).then((value) =>
       value.json().then((data) => {
-        console.log(data);
         if (data.status === "created") {
           dispatch(addYourtGameAction(data.game), changeActveFormAction(false));
           dispatch(changeActveFormAction(false));
@@ -127,7 +126,6 @@ export function leaveTheGame(gameId) {
       }),
     }).then((value) =>
       value.json().then((data) => {
-        console.log(data);
         if (data.leavet_he_game) {
           dispatch(leaveTheGameAction());
         }

@@ -7,7 +7,7 @@ const initialState = {
   characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
 };
 
-export const errorReducers = (state = initialState, action) => {
+export const errorReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ERROR:
       return { ...state, error: [...state.error, action.payload] };
