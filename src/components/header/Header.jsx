@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useActions } from "../../hooks/useActions";
-import { useAddErrors } from "../../hooks/useAddErrors";
+// import { useActions } from "../../hooks/useActions";
+// import { useAddErrors } from "../../hooks/useAddErrors";
+import { useActions, useAddErrors } from "../../hooks/index";
 import "./header.scss";
 
 export default function Header() {

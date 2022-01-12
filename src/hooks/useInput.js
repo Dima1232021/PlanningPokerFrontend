@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useValidation } from "./useValidation";
-import { useAddErrors } from "./useAddErrors";
+import { useValidation, useAddErrors } from "./index";
 
-export const useInput = (initialValue, validations, fieldName) => {
+const useInput = (initialValue, validations, fieldName) => {
   let { addError } = useAddErrors();
   const [value, setValue] = useState(initialValue);
 
@@ -12,7 +11,7 @@ export const useInput = (initialValue, validations, fieldName) => {
     return setValue(e.target.value);
   };
 
-  const outputError = () => {
+  const showErr = () => {
     valid.messageError.map(({ _, message }) => {
       addError(message);
     });
@@ -20,10 +19,12 @@ export const useInput = (initialValue, validations, fieldName) => {
 
   return {
     onChange,
-    outputError,
+    showErr,
     setValue,
     value,
 
     ...valid,
   };
 };
+
+export default useInput;

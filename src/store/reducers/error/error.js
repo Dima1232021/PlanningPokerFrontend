@@ -4,6 +4,7 @@ export const DELETE_ERROR = "DELETE_ERROR";
 const initialState = {
   error: [],
   timer: 5000,
+  characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
 };
 
 export const errorReducers = (state = initialState, action) => {

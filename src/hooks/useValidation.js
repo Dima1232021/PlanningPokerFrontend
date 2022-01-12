@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-export const useValidation = (value, validations, fieldName) => {
+const useValidation = (value, validations, fieldName) => {
   const [maxLength, setMaxLength] = useState(false);
   const [minLength, setMinLength] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -20,7 +20,7 @@ export const useValidation = (value, validations, fieldName) => {
   useEffect(() => {
     for (const validation in validations) {
       switch (validation) {
-        case "maxLength":
+        case "max":
           if (value.length > validations[validation]) {
             !maxLength &&
               addMessageError(
@@ -34,7 +34,7 @@ export const useValidation = (value, validations, fieldName) => {
           }
           break;
 
-        case "minLength":
+        case "min":
           if (value.length < validations[validation]) {
             !minLength &&
               addMessageError(
@@ -56,13 +56,12 @@ export const useValidation = (value, validations, fieldName) => {
             emailError && deleteMessageError(4);
             setEmailError(false);
           } else {
-            !emailError &&
-              addMessageError(4, `${fieldName} field: Invalid Email entered`);
+            !emailError && addMessageError(4, `${fieldName} field: Invalid Email entered`);
             setEmailError(true);
           }
           break;
 
-        case "passwordConfirmation":
+        case "passConf":
           if (validations[validation] !== value) {
             !passwordConfirmation &&
               addMessageError(5, `${fieldName} field: password does not match`);
@@ -89,3 +88,5 @@ export const useValidation = (value, validations, fieldName) => {
     isValid,
   };
 };
+
+export default useValidation;

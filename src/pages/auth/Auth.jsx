@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import AuthForm from "./authForm/AuthForm";
-import MenuBlock from "../menuBlock/MenuBlock";
+import MenuBlock from "../../components/menuBlock/MenuBlock";
+import AuthForm from "../../components/auth/AuthForm";
 
 import "./auth.scss";
 
-export default function AuthenticatePage() {
+export default function Auth() {
   const [auth, setAuth] = useState("Log in");
 
   return (

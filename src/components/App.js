@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Header from "./header/Header";
-import Footer from "./footer/Footer";
 import OutputErrors from "./OutputErrors";
-import { useActions } from "../hooks/useActions";
-import { useAddErrors } from "../hooks/useAddErrors";
-import "./app.scss";
+import { useActions, useAddErrors } from "../hooks/index";
 import { AppRouter } from "./AppRouter";
+import "./app.scss";
 
 function App() {
   const { addError } = useAddErrors();
@@ -29,9 +26,7 @@ function App() {
       {/* <ListActionCable /> */}
       <OutputErrors />
 
-      <Header />
       <AppRouter />
-      <Footer />
     </div>
   );
 }
