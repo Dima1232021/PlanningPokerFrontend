@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import OutputErrors from "./OutputErrors";
-import { useActions, useAddErrors } from "../hooks/index";
+import { useAddErrors } from "../hooks/index";
+import useActions from "../hooks/useActions";
+
 import { AppRouter } from "./AppRouter";
 import "./app.scss";
 

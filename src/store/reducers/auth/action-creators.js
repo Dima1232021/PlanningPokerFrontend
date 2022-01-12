@@ -20,14 +20,12 @@ export const authActionCreators = {
     dispatch(authActionCreators.setIsLoadingAction(true));
     fetch(...bodyFetch("/authenticate/login", loginData))
       .then((value) => value.json())
-      .then((data) => {
+      .then((data) =>
         data.logged_in
-          ? dispatch(authActionCreators.setIsAuthAction())
-          : addError(data.error);
-      })
-      .catch(() => {
-        addError("The server does not respond");
-      })
+          ? dispatch(authActionCreators.setIsAuthAction(data.user))
+          : addError(data.error)
+      )
+      .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },
 
@@ -40,9 +38,7 @@ export const authActionCreators = {
           ? dispatch(authActionCreators.setIsAuthAction(data.user))
           : addError(data.error)
       )
-      .catch(() => {
-        addError("The server does not respond");
-      })
+      .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },
 
@@ -50,14 +46,8 @@ export const authActionCreators = {
     dispatch(authActionCreators.setIsLoadingAction(true));
     fetch(...bodyFetch("/authenticate/logged_in"))
       .then((value) => value.json())
-      .then(
-        (data) =>
-          data.logged_in &&
-          dispatch(authActionCreators.setIsAuthAction(data.user))
-      )
-      .catch(() => {
-        addError("The server does not respond");
-      })
+      .then((data) => data.logged_in && dispatch(authActionCreators.setIsAuthAction(data.user)))
+      .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },
 
@@ -65,12 +55,8 @@ export const authActionCreators = {
     dispatch(authActionCreators.setIsLoadingAction(true));
     fetch(...bodyFetch("/authenticate/logout"))
       .then((value) => value.json())
-      .then(
-        (data) => data.logged_out && dispatch(authActionCreators.setLogout())
-      )
-      .catch(() => {
-        addError("The server does not respond");
-      })
+      .then((data) => data.logged_out && dispatch(authActionCreators.setLogout()))
+      .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },
 };

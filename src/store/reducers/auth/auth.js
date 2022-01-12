@@ -5,22 +5,21 @@ export const SET_LOGOUT = "SET_LOGOUT";
 const initialState = {
   isAuth: false,
   isLoading: false,
-  user: { id: null, username: "", email: "" },
+  id: null,
+  username: "",
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_IS_LOADING:
       return { ...state, isLoading: action.payload };
+
     case SET_IS_AUTH:
-      return { ...state, user: action.payload, isAuth: true };
+      const { id, username } = action.payload;
+      return { ...state, id, username, isAuth: true };
 
     case SET_LOGOUT:
-      return {
-        ...state,
-        user: {},
-        isAuth: false,
-      };
+      return { ...state, id: null, username: "", isAuth: false };
 
     default:
       return state;
