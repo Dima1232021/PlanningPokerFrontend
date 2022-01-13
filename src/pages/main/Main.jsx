@@ -1,27 +1,34 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import "./main.scss";
+import { NavLink } from "react-router-dom";
 import Forms from "../../components/main/Forms";
+import "./main.scss";
 
 const MainPage = () => {
   const history = useHistory();
-  const { ownGames, gamesWhichVisitors } = useSelector((state) => state.games);
+  const { ownGames, gamesInvitation } = useSelector((state) => state.games);
 
   function createGame() {
     history.push("/create_game");
   }
 
-  function joinTheGame() {
-    console.log("oneclick joinTheGame");
+  function joinTheGame(url) {
+    console.log("joinTheGame", url);
   }
-  function deleteGame(event) {
+
+  function deleteGame(event, id) {
     event.stopPropagation();
-    console.log("oneclick deleteGame");
+    console.log("deleteGame", id);
   }
-  function copyLink(event) {
+  function deleteGameInvitation(event, id) {
     event.stopPropagation();
-    console.log("oneclick copyLink");
+    console.log("deleteGameInvitation", id);
+  }
+
+  function copyLink(event, url) {
+    event.stopPropagation();
+    navigator.clipboard.writeText(`http://localhost:3001/game/${url}`);
   }
 
   return (
@@ -39,11 +46,12 @@ const MainPage = () => {
 
           <Forms
             title="Games you have been to"
-            listGames={gamesWhichVisitors}
+            listGames={gamesInvitation}
             joinTheGame={joinTheGame}
             copyLink={copyLink}
-            deleteGame={deleteGame}
+            deleteGame={deleteGameInvitation}
           />
+          <NavLink to="/game/asdfasdf">ahsdfkjadsfkasdlhf</NavLink>
         </div>
       </div>
     </div>

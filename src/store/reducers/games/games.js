@@ -5,7 +5,7 @@ export const ADD_OWN_GAME = "ADD_OWN_GAME";
 const initialState = {
   isLoading: false,
   ownGames: [],
-  gamesWhichVisitors: [],
+  gamesInvitation: [],
 };
 
 export const gamesReducer = (state = initialState, action) => {
@@ -14,8 +14,8 @@ export const gamesReducer = (state = initialState, action) => {
       return { ...state, isLoading: action.payload };
 
     case SET_GAMES:
-      const { ownGames, gamesWhichVisitors } = action.payload;
-      return { ...state, ownGames, gamesWhichVisitors };
+      const { ownGames, gamesInvitation } = action.payload;
+      return { ...state, ownGames, gamesInvitation };
 
     case ADD_OWN_GAME:
       return { ...state, ownGames: [...state.ownGames, action.payload] };

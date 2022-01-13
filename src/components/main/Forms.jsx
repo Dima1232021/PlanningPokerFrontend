@@ -15,13 +15,13 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
       </div>
       <ul className="main__list">
         {listGames.map(({ id, name_game, url }) => (
-          <li key={id} className="main__link" onClick={joinTheGame}>
+          <li key={id} className="main__link" onClick={() => joinTheGame(url)}>
             <p className="main__text">{name_game}</p>
             <div className="main__btns">
-              <button className="main__btn" onClick={copyLink}>
+              <button className="main__btn" onClick={(e) => copyLink(e, url)}>
                 <img src={addIcon} className="main__icon" alt="" />
               </button>
-              <button className="main__btn" onClick={deleteGame}>
+              <button className="main__btn" onClick={(e) => deleteGame(e, id)}>
                 <img src={deleteIcon} className="main__icon" alt="" />
               </button>
             </div>
