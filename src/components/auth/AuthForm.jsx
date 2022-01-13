@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useActions, useAddErrors, useInput } from "../../hooks";
 import Form from "./Form";
 
-export default function AuthForm({ auth }) {
+function AuthForm({ auth }) {
   const { loginAction, createAction } = useActions();
   const { addError } = useAddErrors();
   const username = useInput("", { min: 5, max: 16 }, "Username");
@@ -67,3 +67,4 @@ export default function AuthForm({ auth }) {
     );
   }
 }
+export default AuthForm;

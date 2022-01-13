@@ -4,12 +4,13 @@
   &__row {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 15px;
   }
 
   &__block {
-    width: 50%;
+    flex: 0 0 48%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -38,6 +39,14 @@
     background-color: #1c3b55;
     padding: 5px 5px 5px 15px;
     border-radius: 8px;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  &__btns {
+    display: flex;
   }
 
   &__text,
@@ -63,6 +72,18 @@
   }
   @media (max-width: 767.98px) {
     &__block {
+      flex: 0 0 100%;
+    }
+    &__link {
+      flex-wrap: wrap;
+    }
+
+    &__btns {
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    &__text {
       width: 100%;
     }
   }

@@ -22,7 +22,7 @@ export const AppRouter = () => {
         <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/create_game" exact component={CreateGame} />
-          <Redirect to="/create_game" />
+          <Redirect to="/" />
         </Switch>
       ) : (
         <Switch>

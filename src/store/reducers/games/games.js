@@ -1,10 +1,11 @@
 export const SET_GAMES = "SET_GAMES";
 export const SET_IS_LOADING_GAMES = "SET_IS_LOADING_GAMES";
+export const ADD_OWN_GAME = "ADD_OWN_GAME";
 
 const initialState = {
   isLoading: false,
   ownGames: [],
-  invitationsToGames: [],
+  gamesWhichVisitors: [],
 };
 
 export const gamesReducer = (state = initialState, action) => {
@@ -13,8 +14,11 @@ export const gamesReducer = (state = initialState, action) => {
       return { ...state, isLoading: action.payload };
 
     case SET_GAMES:
-      const { ownGames } = action.payload;
-      return { ...state, ownGames };
+      const { ownGames, gamesWhichVisitors } = action.payload;
+      return { ...state, ownGames, gamesWhichVisitors };
+
+    case ADD_OWN_GAME:
+      return { ...state, ownGames: [...state.ownGames, action.payload] };
 
     default:
       return state;
