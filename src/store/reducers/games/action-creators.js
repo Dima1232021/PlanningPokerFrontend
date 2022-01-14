@@ -1,10 +1,14 @@
-import { SET_GAMES, SET_IS_LOADING_GAMES, ADD_OWN_GAME } from "./games";
+import { SET_GAMES, SET_IS_LOADING_GAMES, ADD_OWN_GAME, SET_IS_CREATE_GAME } from "./games";
 import { bodyFetch } from "../../../config";
 
 export const gamesActionCreators = {
   setIsLoadingGamesAction: (loading) => ({
     type: SET_IS_LOADING_GAMES,
     payload: loading,
+  }),
+  setIsCreateGameAction: (isCreateGame) => ({
+    type: SET_IS_CREATE_GAME,
+    payload: isCreateGame,
   }),
 
   setGamesAction: (games) => ({

@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Error from "./error/Error";
-import { useAddErrors } from "../hooks/index";
-import useActions from "../hooks/useActions";
-import { AppRouter } from "./AppRouter";
+import Loader from "./loader/Loader";
+import { useAddErrors, useActions } from "../hooks/index";
+import AppRouter from "./AppRouter";
+import Header from "./header/Header";
+import Footer from "./footer/Footer";
+
 import "./app.scss";
 
 function App() {
   const { addError } = useAddErrors();
   const { loggedInAction, gamesAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
+
   useEffect(() => {
     loggedInAction(addError);
   }, []);
-
-  // console.log("window", window.location);
 
   useEffect(() => {
     isAuth && gamesAction(addError);
@@ -22,10 +24,14 @@ function App() {
 
   return (
     <div className="wrapper">
-      {/* <ListActionCable /> */}
+      <Loader />
       <Error />
 
-      <AppRouter />
+      <Header />
+      <div className="content">
+        <AppRouter />
+      </div>
+      <Footer />
     </div>
   );
 }
