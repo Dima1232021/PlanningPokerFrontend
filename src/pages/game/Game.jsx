@@ -1,19 +1,6 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import React from "react";
 
-export default function Game() {
-  const params = useParams();
-  const history = useHistory();
-  const isAuth = useSelector((state) => state.auth.isAuth);
-
-  localStorage.setItem("url", `/game/${params.game}`);
-
-  useEffect(() => {
-    !isAuth && history.push("/authenticet");
-  }, []);
-
+export default function Game(props) {
   return (
     <div>
       <h1>Game page</h1>

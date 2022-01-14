@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MainPage from "../pages/main/Main";
@@ -7,11 +7,23 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import CreateGame from "../pages/createGame/CreateGame";
 import Game from "../pages/game/Game";
+import { useHistory } from "react-router";
+import { matchPath } from "react-router";
 
 export const AppRouter = () => {
+  const history = useHistory();
   const { isAuth, isLoading } = useSelector((state) => state.auth);
+  const [url, setUrl] = useState("/");
 
-  
+  useEffect(() => {
+    if (matchPath(window.location.pathname, "/game/:game")) {
+      setUrl(window.location.pathname);
+    }
+  }, []);
+  useEffect(() => {
+    !isAuth && history.push("/authenticet");
+    isAuth && history.push(url);
+  }, [isAuth]);
 
   return (
     <>
@@ -25,13 +37,10 @@ export const AppRouter = () => {
           <Route path="/" exact component={MainPage} />
           <Route path="/create_game" exact component={CreateGame} />
           <Route path="/game/:game" exact component={Game} />
-          <Redirect to="/" />
         </Switch>
       ) : (
         <Switch>
           <Route path="/authenticet" exact component={AuthPage} />
-     
-          <Redirect to="/authenticet" />
         </Switch>
       )}
       <Footer />

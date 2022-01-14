@@ -28,6 +28,7 @@ const MainPage = () => {
 
   function copyLink(event, url) {
     event.stopPropagation();
+    // navigator.clipboard.writeText(`http://localhost:3001/authenticet?url=/game/${url}`);
     navigator.clipboard.writeText(`http://localhost:3001/game/${url}`);
   }
 
