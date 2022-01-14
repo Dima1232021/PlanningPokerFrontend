@@ -1,10 +1,16 @@
 export const SET_GAMES = "SET_GAMES";
 export const SET_IS_LOADING_GAMES = "SET_IS_LOADING_GAMES";
+
+export const SET_IS_LOADING_GAME_INVITATION = "SET_IS_LOADING_GAME_INVITATION";
 export const SET_IS_CREATE_GAME = "SET_IS_CREATE_GAME";
 export const ADD_OWN_GAME = "ADD_OWN_GAME";
+export const DELETE_GAME_INVITATION = "DELETE_GAME_INVITATION";
+export const DELETE_GAME = "DELETE_GAME";
 
 const initialState = {
-  isLoading: false,
+  isLoadCreateGame: false,
+  isLoadOwnGames: false,
+  isLoadGamesInv: false,
   isCreateGame: false,
   ownGames: [],
   gamesInvitation: [],
@@ -13,7 +19,7 @@ const initialState = {
 export const gamesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_IS_LOADING_GAMES:
-      return { ...state, isLoading: action.payload };
+      return { ...state, ...action.payload };
 
     case SET_IS_CREATE_GAME:
       return { ...state, isCreateGame: action.payload };
@@ -24,6 +30,14 @@ export const gamesReducer = (state = initialState, action) => {
 
     case ADD_OWN_GAME:
       return { ...state, ownGames: [...state.ownGames, action.payload], isCreateGame: true };
+
+    case DELETE_GAME:
+      console.log("DELETE_GAME", action.payload);
+      const games = state.ownGames.filter((game) => game.id != action.payload);
+      return { ...state, ownGames: games };
+
+    case DELETE_GAME_INVITATION:
+      return { ...state, gamesInvitation: action.payload };
 
     default:
       return state;

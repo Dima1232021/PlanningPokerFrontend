@@ -9,7 +9,7 @@ function BlockMenu({ stories, setStories }) {
   const history = useHistory();
   const { addError } = useAddErrors();
   const { addOwnGameAction, setIsCreateGameAction } = useActions();
-  const { isLoading, isCreateGame } = useSelector((store) => store.games);
+  const { isLoadCreateGame, isCreateGame } = useSelector((store) => store.games);
   const nameGame = useInput("", {}, "Enter a name for the game");
   const [player, setPlayer] = useState(false);
   const [autoFlip, setAutoFlip] = useState(false);
@@ -24,9 +24,9 @@ function BlockMenu({ stories, setStories }) {
     localStorage.clear();
   }
   useEffect(() => {
-    !isLoading && isCreateGame && history.push("/");
+    !isLoadCreateGame && isCreateGame && history.push("/");
     return () => setIsCreateGameAction(false);
-  }, [isLoading]);
+  }, [isLoadCreateGame]);
 
   return (
     <div className="create-game__block">
@@ -60,11 +60,6 @@ function BlockMenu({ stories, setStories }) {
           </NavLink>
           <button className="create-game__btn-create create-game__btn" to="/" onClick={createGame}>
             Create a game
-            {isLoading && (
-              <div className="loader">
-                <div className="loader__row loader__row-min"></div>
-              </div>
-            )}
           </button>
         </div>
       </div>

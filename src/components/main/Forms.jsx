@@ -4,9 +4,7 @@ import addIcon from "../../icones/add.svg";
 import { useSelector } from "react-redux";
 import Loader from "../loader/Loader";
 
-function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame }) {
-  const { isLoading } = useSelector((state) => state.games);
-
+function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame, isLoading }) {
   return (
     <div className="main__block ">
       <div className="main__header">

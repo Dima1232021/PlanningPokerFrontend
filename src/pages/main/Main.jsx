@@ -3,23 +3,29 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
 import Forms from "../../components/main/Forms";
+
+import { useActions, useAddErrors } from "../../hooks";
 import "./main.scss";
 
-const MainPage = () => {
+function MainPage () {
   const history = useHistory();
-  const { ownGames, gamesInvitation } = useSelector((state) => state.games);
+  const { addError } = useAddErrors();
+  const { deleteGameAction } = useActions();
+  const { ownGames, gamesInvitation, isLoadOwnGames, isLoadGamesInv } = useSelector(
+    (state) => state.games
+  );
 
   function createGame() {
     history.push("/create_game");
   }
 
   function joinTheGame(url) {
-    console.log("joinTheGame", url);
+    history.push(`/game/${url}`);
   }
 
   function deleteGame(event, id) {
     event.stopPropagation();
-    console.log("deleteGame", id);
+    deleteGameAction({ gameId: id }, addError);
   }
   function deleteGameInvitation(event, id) {
     event.stopPropagation();
@@ -42,6 +48,7 @@ const MainPage = () => {
             copyLink={copyLink}
             deleteGame={deleteGame}
             createGame={createGame}
+            isLoading={isLoadOwnGames}
           />
 
           <Forms
@@ -50,6 +57,7 @@ const MainPage = () => {
             joinTheGame={joinTheGame}
             copyLink={copyLink}
             deleteGame={deleteGameInvitation}
+            isLoading={isLoadGamesInv}
           />
         </div>
       </div>

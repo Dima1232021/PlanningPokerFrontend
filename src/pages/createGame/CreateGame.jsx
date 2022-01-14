@@ -6,7 +6,7 @@ import Loader from "../../components/loader/Loader";
 import "./createGame.scss";
 
 export default function CreateGame() {
-  const { isLoading } = useSelector((state) => state.games);
+  const { isLoadCreateGame } = useSelector((state) => state.games);
   const [stories, setStories] = useState([]);
 
   return (
@@ -16,7 +16,7 @@ export default function CreateGame() {
           <h2 className="create-game__title">The form of creating the game</h2>
           <BlockCreateStory stories={stories} setStories={setStories} />
           <BlockMenu stories={stories} setStories={setStories} />
-          {isLoading && (
+          {isLoadCreateGame && (
             <div className="loader">
               <Loader />
             </div>

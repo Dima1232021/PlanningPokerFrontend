@@ -10,7 +10,7 @@ import "./app.scss";
 
 function App() {
   const { addError } = useAddErrors();
-  const { loggedInAction, gamesAction } = useActions();
+  const { loggedInAction, getGamesAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    isAuth && gamesAction(addError);
+    isAuth && getGamesAction(addError);
   }, [isAuth]);
 
   return (

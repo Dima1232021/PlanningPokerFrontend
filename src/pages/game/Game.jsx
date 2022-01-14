@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function Game(props) {
+function GamePage(props) {
+  useEffect(() => {
+    console.log(props);
+  }, []);
   return (
     <div>
       <h1>Game page</h1>
     </div>
   );
 }
+
+export default GamePage;
