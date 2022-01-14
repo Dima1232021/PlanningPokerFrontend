@@ -57,3 +57,19 @@ body,
   flex: 1 1 auto;
   display: flex;
 }
+
+.relHid {
+  position: relative;
+  overflow: hidden;
+}
+
+.loader {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.247);
+}

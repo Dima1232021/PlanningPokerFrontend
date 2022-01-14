@@ -1,8 +1,12 @@
 import React from "react";
 import deleteIcon from "../../icones/delete.svg";
 import addIcon from "../../icones/add.svg";
+import { useSelector } from "react-redux";
+import Loader from "../loader/Loader";
 
 function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame }) {
+  const { isLoading } = useSelector((state) => state.games);
+
   return (
     <div className="main__block ">
       <div className="main__header">
@@ -13,6 +17,8 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
           </button>
         )}
       </div>
+      {isLoading && <Loader />}
+
       <ul className="main__list">
         {listGames.map(({ id, name_game, url }) => (
           <li key={id} className="main__link" onClick={() => joinTheGame(url)}>

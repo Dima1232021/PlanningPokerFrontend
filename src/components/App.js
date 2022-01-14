@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Error from "./error/Error";
-import Loader from "./loader/Loader";
 import { useAddErrors, useActions } from "../hooks/index";
 import AppRouter from "./AppRouter";
 import Header from "./header/Header";
@@ -24,7 +23,6 @@ function App() {
 
   return (
     <div className="wrapper">
-      <Loader />
       <Error />
 
       <Header />
