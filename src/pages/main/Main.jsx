@@ -7,10 +7,10 @@ import Forms from "../../components/main/Forms";
 import { useActions, useAddErrors } from "../../hooks";
 import "./main.scss";
 
-function MainPage () {
+function MainPage() {
   const history = useHistory();
   const { addError } = useAddErrors();
-  const { deleteGameAction } = useActions();
+  const { deleteGameAction, joinTheGameAction } = useActions();
   const { ownGames, gamesInvitation, isLoadOwnGames, isLoadGamesInv } = useSelector(
     (state) => state.games
   );
@@ -19,8 +19,9 @@ function MainPage () {
     history.push("/create_game");
   }
 
-  function joinTheGame(url) {
-    history.push(`/game/${url}`);
+  function joinTheGame(url, id) {
+    joinTheGameAction({ gameId: id }, addError);
+    // history.push(`/game/${url}`);
   }
 
   function deleteGame(event, id) {
@@ -63,6 +64,6 @@ function MainPage () {
       </div>
     </div>
   );
-};
+}
 
 export default MainPage;

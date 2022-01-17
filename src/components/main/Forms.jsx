@@ -19,7 +19,7 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
 
       <ul className="main__list">
         {listGames.map(({ id, name_game, url }) => (
-          <li key={id} className="main__link" onClick={() => joinTheGame(url)}>
+          <li key={id} className="main__link" onClick={() => joinTheGame(url, id)}>
             <p className="main__text">{name_game}</p>
             <div className="main__btns">
               <button className="main__btn" onClick={(e) => copyLink(e, url)}>
