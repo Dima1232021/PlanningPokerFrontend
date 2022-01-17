@@ -7,11 +7,13 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 
 import "./app.scss";
+import Loader from "./loader/Loader";
 
 function App() {
   const { addError } = useAddErrors();
   const { loggedInAction, getGamesAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const isLoaderPage = useSelector((state) => state.game.isLoaderPage);
 
   useEffect(() => {
     loggedInAction(addError);
@@ -22,9 +24,10 @@ function App() {
   }, [isAuth]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper relHid">
       <Error />
 
+      {isLoaderPage && <Loader />}
       <Header />
       <div className="content">
         <AppRouter />

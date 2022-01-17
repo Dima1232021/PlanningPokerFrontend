@@ -16,11 +16,7 @@ const AuthPage = (props) => {
 
         <AuthForm auth={auth} />
 
-        {isLoading && (
-          <div className="loader">
-            <Loader />
-          </div>
-        )}
+        {isLoading && <Loader />}
       </div>
     </div>
   );

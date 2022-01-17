@@ -7,6 +7,7 @@ import { useHistory, matchPath } from "react-router";
 const AppRouter = () => {
   const history = useHistory();
   const { isAuth } = useSelector((state) => state.auth);
+  const { urlGame, joinTheGame } = useSelector((state) => state.game);
   const [url, setUrl] = useState("/");
 
   useEffect(() => {
@@ -14,10 +15,15 @@ const AppRouter = () => {
       setUrl(window.location.pathname);
     }
   }, []);
+
   useEffect(() => {
     !isAuth && history.push("/authenticet");
     isAuth && history.push(url);
   }, [isAuth]);
+
+  useEffect(() => {
+    joinTheGame && history.push(`/game/${urlGame}`);
+  }, [joinTheGame]);
 
   return (
     <>

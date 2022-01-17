@@ -19,9 +19,8 @@ function MainPage() {
     history.push("/create_game");
   }
 
-  function joinTheGame(url, id) {
+  function joinToTheGame(url, id) {
     joinTheGameAction({ gameId: id }, addError);
-    // history.push(`/game/${url}`);
   }
 
   function deleteGame(event, id) {
@@ -45,7 +44,7 @@ function MainPage() {
           <Forms
             title="Own games"
             listGames={ownGames}
-            joinTheGame={joinTheGame}
+            joinTheGame={joinToTheGame}
             copyLink={copyLink}
             deleteGame={deleteGame}
             createGame={createGame}
@@ -55,7 +54,7 @@ function MainPage() {
           <Forms
             title="Games you have been to"
             listGames={gamesInvitation}
-            joinTheGame={joinTheGame}
+            joinTheGame={joinToTheGame}
             copyLink={copyLink}
             deleteGame={deleteGameInvitation}
             isLoading={isLoadGamesInv}

@@ -16,11 +16,7 @@ export default function CreateGame() {
           <h2 className="create-game__title">The form of creating the game</h2>
           <BlockCreateStory stories={stories} setStories={setStories} />
           <BlockMenu stories={stories} setStories={setStories} />
-          {isLoadCreateGame && (
-            <div className="loader">
-              <Loader />
-            </div>
-          )}
+          {isLoadCreateGame && <Loader />}
         </div>
       </div>
     </div>

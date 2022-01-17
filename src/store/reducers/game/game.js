@@ -5,19 +5,25 @@ const initialState = {
   isLoaderPage: false,
   joinTheGame: false,
   gameId: null,
-  driving: { id: null, name: "" },
+  driving: { user_id: null, user_name: "" },
+  stories: [],
+  answers: {},
+  nameGame: "",
+  urlGame: "",
+  game: {},
   historyNumber: 0,
   invitedUsers: [],
   onlineUsers: [],
   onlinePlayers: [],
-  stories: [],
-  answers: {},
 };
 
 export const gameReducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_IS_LOADING_GAME:
       console.log("SET_IS_LOADING_GAME", action.payload);
+      return { ...state, ...action.payload };
+
+    case SET_JOIN_THE_GAME:
       return { ...state, ...action.payload };
 
     default:
