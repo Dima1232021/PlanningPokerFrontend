@@ -24,6 +24,7 @@ export const gameReducers = (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case SET_JOIN_THE_GAME:
+      console.log("SET_JOIN_THE_GAME", action.payload);
       return { ...state, ...action.payload };
 
     default:

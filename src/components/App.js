@@ -13,7 +13,7 @@ function App() {
   const { addError } = useAddErrors();
   const { loggedInAction, getGamesAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const isLoaderPage = useSelector((state) => state.game.isLoaderPage);
+  const { isLoaderPage, joinTheGame } = useSelector((state) => state.game);
 
   useEffect(() => {
     loggedInAction(addError);
@@ -23,16 +23,19 @@ function App() {
     isAuth && getGamesAction(addError);
   }, [isAuth]);
 
+  console.log(joinTheGame);
+
   return (
     <div className="wrapper relHid">
       <Error />
 
       {isLoaderPage && <Loader />}
-      <Header />
+      {!joinTheGame && <Header />}
+
       <div className="content">
         <AppRouter />
       </div>
-      <Footer />
+      {!joinTheGame && <Footer />}
     </div>
   );
 }

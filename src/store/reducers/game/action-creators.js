@@ -17,6 +17,6 @@ export const gameActionCreators = {
       .then((value) => value.json())
       .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
       .catch(() => addError("The server does not respond"))
-      .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true })));
+      .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
   },
 };
