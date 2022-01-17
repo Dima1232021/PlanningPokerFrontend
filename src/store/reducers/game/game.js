@@ -1,6 +1,7 @@
 export const SET_IS_LOADING_GAME = "SET_IS_LOADING_GAME";
 export const SET_JOIN_THE_GAME = "JOIN_THE_GAME";
 export const SET_IS_ACTIVE_MENU = "SET_IS_ACTIVE_MENU";
+export const CLEARE_DATA_GAME = "CLEARE_DATA_GAME";
 
 const initialState = {
   isLoaderPage: false,
@@ -29,6 +30,13 @@ export const gameReducers = (state = initialState, action) => {
 
     case SET_IS_ACTIVE_MENU:
       return { ...state, isActiveMenu: action.payload };
+
+    case CLEARE_DATA_GAME:
+      return {
+        ...state,
+        joinTheGame: false,
+        gameId: null,
+      };
 
     default:
       return state;

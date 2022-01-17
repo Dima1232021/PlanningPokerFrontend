@@ -1,4 +1,9 @@
-import { SET_IS_LOADING_GAME, SET_JOIN_THE_GAME, SET_IS_ACTIVE_MENU } from "./game";
+import {
+  SET_IS_LOADING_GAME,
+  SET_JOIN_THE_GAME,
+  SET_IS_ACTIVE_MENU,
+  CLEARE_DATA_GAME,
+} from "./game";
 import { bodyFetch } from "../../../config";
 
 export const gameActionCreators = {
@@ -16,6 +21,10 @@ export const gameActionCreators = {
     payload: isActiveMenu,
   }),
 
+  clearDataGame: () => ({
+    type: CLEARE_DATA_GAME,
+  }),
+
   joinTheGameAction: (gameId, addError) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
     fetch(...bodyFetch("/game/join_the_game", gameId))
@@ -30,6 +39,15 @@ export const gameActionCreators = {
     fetch(...bodyFetch("/game/find_game_you_have_joined"))
       .then((value) => value.json())
       .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
+      .catch(() => addError("The server does not respond"))
+      .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
+  },
+
+  liveTheGameAction: (addError) => (dispatch) => {
+    dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
+    fetch(...bodyFetch("/game/leave_the_game"))
+      .then((value) => value.json())
+      .then((data) => data.leavetTheGame && dispatch(gameActionCreators.clearDataGame()))
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
   },

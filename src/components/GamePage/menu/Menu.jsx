@@ -24,19 +24,16 @@ export default function Menu() {
           </button>
         </div>
 
+
         {/* <div className="menu__row">
-          <MenuStories />
-        </div>
-
-        <div className="menu__row">
           <MenuPlayers />
-        </div>
+        </div> */}
 
-        {game.driving.user_id === userid && (
+        {/* {game.driving.user_id === userid && (
           <div className="menu__row">
             <MenuGame />
           </div>
-        )} */}
+        )}  */}
       </div>
     </div>
   );

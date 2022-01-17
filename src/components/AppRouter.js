@@ -23,6 +23,7 @@ const AppRouter = () => {
 
   useEffect(() => {
     joinTheGame && history.push(`/game/${urlGame}`);
+    isAuth && !joinTheGame && history.push(`/`);
   }, [joinTheGame]);
 
   return (

@@ -1,14 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useActions } from "../../../hooks";
+import { useActions, useAddErrors } from "../../../hooks";
+import edit from "../../../icones/edit.svg";
 
 import "./menuGame.scss";
 
 function MenuGame() {
-  const { setIsActiveMenu } = useActions();
-  const { isActiveMenu } = useSelector((state) => state.game);
+  const { addError } = useAddErrors();
+  const { setIsActiveMenu, liveTheGameAction } = useActions();
+  const { isActiveMenu, stories } = useSelector((state) => state.game);
   function leave() {
-    console.log("leave");
+    liveTheGameAction(addError);
   }
 
   return (
@@ -22,16 +24,34 @@ function MenuGame() {
       <div className="game-menu__column">
         <div className="game-menu__row">
           <h2 className="game-menu__title">Menu</h2>
-          <button onClick={leave} className="menu__btn-leave">
+          <button onClick={leave} className="game-menu__btn-leave">
             Exit game
           </button>
         </div>
 
-        {/* <div className="menu__row">
-          <MenuStories />
+        <div className="game-menu__row">
+          <h3 className="game-menu__title-2">Stories</h3>
+          <ul className="game-menu__list">
+            {stories.map((story, index) => {
+              return (
+                <li key={story.id} className="game-menu__link">
+                  <div className="game-menu__header">
+                    <span>Story {index + 1}</span>
+
+                    <button className="game-menu__btn-edit">
+                      {/* Edit */}
+                      <img src={edit} className="main__icon" alt="" />
+                    </button>
+                  </div>
+
+                  <p className="game-menu__text">{story.body}</p>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
-        <div className="menu__row">
+        {/* <div className="menu__row">
           <MenuPlayers />
         </div>
 

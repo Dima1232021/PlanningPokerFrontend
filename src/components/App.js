@@ -16,6 +16,7 @@ function App() {
   const { loggedInAction, getGamesAction, findGameYouHaveJoinedAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
   const { isLoaderPage, joinTheGame } = useSelector((state) => state.game);
+  
 
   useEffect(() => {
     loggedInAction(addError);
