@@ -1,4 +1,4 @@
-import { SET_IS_LOADING_GAME, SET_JOIN_THE_GAME } from "./game";
+import { SET_IS_LOADING_GAME, SET_JOIN_THE_GAME, SET_IS_ACTIVE_MENU } from "./game";
 import { bodyFetch } from "../../../config";
 
 export const gameActionCreators = {
@@ -11,9 +11,23 @@ export const gameActionCreators = {
     payload: data,
   }),
 
+  setIsActiveMenu: (isActiveMenu) => ({
+    type: SET_IS_ACTIVE_MENU,
+    payload: isActiveMenu,
+  }),
+
   joinTheGameAction: (gameId, addError) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
     fetch(...bodyFetch("/game/join_the_game", gameId))
+      .then((value) => value.json())
+      .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
+      .catch(() => addError("The server does not respond"))
+      .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
+  },
+
+  findGameYouHaveJoinedAction: (addError) => (dispatch) => {
+    dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
+    fetch(...bodyFetch("/game/find_game_you_have_joined"))
       .then((value) => value.json())
       .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
       .catch(() => addError("The server does not respond"))

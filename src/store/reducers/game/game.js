@@ -1,5 +1,6 @@
 export const SET_IS_LOADING_GAME = "SET_IS_LOADING_GAME";
 export const SET_JOIN_THE_GAME = "JOIN_THE_GAME";
+export const SET_IS_ACTIVE_MENU = "SET_IS_ACTIVE_MENU";
 
 const initialState = {
   isLoaderPage: false,
@@ -15,17 +16,19 @@ const initialState = {
   invitedUsers: [],
   onlineUsers: [],
   onlinePlayers: [],
+  isActiveMenu: true,
 };
 
 export const gameReducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_IS_LOADING_GAME:
-      console.log("SET_IS_LOADING_GAME", action.payload);
       return { ...state, ...action.payload };
 
     case SET_JOIN_THE_GAME:
-      console.log("SET_JOIN_THE_GAME", action.payload);
       return { ...state, ...action.payload };
+
+    case SET_IS_ACTIVE_MENU:
+      return { ...state, isActiveMenu: action.payload };
 
     default:
       return state;

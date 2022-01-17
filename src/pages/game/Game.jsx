@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import MenuGame from "../../components/game/menu/MenuGame";
+import "./game.scss";
 
-function GamePage(props) {
-  useEffect(() => {
-    console.log(props);
-  }, []);
+function GamePage() {
+  const { isActiveMenu } = useSelector((state) => state.game);
   return (
-    <div>
-      <h1>Game page</h1>
+    <div className="game">
+      <div className="game__column">a</div>
+      <div className={`game__column ${isActiveMenu && "active"}`}>
+        <MenuGame />
+      </div>
     </div>
   );
 }

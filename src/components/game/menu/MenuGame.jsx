@@ -1,25 +1,28 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useActions } from "../../../hooks";
 
-import "./menu.scss";
+import "./menuGame.scss";
 
-export default function Menu() {
+function MenuGame() {
+  const { setIsActiveMenu } = useActions();
+  const { isActiveMenu } = useSelector((state) => state.game);
   function leave() {
-    // dispatch(leaveTheGame(game.id));
     console.log("leave");
   }
 
   return (
     <div className="game-menu ">
       <div className="game-menu__column">
-        <button className="game-menu__btn-menu" onClick={() => setActive((val) => !val)}>
-          {active ? ">>" : "<<"}
+        <button className="game-menu__btn-menu" onClick={() => setIsActiveMenu(!isActiveMenu)}>
+          {isActiveMenu ? ">>" : "<<"}
         </button>
       </div>
 
       <div className="game-menu__column">
         <div className="game-menu__row">
-          <h2 className="game-menu__title-menu">Menu</h2>
-          <button onClick={leave} className="game-menu__btn-leave">
+          <h2 className="game-menu__title">Menu</h2>
+          <button onClick={leave} className="menu__btn-leave">
             Exit game
           </button>
         </div>
@@ -41,3 +44,5 @@ export default function Menu() {
     </div>
   );
 }
+
+export default MenuGame;

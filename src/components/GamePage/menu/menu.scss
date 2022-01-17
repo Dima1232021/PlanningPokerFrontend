@@ -1,34 +1,5 @@
 .menu {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #ffffff00;
 
-  &__column {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    &:nth-child(1) {
-      width: 30px;
-      justify-content: center;
-      background-color: #ffffff00;
-    }
-    &:nth-child(2) {
-      position: relative;
-      z-index: 3;
-      padding: 5px 10px;
-      width: 290px;
-      background-color: rgb(48, 48, 48);
-      overflow-y: auto;
-    }
-  }
-
-  &__row {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
 
   &__title,
   &__btn-menu {
