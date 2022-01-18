@@ -134,5 +134,10 @@
     &__testarea {
       margin: 0px 0px 10px 0px;
     }
+
+    &__column:last-child {
+      align-items: flex-end;
+      margin-top: 20px;
+    }
   }
 }
