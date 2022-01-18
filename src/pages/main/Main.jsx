@@ -19,8 +19,8 @@ function MainPage() {
     history.push("/create_game");
   }
 
-  function joinToTheGame(url, id) {
-    joinTheGameAction({ gameId: id }, addError);
+  function joinToTheGame(url) {
+    joinTheGameAction({ urlGame: url }, addError);
   }
 
   function deleteGame(event, id) {

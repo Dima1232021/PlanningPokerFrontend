@@ -16,7 +16,7 @@ function MenuGame() {
   return (
     <div className="game-menu ">
       <div className="game-menu__column">
-        <button className="game-menu__btn-menu" onClick={() => setIsActiveMenu(!isActiveMenu)}>
+        <button className="game-menu__btn-menu btn" onClick={() => setIsActiveMenu(!isActiveMenu)}>
           {isActiveMenu ? ">>" : "<<"}
         </button>
       </div>
@@ -24,7 +24,7 @@ function MenuGame() {
       <div className="game-menu__column">
         <div className="game-menu__row">
           <h2 className="game-menu__title">Menu</h2>
-          <button onClick={leave} className="game-menu__btn-leave">
+          <button onClick={leave} className="game-menu__btn-leave btn">
             Exit game
           </button>
         </div>
@@ -38,9 +38,8 @@ function MenuGame() {
                   <div className="game-menu__header">
                     <span>Story {index + 1}</span>
 
-                    <button className="game-menu__btn-edit">
-                      {/* Edit */}
-                      <img src={edit} className="main__icon" alt="" />
+                    <button className="game-menu__btn-edit btn">
+                      <img src={edit} className="icon" alt="" />
                     </button>
                   </div>
 

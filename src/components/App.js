@@ -8,26 +8,23 @@ import Footer from "./footer/Footer";
 
 import "./app.scss";
 import Loader from "./loader/Loader";
-import { useHistory } from "react-router";
 
 function App() {
-  const history = useHistory();
   const { addError } = useAddErrors();
   const { loggedInAction, getGamesAction, findGameYouHaveJoinedAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
   const { isLoaderPage, joinTheGame } = useSelector((state) => state.game);
-  
 
   useEffect(() => {
     loggedInAction(addError);
   }, []);
 
-  useEffect(() => {
-    if (isAuth) {
-      findGameYouHaveJoinedAction(addError);
-      getGamesAction(addError);
-    }
-  }, [isAuth]);
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     findGameYouHaveJoinedAction(addError);
+  //     getGamesAction(addError);
+  //   }
+  // }, [isAuth]);
 
   return (
     <div className="wrapper relHid">

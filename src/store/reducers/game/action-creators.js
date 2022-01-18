@@ -25,9 +25,9 @@ export const gameActionCreators = {
     type: CLEARE_DATA_GAME,
   }),
 
-  joinTheGameAction: (gameId, addError) => (dispatch) => {
+  joinTheGameAction: (urlGame, addError) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
-    fetch(...bodyFetch("/game/join_the_game", gameId))
+    fetch(...bodyFetch("/game/join_the_game", urlGame))
       .then((value) => value.json())
       .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
       .catch(() => addError("The server does not respond"))

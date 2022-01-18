@@ -62,3 +62,13 @@ body,
   position: relative;
   overflow: hidden;
 }
+.btn:hover {
+  position: relative;
+  top: -2px;
+  left: 1px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
