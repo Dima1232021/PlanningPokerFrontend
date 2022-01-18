@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AuthPage, CreateGame, GamePage, MainPage } from "../pages";
 import { useHistory, matchPath } from "react-router";
-import NoMatch from "../store/reducers/noMatch/NoMatch";
+import NoMatch from "../pages/noMatch/NoMatch";
 
 const AppRouter = () => {
   const history = useHistory();

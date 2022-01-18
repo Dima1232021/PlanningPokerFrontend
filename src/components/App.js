@@ -8,6 +8,7 @@ import Footer from "./footer/Footer";
 import Loader from "./loader/Loader";
 
 import "./app.scss";
+import Confirm from "./confirm/Confirm";
 
 function App() {
   const { addError } = useAddErrors();
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="wrapper relHid">
       <Error />
+      <Confirm />
 
       {isLoaderPage && <Loader />}
       {!joinTheGame && <Header />}

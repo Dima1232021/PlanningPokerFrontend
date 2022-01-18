@@ -14,6 +14,9 @@ function MainPage() {
     (state) => state.games
   );
   const [isActiveMessage, setActiveMessage] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [isAnswer, setAnswer] = useState(null);
+  const [isActiveConfirm, setActiveConfirm] = useState(false);
 
   function createGame() {
     history.push("/create_game");
@@ -23,11 +26,12 @@ function MainPage() {
     joinTheGameAction({ urlGame: url }, addError);
   }
 
-  function deleteGame(event, id) {
+  function deleteGame(event, id, name_game) {
     event.stopPropagation();
-    deleteGameAction({ gameId: id }, addError);
+    // confirm(`Видалити гру ${name_game}`) && deleteGameAction({ gameId: id }, addError);
+    console.log(window.confirm(`Видалити гру ? ${name_game}`));
   }
-  function deleteGameInvitation(event, id) {
+  function deleteGameInvitation(event, id, name_game) {
     event.stopPropagation();
     console.log("deleteGameInvitation", id);
   }
