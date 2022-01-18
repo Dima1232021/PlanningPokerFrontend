@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./confirm.scss";
 
 export default function Confirm() {
-  return (
+  const { isActiveConfirm } = useSelector((state) => state.confirmation);
+  return isActiveConfirm ? (
     <div className="confirm">
       <div className="confirm__form">
         <p className="confirm__text">rtxdcfvb</p>
@@ -12,5 +14,5 @@ export default function Confirm() {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }

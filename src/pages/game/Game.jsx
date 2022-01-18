@@ -6,12 +6,12 @@ import "./game.scss";
 
 function GamePage(props) {
   const { addError } = useAddErrors();
-  const { joinTheGameAction } = useActions();
+  const { joinTheGameAction, setIsActivePage } = useActions();
   const { isActiveMenu, joinTheGame, isLoaderPage } = useSelector((state) => state.game);
 
   useEffect(() => {
-    console.log("GamePage", joinTheGame, isLoaderPage);
-    // !joinTheGame && joinTheGameAction({ urlGame: props.match.params.game }, addError);
+    setIsActivePage(true);
+    return () => setIsActivePage(false);
   }, []);
   return (
     <div className="game">

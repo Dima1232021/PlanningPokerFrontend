@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function useConfirmation() {
-  const [isActive, setActive] = useState("false");
-  return { isActive };
+  const startPoll = async (message) => {
+
+  };
+  return { startPoll };
 }

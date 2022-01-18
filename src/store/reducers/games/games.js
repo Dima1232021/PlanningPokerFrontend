@@ -30,7 +30,6 @@ export const gamesReducer = (state = initialState, action) => {
       return { ...state, ownGames: [...state.ownGames, action.payload], isCreateGame: true };
 
     case DELETE_GAME:
-      console.log("DELETE_GAME", action.payload);
       const games = state.ownGames.filter((game) => game.id != action.payload);
       return { ...state, ownGames: games };
 

@@ -3,27 +3,16 @@ import {
   SET_JOIN_THE_GAME,
   SET_IS_ACTIVE_MENU,
   CLEARE_DATA_GAME,
+  SET_IS_ACTIVE_PAGE,
 } from "./game";
 import { bodyFetch } from "../../../config";
 
 export const gameActionCreators = {
-  setIsLoadingGameAction: (loading) => ({
-    type: SET_IS_LOADING_GAME,
-    payload: loading,
-  }),
-  setJoinTheGame: (data) => ({
-    type: SET_JOIN_THE_GAME,
-    payload: data,
-  }),
-
-  setIsActiveMenu: (isActiveMenu) => ({
-    type: SET_IS_ACTIVE_MENU,
-    payload: isActiveMenu,
-  }),
-
-  clearDataGame: () => ({
-    type: CLEARE_DATA_GAME,
-  }),
+  setIsLoadingGameAction: (loading) => ({ type: SET_IS_LOADING_GAME, payload: loading }),
+  setJoinTheGame: (data) => ({ type: SET_JOIN_THE_GAME, payload: data }),
+  setIsActiveMenu: (isActiveMenu) => ({ type: SET_IS_ACTIVE_MENU, payload: isActiveMenu }),
+  clearDataGame: () => ({ type: CLEARE_DATA_GAME }),
+  setIsActivePage: (isActivePage) => ({ type: SET_IS_ACTIVE_PAGE, payload: isActivePage }),
 
   joinTheGameAction: (urlGame, addError) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
