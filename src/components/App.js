@@ -5,9 +5,9 @@ import { useAddErrors, useActions } from "../hooks/index";
 import AppRouter from "./AppRouter";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
+import Loader from "./loader/Loader";
 
 import "./app.scss";
-import Loader from "./loader/Loader";
 
 function App() {
   const { addError } = useAddErrors();
@@ -19,12 +19,12 @@ function App() {
     loggedInAction(addError);
   }, []);
 
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     findGameYouHaveJoinedAction(addError);
-  //     getGamesAction(addError);
-  //   }
-  // }, [isAuth]);
+  useEffect(() => {
+    if (isAuth) {
+      findGameYouHaveJoinedAction(addError);
+      getGamesAction(addError);
+    }
+  }, [isAuth]);
 
   return (
     <div className="wrapper relHid">

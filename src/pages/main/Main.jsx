@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { NavLink } from "react-router-dom";
 import Forms from "../../components/main/Forms";
-
+import Message from "../../components/message/Message";
 import { useActions, useAddErrors } from "../../hooks";
 import "./main.scss";
 
@@ -14,6 +13,7 @@ function MainPage() {
   const { ownGames, gamesInvitation, isLoadOwnGames, isLoadGamesInv } = useSelector(
     (state) => state.games
   );
+  const [isActiveMessage, setActiveMessage] = useState(false);
 
   function createGame() {
     history.push("/create_game");
@@ -34,6 +34,8 @@ function MainPage() {
 
   function copyLink(event, url) {
     event.stopPropagation();
+    setActiveMessage(true);
+    setTimeout(() => setActiveMessage(false), 3000);
     navigator.clipboard.writeText(`http://localhost:3001/game/${url}`);
   }
 
@@ -59,6 +61,8 @@ function MainPage() {
             deleteGame={deleteGameInvitation}
             isLoading={isLoadGamesInv}
           />
+
+          {isActiveMessage && <Message />}
         </div>
       </div>
     </div>
