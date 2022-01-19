@@ -21,9 +21,7 @@ export const authActionCreators = {
     fetch(...bodyFetch("/authenticate/login", loginData))
       .then((value) => value.json())
       .then((data) =>
-        data.logged_in
-          ? dispatch(authActionCreators.setIsAuthAction(data.user))
-          : addError(data.error)
+        data.isAuth ? dispatch(authActionCreators.setIsAuthAction(data)) : addError(data.error)
       )
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
@@ -34,9 +32,7 @@ export const authActionCreators = {
     fetch(...bodyFetch("/authenticate/create", createData))
       .then((value) => value.json())
       .then((data) =>
-        data.logged_in
-          ? dispatch(authActionCreators.setIsAuthAction(data.user))
-          : addError(data.error)
+        data.isAuth ? dispatch(authActionCreators.setIsAuthAction(data)) : addError(data.error)
       )
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
@@ -46,7 +42,7 @@ export const authActionCreators = {
     dispatch(authActionCreators.setIsLoadingAction(true));
     fetch(...bodyFetch("/authenticate/logged_in"))
       .then((value) => value.json())
-      .then((data) => data.logged_in && dispatch(authActionCreators.setIsAuthAction(data.user)))
+      .then((data) => data.isAuth && dispatch(authActionCreators.setIsAuthAction(data)))
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },

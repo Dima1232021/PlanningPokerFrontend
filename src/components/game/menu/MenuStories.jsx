@@ -10,7 +10,8 @@ function MenuStories() {
   const { confirm } = useConfirm();
   const { addError } = useAddErrors();
   const { removeStoryAction, addStoryAction, editStoryAction } = useActions();
-  const { stories, gameId } = useSelector((state) => state.game);
+  const { userId } = useSelector((state) => state.auth);
+  const { stories, gameId, driving } = useSelector((state) => state.game);
   const textStory = useInput("", {}, "Enter history");
   const [activeModalEditStory, setActiveModalEditStory] = useState(false);
   const [activeModalAddStory, setActiveModalAddStory] = useState(false);
@@ -41,19 +42,25 @@ function MenuStories() {
     const isConfirmed = await confirm("Delete history ?");
     isConfirmed && removeStoryAction({ storyId }, addError);
   }
+
+  
+
   return (
     <div className="game-menu__row">
       <div className="game-menu__header">
         <h3 className="game-menu__title-2">Stories</h3>
-        <button
-          className="game-menu__btn-icon btn"
-          onClick={() => {
-            textStory.setValue("");
-            setActiveModalAddStory(true);
-          }}
-        >
-          <img src={addStoryIcon} className="icon" alt="" />
-        </button>
+
+        {driving.user_id == userId && (
+          <button
+            className="game-menu__btn-icon btn"
+            onClick={() => {
+              textStory.setValue("");
+              setActiveModalAddStory(true);
+            }}
+          >
+            <img src={addStoryIcon} className="icon" alt="" />
+          </button>
+        )}
       </div>
 
       <ul className="game-menu__list">
@@ -62,15 +69,22 @@ function MenuStories() {
             <li key={story.id} className="game-menu__link">
               <div className="game-menu__header">
                 <span>Story {index + 1}</span>
-
-                <div>
-                  <button className="game-menu__btn-icon btn" onClick={() => modalEditStory(story)}>
-                    <img src={edit} className="icon" alt="" />
-                  </button>
-                  <button className="game-menu__btn-icon btn" onClick={() => removeStory(story.id)}>
-                    <img src={deleteIcon} className="icon" alt="" />
-                  </button>
-                </div>
+                {driving.user_id == userId && (
+                  <div>
+                    <button
+                      className="game-menu__btn-icon btn"
+                      onClick={() => modalEditStory(story)}
+                    >
+                      <img src={edit} className="icon" alt="" />
+                    </button>
+                    <button
+                      className="game-menu__btn-icon btn"
+                      onClick={() => removeStory(story.id)}
+                    >
+                      <img src={deleteIcon} className="icon" alt="" />
+                    </button>
+                  </div>
+                )}
               </div>
 
               <p className="game-menu__text">{story.body}</p>

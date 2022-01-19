@@ -5,6 +5,7 @@ import {
   SET_IS_CREATE_GAME,
   DELETE_GAME_INVITATION,
   DELETE_GAME,
+  SET_ADD_INVITATION,
 } from "./games";
 import { bodyFetch } from "../../../config";
 
@@ -36,6 +37,11 @@ export const gamesActionCreators = {
   deleteGame: (GameId) => ({
     type: DELETE_GAME,
     payload: GameId,
+  }),
+
+  setAddInvitation: (invitation) => ({
+    type: SET_ADD_INVITATION,
+    payload: invitation,
   }),
 
   getGamesAction: (addError) => (dispatch) => {

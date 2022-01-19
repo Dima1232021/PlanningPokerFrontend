@@ -1,34 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 function ShowUsers() {
+  const { onlineUsers } = useSelector((state) => state.game);
   return (
     <div className="game-menu__row">
       <div className="game-menu__header">
         <h3 className="game-menu__title-2">Users</h3>
       </div>
 
-      {/* <ul className="game-menu__list">
-        {stories.map((story, index) => {
+      <ul className="game-menu__list">
+        {onlineUsers.map((user) => {
           return (
-            <li key={story.id} className="game-menu__link">
-              <div className="game-menu__header">
-                <span>Story {index + 1}</span>
-
-                <div>
-                  <button className="game-menu__btn-icon btn" onClick={() => modalEditStory(story)}>
-                    <img src={edit} className="icon" alt="" />
-                  </button>
-                  <button className="game-menu__btn-icon btn" onClick={() => removeStory(story.id)}>
-                    <img src={deleteIcon} className="icon" alt="" />
-                  </button>
-                </div>
-              </div>
-
-              <p className="game-menu__text">{story.body}</p>
+            <li key={user.id} className="game-menu__link">
+              <p className="game-menu__text">{user.username}</p>
             </li>
           );
         })}
-      </ul> */}
+      </ul>
     </div>
   );
 }

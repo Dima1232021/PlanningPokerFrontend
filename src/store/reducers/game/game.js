@@ -18,10 +18,10 @@ const initialState = {
   urlGame: "",
   game: {},
   historyNumber: 0,
-  invitedUsers: [],
   onlineUsers: [],
   onlinePlayers: [],
   isActiveMenu: true,
+  users: [],
 };
 
 export const gameReducers = (state = initialState, action) => {

@@ -4,6 +4,7 @@ export const SET_IS_CREATE_GAME = "SET_IS_CREATE_GAME";
 export const ADD_OWN_GAME = "ADD_OWN_GAME";
 export const DELETE_GAME_INVITATION = "DELETE_GAME_INVITATION";
 export const DELETE_GAME = "DELETE_GAME";
+export const SET_ADD_INVITATION = "SET_ADD_INVITATION";
 
 const initialState = {
   isLoadCreateGame: false,
@@ -35,6 +36,9 @@ export const gamesReducer = (state = initialState, action) => {
 
     case DELETE_GAME_INVITATION:
       return { ...state, gamesInvitation: action.payload };
+
+    case SET_ADD_INVITATION:
+      return { ...state, gamesInvitation: [...state.gamesInvitation, action.payload] };
 
     default:
       return state;

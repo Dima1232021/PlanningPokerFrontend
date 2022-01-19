@@ -17,10 +17,14 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
       {isLoading && <Loader />}
 
       <ul className="main__list">
-        {listGames.map(({ id, name_game, url }) => (
+        {listGames.map(({ id, name_game, url, drivingName = false }) => (
           <li key={id} className="main__link" onClick={() => joinTheGame(url)}>
-            <p className="main__text">{name_game}</p>
             <div className="main__btns">
+              <div className="main__footer">
+                <h3>Driving:</h3>
+                <p>{drivingName ? drivingName : "You"}</p>
+              </div>
+
               <button className="main__btn" onClick={(e) => copyLink(e, url)}>
                 <img src={addIcon} className="main__icon" alt="" />
               </button>
@@ -28,6 +32,7 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
                 <img src={deleteIcon} className="main__icon" alt="" />
               </button>
             </div>
+            <p className="main__text">{name_game}</p>
           </li>
         ))}
       </ul>
