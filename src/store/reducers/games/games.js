@@ -31,11 +31,12 @@ export const gamesReducer = (state = initialState, action) => {
       return { ...state, ownGames: [...state.ownGames, action.payload], isCreateGame: true };
 
     case DELETE_GAME:
-      const games = state.ownGames.filter((game) => game.id != action.payload);
+      const games = state.ownGames.filter((game) => game.id !== action.payload);
       return { ...state, ownGames: games };
 
     case DELETE_GAME_INVITATION:
-      return { ...state, gamesInvitation: action.payload };
+      const invitation = state.gamesInvitation.filter((game) => game.id !== action.payload);
+      return { ...state, gamesInvitation: invitation };
 
     case SET_ADD_INVITATION:
       return { ...state, gamesInvitation: [...state.gamesInvitation, action.payload] };

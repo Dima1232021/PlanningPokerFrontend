@@ -29,7 +29,7 @@ export const gamesActionCreators = {
     payload: game,
   }),
 
-  deleteGameInvitation: (GameId) => ({
+  deleteInvitation: (GameId) => ({
     type: DELETE_GAME_INVITATION,
     payload: GameId,
   }),
@@ -76,10 +76,20 @@ export const gamesActionCreators = {
     dispatch(gamesActionCreators.setIsLoadGamesAction({ isLoadOwnGames: true }));
     fetch(...bodyFetch("/games/delete_game", GameId))
       .then((value) => value.json())
-      .then((data) => {
-        data.delete_game && dispatch(gamesActionCreators.deleteGame(GameId.gameId));
-      })
+      .then((data) => data.delete_game && dispatch(gamesActionCreators.deleteGame(GameId.gameId)))
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(gamesActionCreators.setIsLoadGamesAction({ isLoadOwnGames: false })));
+  },
+
+  deleteInvitationAction: (GameId, addError) => (dispatch) => {
+    dispatch(gamesActionCreators.setIsLoadGamesAction({ isLoadGamesInv: true }));
+    fetch(...bodyFetch("/game/delete_invited", GameId))
+      .then((value) => value.json())
+      .then(
+        (data) =>
+          data.delete_invited && dispatch(gamesActionCreators.deleteInvitation(GameId.gameId))
+      )
+      .catch(() => addError("The server does not respond"))
+      .finally(() => dispatch(gamesActionCreators.setIsLoadGamesAction({ isLoadGamesInv: false })));
   },
 };

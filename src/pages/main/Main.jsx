@@ -10,7 +10,7 @@ function MainPage() {
   const history = useHistory();
   const { confirm } = useConfirm();
   const { addError } = useAddErrors();
-  const { deleteGameAction, joinTheGameAction } = useActions();
+  const { deleteGameAction, joinTheGameAction, deleteInvitationAction } = useActions();
   const { joinTheGame, urlGame, isLoaderPage } = useSelector((state) => state.game);
   const { ownGames, gamesInvitation, isLoadOwnGames, isLoadGamesInv } = useSelector(
     (state) => state.games
@@ -31,9 +31,15 @@ function MainPage() {
 
     isConfirmed && deleteGameAction({ gameId: id }, addError);
   }
-  function deleteGameInvitation(event, id, name_game) {
+
+  async function deleteInvitation(event, id, name_game) {
     event.stopPropagation();
-    console.log("deleteGameInvitation", id);
+    const isConfirmed = await confirm(
+      `You want to delete the invitation to the game "${name_game}" ?`
+    );
+
+    isConfirmed && deleteInvitationAction({ gameId: id }, addError);
+    // console.log("deleteGameInvitation", id);
   }
 
   function copyLink(event, url) {
@@ -64,7 +70,7 @@ function MainPage() {
             listGames={gamesInvitation}
             joinTheGame={joinToTheGame}
             copyLink={copyLink}
-            deleteGame={deleteGameInvitation}
+            deleteGame={deleteInvitation}
             isLoading={isLoadGamesInv}
           />
 

@@ -14,7 +14,6 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
           </button>
         )}
       </div>
-      {isLoading && <Loader />}
 
       <ul className="main__list">
         {listGames.map(({ id, name_game, url, drivingName = false }) => (
@@ -36,6 +35,8 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
           </li>
         ))}
       </ul>
+
+      {isLoading && <Loader />}
     </div>
   );
 }
