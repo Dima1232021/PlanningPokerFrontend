@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useActions, useAddErrors, useConfirm } from "../../../hooks";
-import edit from "../../../icones/edit.svg";
+import Stories from "./Stories";
 
 import "./menuGame.scss";
 
@@ -37,26 +37,7 @@ function MenuGame() {
           </button>
         </div>
 
-        <div className="game-menu__row">
-          <h3 className="game-menu__title-2">Stories</h3>
-          <ul className="game-menu__list">
-            {stories.map((story, index) => {
-              return (
-                <li key={story.id} className="game-menu__link">
-                  <div className="game-menu__header">
-                    <span>Story {index + 1}</span>
-
-                    <button className="game-menu__btn-edit btn">
-                      <img src={edit} className="icon" alt="" />
-                    </button>
-                  </div>
-
-                  <p className="game-menu__text">{story.body}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <Stories />
 
         {/* <div className="menu__row">
           <MenuPlayers />

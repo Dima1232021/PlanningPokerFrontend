@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import StoriesBlock from "../../../storiesBlock/StoriesBlock";
 import { useInput } from "../../../../hooks/useInput";
-import ModelStory from "../ModelStory";
+import ModelStory from "../../../game/menu/ModelStory";
 import {
   editHistory,
   addHistory,

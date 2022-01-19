@@ -3,11 +3,13 @@ export const SET_JOIN_THE_GAME = "JOIN_THE_GAME";
 export const SET_IS_ACTIVE_MENU = "SET_IS_ACTIVE_MENU";
 export const CLEARE_DATA_GAME = "CLEARE_DATA_GAME";
 export const SET_IS_ACTIVE_PAGE = "SET_IS_ACTIVE_PAGE";
+export const SET_IS_DATA_GAME = "SET_IS_DATA_GAME";
 
 const initialState = {
   gameYouHaveJoined: { urlGame: "", nameGame: "", joinTheGame: null },
   isActivePage: false,
   isLoaderPage: false,
+  isLoaderStory: false,
   joinTheGame: false,
   gameId: null,
   driving: { user_id: null, user_name: "" },
@@ -38,12 +40,11 @@ export const gameReducers = (state = initialState, action) => {
     case SET_IS_ACTIVE_PAGE:
       return { ...state, isActivePage: action.payload };
 
+    case SET_IS_DATA_GAME:
+      return { ...state, ...action.payload };
+
     case CLEARE_DATA_GAME:
-      return {
-        ...state,
-        joinTheGame: false,
-        gameId: null,
-      };
+      return { ...initialState };
 
     default:
       return state;

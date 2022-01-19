@@ -4,6 +4,7 @@ import {
   SET_IS_ACTIVE_MENU,
   CLEARE_DATA_GAME,
   SET_IS_ACTIVE_PAGE,
+  SET_IS_DATA_GAME,
 } from "./game";
 import { bodyFetch } from "../../../config";
 
@@ -13,6 +14,7 @@ export const gameActionCreators = {
   setIsActiveMenu: (isActiveMenu) => ({ type: SET_IS_ACTIVE_MENU, payload: isActiveMenu }),
   clearDataGame: () => ({ type: CLEARE_DATA_GAME }),
   setIsActivePage: (isActivePage) => ({ type: SET_IS_ACTIVE_PAGE, payload: isActivePage }),
+  setIsDataGame: (data) => ({ type: SET_IS_DATA_GAME, payload: data }),
 
   joinTheGameAction: (urlGame, addError) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
@@ -39,5 +41,11 @@ export const gameActionCreators = {
       .then((data) => data.leavetTheGame && dispatch(gameActionCreators.clearDataGame()))
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
+  },
+
+  removeStoryAction: (storyId, addError) => () => {
+    fetch(...bodyFetch("/game/remove_story", storyId)).catch(() =>
+      addError("The server does not respond")
+    );
   },
 };

@@ -1,21 +1,13 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
 import { useSelector } from "react-redux";
-import {
-  changeGameYouHaveJoinedAction,
-  addGameInvitationAction,
-  deleteInvitationAction,
-  addAnswersAction,
-  addStoryAction,
-  changeInvitedPlayersAction,
-  changePlayersOnlineAction,
-} from "../reducers/gamesReducer";
-import { addUserAction } from "../reducers/usersReducer";
+import { useActions } from "../hooks";
 
 const ListActionCable = () => {
+  const { setIsDataGame } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const userId = useSelector((state) => state.user.user.id);
-  const gameId = useSelector((state) => state.games.gameId);
+  const userId = useSelector((state) => state.auth.id);
+  const gameId = useSelector((state) => state.game.gameId);
 
   if (isAuth) {
     return (
@@ -69,6 +61,7 @@ const ListActionCable = () => {
           channel={{ channel: "StoriesChannel", gameId }}
           onReceived={(data) => {
             console.log(data);
+            setIsDataGame(data);
             // dispatch(addStoryAction(data));
           }}
         />
