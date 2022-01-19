@@ -16,11 +16,15 @@ const AppRouter = () => {
   const [url, setUrl] = useState("/");
 
   useEffect(() => {
-    setUrl(window.location.pathname);
-    !isAuth && history.push("/authenticet");
-  }, []);
+    const pathName = window.location.pathname;
 
-  useEffect(() => isAuth && history.push(url), [isAuth]);
+    if (isAuth) {
+      history.push(url);
+    } else {
+      history.push("/authenticet");
+      !matchPath(pathName, "/authenticet") && setUrl(pathName);
+    }
+  }, [isAuth]);
 
   useEffect(() => {
     if (gameYouHaveJoined.joinTheGame) {

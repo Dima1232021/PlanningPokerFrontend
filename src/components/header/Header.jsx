@@ -1,15 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useActions, useAddErrors } from "../../hooks/index";
+import { useActions, useAddErrors, useConfirm } from "../../hooks";
 import "./header.scss";
 
 export default function Header() {
+  const { confirm } = useConfirm();
   const { addError } = useAddErrors();
   const { logoutAction } = useActions();
   const { isAuth, username } = useSelector((state) => state.auth);
 
-  function authLogoUt() {
-    logoutAction(addError);
+  async function authLogoUt() {
+    const isConfirmed = await confirm(`Are you sure you want to sign out?`);
+    if (isConfirmed) {
+      logoutAction(addError);
+    }
   }
 
   return (
