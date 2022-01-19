@@ -29,7 +29,7 @@ export const gameReducers = (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case SET_JOIN_THE_GAME:
-      // console.log("gameReducers", action.payload);
+      console.log("gameReducers", action.payload);
       return { ...state, ...action.payload };
 
     case SET_IS_ACTIVE_MENU:

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Forms from "../../components/main/Forms";
@@ -9,9 +9,9 @@ import "./main.scss";
 function MainPage() {
   const history = useHistory();
   const { confirm } = useConfirm();
-
   const { addError } = useAddErrors();
   const { deleteGameAction, joinTheGameAction } = useActions();
+  const { joinTheGame, urlGame, isLoaderPage } = useSelector((state) => state.game);
   const { ownGames, gamesInvitation, isLoadOwnGames, isLoadGamesInv } = useSelector(
     (state) => state.games
   );
@@ -27,11 +27,9 @@ function MainPage() {
 
   async function deleteGame(event, id, name_game) {
     event.stopPropagation();
-    const isConfirmed = await confirm(`Ви точно бажаєте видалити гру "${name_game}" ?`);
+    const isConfirmed = await confirm(`You want to delete the game "${name_game}" ?`);
 
-    if (isConfirmed) {
-      deleteGameAction({ gameId: id }, addError);
-    }
+    isConfirmed && deleteGameAction({ gameId: id }, addError);
   }
   function deleteGameInvitation(event, id, name_game) {
     event.stopPropagation();
@@ -44,6 +42,8 @@ function MainPage() {
     setTimeout(() => setActiveMessage(false), 3000);
     navigator.clipboard.writeText(`http://localhost:3001/game/${url}`);
   }
+
+  useEffect(() => !isLoaderPage && joinTheGame && history.push(`/game/${urlGame}`), [isLoaderPage]);
 
   return (
     <div className="main">

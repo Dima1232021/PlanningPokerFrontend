@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { AuthPage, CreateGame, GamePage, MainPage } from "../pages";
 import { useHistory, matchPath } from "react-router";
 import NoMatch from "../pages/noMatch/NoMatch";
-import { useActions, useAddErrors } from "../hooks";
+import { useActions, useAddErrors, useConfirm } from "../hooks";
 
 const AppRouter = () => {
+  const { confirm } = useConfirm();
   const history = useHistory();
   const { joinTheGameAction, liveTheGameAction } = useActions();
   const { addError } = useAddErrors();
@@ -17,7 +18,6 @@ const AppRouter = () => {
 
   useEffect(() => {
     const pathName = window.location.pathname;
-
     if (isAuth) {
       history.push(url);
     } else {
@@ -26,24 +26,24 @@ const AppRouter = () => {
     }
   }, [isAuth]);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (gameYouHaveJoined.joinTheGame) {
       if (gameYouHaveJoined.urlGame == url.substr(6, 30)) {
-        return history.push(url);
+        return joinTheGameAction({ urlGame: gameYouHaveJoined.urlGame }, addError);
       } else {
-        if (
-          window.confirm(`Перейти до гри "${gameYouHaveJoined.nameGame}" з якої ви не вийшли  ?`)
-        ) {
-          joinTheGameAction({ urlGame: gameYouHaveJoined.urlGame }, addError);
-          return history.push(`game/${gameYouHaveJoined.urlGame}`);
+        const isConfirmed = await confirm(
+          `Go to the game "${gameYouHaveJoined.nameGame}" from which you did not leave?`
+        );
+        if (isConfirmed) {
+          history.push(`/game/${gameYouHaveJoined.urlGame}`);
+          return joinTheGameAction({ urlGame: gameYouHaveJoined.urlGame }, addError);
         } else {
           liveTheGameAction(addError);
-          return history.push(url);
         }
       }
     }
 
-    isActivePage && joinTheGameAction({ urlGame: url.substr(6, 30) }, addError);
+    return isActivePage && joinTheGameAction({ urlGame: url.substr(6, 30) }, addError);
   }, [gameYouHaveJoined]);
 
   return (

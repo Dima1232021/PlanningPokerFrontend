@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useActions, useAddErrors } from "../../../hooks";
+import { useHistory } from "react-router";
+import { useActions, useAddErrors, useConfirm } from "../../../hooks";
 import edit from "../../../icones/edit.svg";
 
 import "./menuGame.scss";
 
 function MenuGame() {
+  const history = useHistory();
+  const { confirm } = useConfirm();
   const { addError } = useAddErrors();
   const { setIsActiveMenu, liveTheGameAction } = useActions();
   const { isActiveMenu, stories } = useSelector((state) => state.game);
-  function leave() {
-    liveTheGameAction(addError);
+
+  async function leave() {
+    const isConfirmed = await confirm("Do you want to leave the game ?");
+    if (isConfirmed) {
+      liveTheGameAction(addError);
+      history.push("/");
+    }
   }
 
   return (
