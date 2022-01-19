@@ -6,17 +6,14 @@ import AppRouter from "./AppRouter";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Loader from "./loader/Loader";
-import { matchPath } from "react-router";
-
+import ConfirmDialog from "./confirmDialog/ConfirmDialog";
 import "./app.scss";
-import Confirm from "./confirm/Confirm";
 
 function App() {
   const { addError } = useAddErrors();
   const { loggedInAction, getGamesAction, findGameYouHaveJoinedAction } = useActions();
   const isAuth = useSelector((state) => state.auth.isAuth);
   const { isLoaderPage, isActivePage } = useSelector((state) => state.game);
-  const path = window.location.pathname;
 
   useEffect(() => {
     loggedInAction(addError);
@@ -31,8 +28,8 @@ function App() {
 
   return (
     <div className="wrapper relHid">
+      <ConfirmDialog />
       <Error />
-      <Confirm />
 
       {isLoaderPage && <Loader />}
 

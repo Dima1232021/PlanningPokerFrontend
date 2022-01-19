@@ -1,0 +1,44 @@
+.confirm {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+
+  &__dialog {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px;
+    background-color: #1c3b55;
+    width: 500px;
+    border: 5px solid #265074;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  &__btn {
+    padding: 6px 15px;
+    margin: 0 10px;
+    border-radius: 5px;
+    background-color: #3a80ba;
+    font-weight: bold;
+    &:last-child {
+      background-color: rgba(255, 38, 0, 0.829);
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    &__dialog {
+      width: 300px;
+    }
+  }
+}

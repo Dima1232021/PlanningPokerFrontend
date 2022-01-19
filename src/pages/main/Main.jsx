@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Forms from "../../components/main/Forms";
 import Message from "../../components/message/Message";
-import { useActions, useAddErrors, useConfirmation } from "../../hooks";
+import { useActions, useAddErrors, useConfirm } from "../../hooks";
 import "./main.scss";
 
 function MainPage() {
   const history = useHistory();
-  const { startPoll } = useConfirmation();
+  const { confirm } = useConfirm();
+
   const { addError } = useAddErrors();
   const { deleteGameAction, joinTheGameAction } = useActions();
   const { ownGames, gamesInvitation, isLoadOwnGames, isLoadGamesInv } = useSelector(
@@ -24,10 +25,13 @@ function MainPage() {
     joinTheGameAction({ urlGame: url }, addError);
   }
 
-  function deleteGame(event, id, name_game) {
+  async function deleteGame(event, id, name_game) {
     event.stopPropagation();
-    window.confirm(`Видалити гру ${name_game}`) && deleteGameAction({ gameId: id }, addError);
-    // window.confirm(`Видалити гру ${name_game}`) && console.log("MainPage");
+    const isConfirmed = await confirm(`Ви точно бажаєте видалити гру "${name_game}" ?`);
+
+    if (isConfirmed) {
+      deleteGameAction({ gameId: id }, addError);
+    }
   }
   function deleteGameInvitation(event, id, name_game) {
     event.stopPropagation();
