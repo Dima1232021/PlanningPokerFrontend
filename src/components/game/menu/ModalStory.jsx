@@ -1,32 +1,25 @@
 import React from "react";
 import Modal from "../../Modal/Modal";
 
-export default function ModelStory({
-  title,
-  textStory,
-  active,
-  setActive,
-  setValue,
-  nameBtn,
-}) {
+export default function ModalStory({ title, textStory, active, setActive, setValue, nameBtn }) {
   return (
     <Modal active={active} setActive={setActive}>
-      <div className="menu__modal">
-        <h2 className="menu__modal-title">{title}</h2>
+      <div className="game-menu__modal">
+        <h2 className="game-menu__title">{title}</h2>
         <textarea
-          className="menu__textarea"
+          className="game-menu__textarea"
           value={textStory.value}
           onChange={(e) => textStory.onChange(e)}
           placeholder="Enter history"
           onBlur={textStory.outputError}
         ></textarea>
 
-        <button className="menu__btn-leave" onClick={() => setActive(false)}>
+        <button className="game-menu__btn-leave" onClick={() => setActive(false)}>
           Cancel
         </button>
 
         <button
-          className="menu__btn-сhange"
+          className="game-menu__btn-modal"
           onClick={() => {
             if (textStory.isValid) {
               setActive(false);

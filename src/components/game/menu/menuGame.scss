@@ -48,7 +48,8 @@
     border-radius: 8px 0px 0px 8px;
   }
 
-  &__btn-leave {
+  &__btn-leave,
+  &__btn-modal {
     font-size: 16px;
     line-height: 20px;
     font-weight: bold;
@@ -58,17 +59,11 @@
     background-color: rgba(255, 38, 0, 0.829);
   }
 
-  &__list {
+  &__list,
+  &__textarea {
     width: 100%;
+    border-radius: 8px;
   }
-
-  // &__header {
-  //   width: 100%;
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   background-color: chocolate;
-  // }
 
   &__title-2,
   &__link {
@@ -78,7 +73,8 @@
     margin-top: 10px;
   }
 
-  &__title-2 {
+  &__title-2,
+  &__textarea {
     font-size: 16px;
     line-height: 18px;
   }
@@ -103,5 +99,26 @@
   &__btn-icon {
     padding: 2px 10px;
     background-color: rgba(0, 0, 0, 0);
+  }
+
+  &__modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    h2 {
+      width: 100%;
+    }
+  }
+  &__textarea {
+    margin: 30px 0px 15px;
+    resize: none;
+    padding: 10px 20px;
+    height: 300px;
+  }
+
+  &__btn-modal {
+    padding: 8px 20px;
+    background: #3a80ba;
+    margin-left: 15px;
   }
 }

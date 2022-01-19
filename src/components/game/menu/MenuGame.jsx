@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useActions, useAddErrors, useConfirm } from "../../../hooks";
@@ -11,7 +11,7 @@ function MenuGame() {
   const { confirm } = useConfirm();
   const { addError } = useAddErrors();
   const { setIsActiveMenu, liveTheGameAction } = useActions();
-  const { isActiveMenu, stories } = useSelector((state) => state.game);
+  const { isActiveMenu } = useSelector((state) => state.game);
 
   async function leave() {
     const isConfirmed = await confirm("Do you want to leave the game ?");
