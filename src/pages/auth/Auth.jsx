@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MenuBlock from "../../components/menuBlock/MenuBlock";
+import MenuBlock from "../../components/auth/MenuBlock";
 import AuthForm from "../../components/auth/AuthForm";
 import Loader from "../../components/loader/Loader";
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ const AuthPage = (props) => {
   return (
     <div className="auth">
       <div className="auth__form relHid">
-        <MenuBlock btn1="Log in" btn2="Sign up" value={auth} setValue={setAuth} />
+        <MenuBlock value={auth} setValue={setAuth} />
 
         <AuthForm auth={auth} />
 

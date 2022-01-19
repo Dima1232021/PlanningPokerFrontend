@@ -1,7 +1,6 @@
 import React from "react";
 import deleteIcon from "../../icones/delete.svg";
 import addIcon from "../../icones/add.svg";
-import { useSelector } from "react-redux";
 import Loader from "../loader/Loader";
 
 function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame, isLoading }) {
