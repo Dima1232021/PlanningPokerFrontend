@@ -79,7 +79,8 @@
   }
 
   &__title-2,
-  &__textarea {
+  &__textarea,
+  &__name {
     font-size: 16px;
     line-height: 18px;
   }
@@ -128,5 +129,21 @@
     padding: 8px 20px;
     background: #3a80ba;
     margin-left: 15px;
+  }
+
+  &__switch {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    background-color: #1c3b55;
+    border-radius: 8px;
+    padding: 5px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 }

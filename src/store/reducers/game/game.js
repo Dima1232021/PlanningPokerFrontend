@@ -16,12 +16,11 @@ const initialState = {
   answers: {},
   nameGame: "",
   urlGame: "",
-  game: {},
+  game: { flipСardsAutomatically: false, historyPoll: {}, idPlayersResponded: [], poll: false },
   historyNumber: 0,
   onlineUsers: [],
   onlinePlayers: [],
   isActiveMenu: true,
-  users: [],
 };
 
 export const gameReducers = (state = initialState, action) => {

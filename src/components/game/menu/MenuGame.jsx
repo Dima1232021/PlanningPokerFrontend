@@ -6,6 +6,7 @@ import MenuStories from "./MenuStories";
 import Message from "../../message/Message";
 import ShowUsers from "./ShowUsers";
 import addIcon from "../../../icones/add.svg";
+import SetingsGame from "./SetingsGame";
 
 import "./menuGame.scss";
 
@@ -14,7 +15,8 @@ function MenuGame() {
   const { confirm } = useConfirm();
   const { addError } = useAddErrors();
   const { setIsActiveMenu, liveTheGameAction } = useActions();
-  const { isActiveMenu, urlGame } = useSelector((state) => state.game);
+  const { userId } = useSelector((state) => state.auth);
+  const { isActiveMenu, urlGame, driving } = useSelector((state) => state.game);
   const [isActiveMessage, setActiveMessage] = useState(false);
 
   async function leave() {
@@ -54,15 +56,7 @@ function MenuGame() {
 
         <ShowUsers />
 
-        {/* <div className="menu__row">
-          <MenuPlayers />
-        </div>
-
-        {game.driving.user_id === userid && (
-          <div className="menu__row">
-            <MenuGame />
-          </div>
-        )} */}
+        {driving.user_id === userId && <SetingsGame />}
       </div>
       {isActiveMessage && <Message />}
     </div>
