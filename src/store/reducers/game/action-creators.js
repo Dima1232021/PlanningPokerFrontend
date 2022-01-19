@@ -60,4 +60,15 @@ export const gameActionCreators = {
       addError("The server does not respond")
     );
   },
+
+  changeDrivingSetingsAction: (gameId, addError) => () => {
+    fetch(...bodyFetch("/game/change_driving_Setings", gameId)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+  changeGameSettingsAction: (gameId, addError) => () => {
+    fetch(...bodyFetch("/game/change_game_settings", gameId)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
 };

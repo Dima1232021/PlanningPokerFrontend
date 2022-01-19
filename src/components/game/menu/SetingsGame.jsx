@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import useActions from "../../../hooks/useActions";
+import useAddErrors from "../../../hooks/useAddErrors";
 import Switch from "../../switch/Switch";
 
 export default function SetingsGame() {
-  const { game, onlinePlayers } = useSelector((state) => state.game);
+  const { addError } = useAddErrors();
+  const { changeDrivingSetingsAction, changeGameSettingsAction } = useActions();
+  const { game, onlinePlayers, gameId } = useSelector((state) => state.game);
   const { userId } = useSelector((state) => state.auth);
   const [player, setPlayer] = useState(false);
 
@@ -11,12 +15,12 @@ export default function SetingsGame() {
     setPlayer(!!onlinePlayers.find((user) => user.id == userId));
   }, [onlinePlayers]);
 
-  function changePlayerSettings() {
-    console.log("changePlayerSettings");
+  function changeDrivingSetings() {
+    changeDrivingSetingsAction({ gameId }, addError);
   }
 
-  function changesettingsCardFlip() {
-    console.log("changesettingsCardFlip");
+  function changeGameSettings() {
+    changeGameSettingsAction({ gameId }, addError);
   }
   return (
     <div className="game-menu__row">
@@ -26,11 +30,11 @@ export default function SetingsGame() {
 
       <div className="game-menu__switch">
         <p className="game-menu__name">Take part in the game</p>
-        <Switch value={player} setValue={changePlayerSettings} />
+        <Switch value={player} setValue={changeDrivingSetings} />
       </div>
       <div className="game-menu__switch">
         <p className="game-menu__name">Flip cards automatically</p>
-        <Switch value={game.flipСardsAutomatically} setValue={changesettingsCardFlip} />
+        <Switch value={game.flipСardsAutomatically} setValue={changeGameSettings} />
       </div>
     </div>
   );
