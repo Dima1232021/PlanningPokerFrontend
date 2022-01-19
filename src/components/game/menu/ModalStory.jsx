@@ -22,7 +22,6 @@ export default function ModalStory({ title, textStory, active, setActive, setVal
           className="game-menu__btn-modal"
           onClick={() => {
             if (textStory.isValid) {
-              setActive(false);
               return setValue();
             }
             return textStory.outputError();

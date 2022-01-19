@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useActions, useAddErrors, useConfirm } from "../../../hooks";
-import Stories from "./Stories";
+import MenuStories from "./MenuStories";
 
 import "./menuGame.scss";
+import ShowUsers from "./ShowUsers";
 
 function MenuGame() {
   const history = useHistory();
@@ -37,7 +38,9 @@ function MenuGame() {
           </button>
         </div>
 
-        <Stories />
+        <MenuStories />
+
+        <ShowUsers />
 
         {/* <div className="menu__row">
           <MenuPlayers />

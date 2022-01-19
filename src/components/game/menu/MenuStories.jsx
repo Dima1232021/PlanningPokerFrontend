@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import addStoryIcon from "../../../icones/addStory.svg";
 import edit from "../../../icones/edit.svg";
 import deleteIcon from "../../../icones/delete.svg";
-import { useActions, useAddErrors, useInput } from "../../../hooks";
+import { useActions, useAddErrors, useConfirm, useInput } from "../../../hooks";
 import ModalStory from "./ModalStory";
 
-function Stories() {
+function MenuStories() {
+  const { confirm } = useConfirm();
   const { addError } = useAddErrors();
-  const { removeStoryAction } = useActions();
-  const { stories } = useSelector((state) => state.game);
+  const { removeStoryAction, addStoryAction, editStoryAction } = useActions();
+  const { stories, gameId } = useSelector((state) => state.game);
   const textStory = useInput("", {}, "Enter history");
   const [activeModalEditStory, setActiveModalEditStory] = useState(false);
   const [activeModalAddStory, setActiveModalAddStory] = useState(false);
@@ -22,16 +23,23 @@ function Stories() {
   }
 
   function editStory() {
-    console.log("editStory", textStory.value, storyId);
+    const story = stories.find(({ id }) => id === storyId);
+    if (story.body === textStory.value) {
+      addError("You haven't changed the story!");
+    } else {
+      editStoryAction({ gameId, storyId, body: textStory.value }, addError);
+      setActiveModalEditStory(false);
+    }
   }
 
   function addStory() {
-    console.log("addStory", textStory.value);
+    addStoryAction({ gameId, body: textStory.value }, addError);
+    setActiveModalAddStory(false);
   }
 
-  function removeStory(storyId) {
-    removeStoryAction({ storyId }, addError);
-    console.log("removeStory", storyId);
+  async function removeStory(storyId) {
+    const isConfirmed = await confirm("Delete history ?");
+    isConfirmed && removeStoryAction({ storyId }, addError);
   }
   return (
     <div className="game-menu__row">
@@ -91,4 +99,4 @@ function Stories() {
   );
 }
 
-export default Stories;
+export default MenuStories;

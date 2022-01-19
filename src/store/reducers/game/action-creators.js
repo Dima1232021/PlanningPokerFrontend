@@ -43,6 +43,18 @@ export const gameActionCreators = {
       .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
   },
 
+  addStoryAction: (dataNewStory, addError) => () => {
+    fetch(...bodyFetch("/game/add_history", dataNewStory)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
+  editStoryAction: (dataNewStory, addError) => () => {
+    fetch(...bodyFetch("/game/edit_history", dataNewStory)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
   removeStoryAction: (storyId, addError) => () => {
     fetch(...bodyFetch("/game/remove_story", storyId)).catch(() =>
       addError("The server does not respond")

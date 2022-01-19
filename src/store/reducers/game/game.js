@@ -6,10 +6,9 @@ export const SET_IS_ACTIVE_PAGE = "SET_IS_ACTIVE_PAGE";
 export const SET_IS_DATA_GAME = "SET_IS_DATA_GAME";
 
 const initialState = {
-  gameYouHaveJoined: { urlGame: "", nameGame: "", joinTheGame: null },
+  gameYouHaveJoined: { urlGame: "", nameGame: "", joinTheGame: false },
   isActivePage: false,
   isLoaderPage: false,
-  isLoaderStory: false,
   joinTheGame: false,
   gameId: null,
   driving: { user_id: null, user_name: "" },
