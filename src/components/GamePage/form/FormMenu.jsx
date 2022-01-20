@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { startAPoll, finishAPoll, resetAPoll } from "../../../../actions/Game";
-import { useAddErrors } from "../../../../hooks/useAddErrors";
+import { startAPoll, finishAPoll, resetAPoll } from "../../../actions/Game";
+import { useAddErrors } from "../../../hooks/useAddErrors";
 
 import "./formMenu.scss";
 

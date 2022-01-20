@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import "./formGame.scss";
 import FormMenu from "./FormMenu";
+import FormStory from "./FormStory";
 import HeaderForm from "./HeaderForm";
 export default function () {
   const { userId } = useSelector((state) => state.auth);
@@ -11,11 +12,9 @@ export default function () {
     <div className={`form-game ${isActiveMenu && "active"}`}>
       <HeaderForm />
 
-      {driving.user_id === userId && (
-        <div className="form__row">
-          <FormMenu />
-        </div>
-      )}
+      {driving.user_id === userId && <FormMenu />}
+
+      <FormStory />
 
       {/* <div className="form__row">
         <FormStory />

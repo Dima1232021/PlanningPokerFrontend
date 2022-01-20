@@ -15,6 +15,7 @@ export const gameActionCreators = {
   clearDataGame: () => ({ type: CLEARE_DATA_GAME }),
   setIsActivePage: (isActivePage) => ({ type: SET_IS_ACTIVE_PAGE, payload: isActivePage }),
   setIsDataGame: (data) => ({ type: SET_IS_DATA_GAME, payload: data }),
+  changeHistoryNumber: (num) => ({ type: SET_IS_DATA_GAME, payload: num }),
 
   joinTheGameAction: (urlGame, addError) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));

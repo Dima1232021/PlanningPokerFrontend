@@ -4,29 +4,11 @@ export default function FormMenu() {
   return (
     <div className="form-game__row">
       <div className="form-game__menu">
-        <button
-        //   onClick={startPull}
+        <button className="form-game__btn">Start Poll</button>
 
-        //   disabled={game.poll || checkAnswer || !stories.length}
-        >
-          Start Poll
-        </button>
+        <button className="form-game__btn">Flip Cards</button>
 
-        <button
-
-        //   onClick={flipCards}
-        //   disabled={!game.poll}
-        >
-          Flip Cards
-        </button>
-
-        <button
-
-        //   onClick={resetCards}
-        //   disabled={game.poll || !checkAnswer}
-        >
-          Reset Cards
-        </button>
+        <button className="form-game__btn">Reset Cards</button>
       </div>
     </div>
   );
