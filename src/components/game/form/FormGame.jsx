@@ -2,27 +2,22 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import "./formGame.scss";
+import FormMenu from "./FormMenu";
+import HeaderForm from "./HeaderForm";
 export default function () {
-  const { driving, nameGame } = useSelector((state) => state.game);
+  const { userId } = useSelector((state) => state.auth);
+  const { driving, isActiveMenu } = useSelector((state) => state.game);
   return (
-    <div className="form-game">
-      <div className="form-game__row">
-        <div className="form-game__header">
-          <h2 className="form-game__title">{nameGame}</h2>
-          <p className="form-game__name">
-            <b>Driving:</b>
-            {driving.user_name}
-          </p>
-        </div>
-      </div>
-      {/* 
-      {game.driving.user_id === userid && (
+    <div className={`form-game ${isActiveMenu && "active"}`}>
+      <HeaderForm />
+
+      {driving.user_id === userId && (
         <div className="form__row">
           <FormMenu />
         </div>
       )}
 
-      <div className="form__row">
+      {/* <div className="form__row">
         <FormStory />
       </div>
 
@@ -32,7 +27,7 @@ export default function () {
 
       <div className="form__row">
         <FormPlayerCards />
-      </div> */}
+      </div>  */}
     </div>
   );
 }
