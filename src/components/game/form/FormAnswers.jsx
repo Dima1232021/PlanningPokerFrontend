@@ -9,6 +9,9 @@ export default function FormAnswers() {
   const [answersToHistory, setAnswersToHistory] = useState([]);
 
   useEffect(() => {
+    console.log("FormAnswers stories", stories);
+    console.log("FormAnswers answers", answers);
+    // console.log("FormAnswers", answers[stories[historyNumber].id]);
     setAnswersToHistory(stories.length && answers[stories[historyNumber].id]);
   }, [historyNumber, answers]);
 

@@ -23,7 +23,9 @@ export default function FormMenu() {
   function flipCard() {
     flipCardAction({ gameId }, addError);
   }
-  function resetCards() {}
+  function resetCards() {
+    resetCardsAction({ storyId: stories[historyNumber].id, gameId }, addError);
+  }
 
   return (
     <div className="form-game__row">
