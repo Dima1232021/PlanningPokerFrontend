@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useActions, useAddErrors } from "../../hooks";
 import MenuGame from "../../components/game/menu/MenuGame";
 import "./game.scss";
+import FormGame from "../../components/game/form/FormGame";
 
 function GamePage(props) {
   const { addError } = useAddErrors();
@@ -15,7 +16,9 @@ function GamePage(props) {
   }, []);
   return (
     <div className="game">
-      <div className="game__column">a</div>
+      <div className="game__column">
+        <FormGame />
+      </div>
       <div className={`game__column ${isActiveMenu && "active"}`}>
         <MenuGame />
       </div>
