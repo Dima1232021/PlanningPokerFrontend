@@ -67,8 +67,33 @@ export const gameActionCreators = {
       addError("The server does not respond")
     );
   },
+
   changeGameSettingsAction: (gameId, addError) => () => {
     fetch(...bodyFetch("/game/change_game_settings", gameId)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
+  startPollAction: (dataGame, addError) => () => {
+    fetch(...bodyFetch("/game/start_poll", dataGame)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
+  flipCardAction: (gameId, addError) => () => {
+    fetch(...bodyFetch("/game/flip_card", gameId)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
+  resetCardsAction: (dataGame, addError) => () => {
+    fetch(...bodyFetch("/game/reset_cards", dataGame)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
+  giveAnAnswerAction: (answer, addError) => () => {
+    fetch(...bodyFetch("/game/give_an_answer", answer)).catch(() =>
       addError("The server does not respond")
     );
   },

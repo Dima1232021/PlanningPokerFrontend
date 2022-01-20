@@ -26,7 +26,7 @@ export default function FormStory() {
               ) : (
                 <>
                   <h3 className="form-game__title">The poll has begun</h3>
-                  <p className="form-game__text">{game.history_poll.body}</p>
+                  <p className="form-game__text">{game.historyPoll.body}</p>
                 </>
               )}
             </div>

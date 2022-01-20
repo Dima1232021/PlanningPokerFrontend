@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import FormAnswers from "./FormAnswers";
+import FormCards from "./FormCards";
 
 import "./formGame.scss";
 import FormMenu from "./FormMenu";
@@ -16,17 +18,9 @@ export default function () {
 
       <FormStory />
 
-      {/* <div className="form__row">
-        <FormStory />
-      </div>
+      <FormAnswers />
 
-      <div className="form__row">
-        <FormUsers />
-      </div>
-
-      <div className="form__row">
-        <FormPlayerCards />
-      </div>  */}
+      <FormCards />
     </div>
   );
 }

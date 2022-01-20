@@ -67,6 +67,7 @@ const ListActionCable = () => {
           channel={{ channel: "AnswersChannel", gameId }}
           onReceived={(data) => {
             console.log("AnswersChannel", data);
+            setIsDataGame(data);
             // dispatch(addAnswersAction(data));
           }}
         />

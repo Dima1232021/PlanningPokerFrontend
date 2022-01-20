@@ -62,10 +62,19 @@ body,
   position: relative;
   overflow: hidden;
 }
-.btn:hover {
-  position: relative;
-  top: -2px;
-  left: 1px;
+.btn {
+  &:hover {
+    position: relative;
+    top: -2px;
+    left: 1px;
+  }
+
+  &:disabled {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    cursor: default;
+  }
 }
 
 .icon {

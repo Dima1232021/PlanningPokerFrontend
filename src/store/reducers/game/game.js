@@ -20,7 +20,8 @@ const initialState = {
   historyNumber: 0,
   onlineUsers: [],
   onlinePlayers: [],
-  isActiveMenu: true,
+  isActiveMenu: false,
+  fibonacci: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, "pass"],
 };
 
 export const gameReducers = (state = initialState, action) => {
