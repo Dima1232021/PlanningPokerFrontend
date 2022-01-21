@@ -1,15 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useActions, useAddErrors } from "../../../hooks";
+import { useActions, useAddErrors, useConfirm } from "../../../hooks";
 
 function ShowUsers() {
+  const { confirm } = useConfirm();
   const { addError } = useAddErrors();
   const { changeStatusUserAction } = useActions();
   const { userId } = useSelector((state) => state.auth);
   const { onlineUsers, driving, statusChange, gameId } = useSelector((state) => state.game);
 
-  function changeStatusUser(user) {
-    changeStatusUserAction({ userId: user.id, gameId }, addError);
+  async function changeStatusUser(user) {
+    const isConfirmed = await confirm("You want to change the status ?");
+    return isConfirmed && changeStatusUserAction({ userId: user.id, gameId }, addError);
   }
   return (
     <div className="game-menu__row">
@@ -29,10 +31,10 @@ function ShowUsers() {
                     onClick={() => changeStatusUser(user)}
                     className="game-menu__btn-status btn"
                   >
-                    {user.player ? "Гравець" : "Глядач"}
+                    {user.player ? "Player" : "Spectator"}
                   </button>
                 ) : (
-                  <p className="game-menu__text-status">{user.player ? "Гравець" : "Глядач"}</p>
+                  <p className="game-menu__text-status">{user.player ? "Player" : "Spectator"}</p>
                 )}
               </div>
             </li>
