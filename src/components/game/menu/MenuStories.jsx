@@ -11,7 +11,7 @@ function MenuStories() {
   const { addError } = useAddErrors();
   const { removeStoryAction, addStoryAction, editStoryAction, changeHistoryNumber } = useActions();
   const { userId } = useSelector((state) => state.auth);
-  const { stories, gameId, driving } = useSelector((state) => state.game);
+  const { stories, gameId, driving, game } = useSelector((state) => state.game);
   const textStory = useInput("", {}, "Enter history");
   const [activeModalEditStory, setActiveModalEditStory] = useState(false);
   const [activeModalAddStory, setActiveModalAddStory] = useState(false);
@@ -19,9 +19,12 @@ function MenuStories() {
 
   function modalEditStory(event, story) {
     event.stopPropagation();
-    setStoryId(story.id);
-    textStory.setValue(story.body);
-    setActiveModalEditStory(true);
+    if (game.historyPoll.id !== story.id) {
+      setStoryId(story.id);
+      textStory.setValue(story.body);
+      return setActiveModalEditStory(true);
+    }
+    return addError("You cannot change this story while the poll is in progress");
   }
 
   function editStory() {
@@ -41,8 +44,11 @@ function MenuStories() {
 
   async function removeStory(event, storyId) {
     event.stopPropagation();
-    const isConfirmed = await confirm("Delete history ?");
-    isConfirmed && removeStoryAction({ storyId }, addError);
+    if (game.historyPoll.id !== storyId) {
+      const isConfirmed = await confirm("Delete history ?");
+      return isConfirmed && removeStoryAction({ storyId }, addError);
+    }
+    return addError("You cannot delete this story while the poll is in progress");
   }
 
   function setHistoryNumber(index) {

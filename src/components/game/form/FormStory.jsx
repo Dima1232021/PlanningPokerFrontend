@@ -17,7 +17,7 @@ export default function FormStory() {
     <div className="form-game__row">
       <div className="form-game__story">
         {!stories.length ? (
-          <h3 className="form-game__title">You haven't created a story yet</h3>
+          <h3 className="form-game__title">There is no history yet</h3>
         ) : (
           <>
             <div className="form-game__column">
