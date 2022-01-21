@@ -30,7 +30,7 @@ export const gameActionCreators = {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
     fetch(...bodyFetch("/game/find_game_you_have_joined"))
       .then((value) => value.json())
-      .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
+      .then((data) => dispatch(gameActionCreators.setIsDataGame(data)))
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
   },

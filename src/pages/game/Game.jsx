@@ -1,19 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useActions, useAddErrors } from "../../hooks";
 import MenuGame from "../../components/game/menu/MenuGame";
-import "./game.scss";
 import FormGame from "../../components/game/form/FormGame";
+import "./game.scss";
+import { useActions } from "../../hooks";
 
-function GamePage(props) {
-  const { addError } = useAddErrors();
-  const { joinTheGameAction, setIsActivePage } = useActions();
-  const { isActiveMenu, joinTheGame, isLoaderPage } = useSelector((state) => state.game);
+function GamePage() {
+  const { changeHistoryNumber, setIsActivePage } = useActions();
+  const { isActiveMenu, stories, historyNumber } = useSelector((state) => state.game);
 
   useEffect(() => {
     setIsActivePage(true);
     return () => setIsActivePage(false);
   }, []);
+
+  useEffect(() => {
+    stories.length - 1 < historyNumber && changeHistoryNumber({ historyNumber: 0 });
+  }, [stories]);
   return (
     <div className="game">
       <div className="game__column">

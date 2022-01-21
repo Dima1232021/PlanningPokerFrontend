@@ -52,7 +52,7 @@ function MenuStories() {
   }
 
   function setHistoryNumber(index) {
-    changeHistoryNumber({ historyNumber: index });
+    !game.poll && changeHistoryNumber({ historyNumber: index });
   }
 
   return (

@@ -8,12 +8,11 @@ export default function FormMenu() {
   const { onlineUsers, game, stories, answers, gameId, historyNumber } = useSelector(
     (state) => state.game
   );
-  const { userId } = useSelector((state) => state.auth);
   const [checkAnswer, setCheckAnswer] = useState(false);
   const [checkPlayer, setCheckPlayer] = useState(false);
 
   useEffect(() => {
-    setCheckPlayer(!!onlineUsers.find((user) => user.id === userId && user.player));
+    setCheckPlayer(!!onlineUsers.find((user) => user.player));
   }, [onlineUsers]);
 
   useEffect(() => {

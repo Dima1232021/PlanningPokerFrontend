@@ -19,7 +19,6 @@ const initialState = {
   game: { historyPoll: {}, idPlayersResponded: [], poll: false },
   historyNumber: 0,
   onlineUsers: [],
-
   statusChange: false,
   flipСardsAutomatically: false,
   isActiveMenu: false,
@@ -31,15 +30,32 @@ export const gameReducers = (state = initialState, action) => {
     case SET_IS_LOADING_GAME:
       return { ...state, ...action.payload };
 
-    case SET_JOIN_THE_GAME:
-      console.log("gameReducers", action.payload);
-      return { ...state, ...action.payload };
-
     case SET_IS_ACTIVE_MENU:
       return { ...state, isActiveMenu: action.payload };
 
     case SET_IS_ACTIVE_PAGE:
       return { ...state, isActivePage: action.payload };
+
+    case SET_JOIN_THE_GAME:
+      const { answers, joinTheGame, stories, onlineUsers, game } = action.payload;
+      return {
+        ...state,
+        answers,
+        joinTheGame,
+        stories,
+        onlineUsers,
+        gameId: game.id,
+        driving: game.driving,
+        nameGame: game.name_game,
+        urlGame: game.url,
+        game: {
+          historyPoll: game.history_poll,
+          idPlayersResponded: game.id_players_answers,
+          poll: game.poll,
+        },
+        statusChange: game.statusChange,
+        flipСardsAutomatically: game.flipСardsAutomatically,
+      };
 
     case SET_IS_DATA_GAME:
       return { ...state, ...action.payload };
