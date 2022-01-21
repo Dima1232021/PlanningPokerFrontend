@@ -24,7 +24,10 @@ export default function FormMenu() {
     flipCardAction({ gameId }, addError);
   }
   function resetCards() {
-    resetCardsAction({ storyId: stories[historyNumber].id, gameId }, addError);
+    if (onlinePlayers.length) {
+      return resetCardsAction({ storyId: stories[historyNumber].id, gameId }, addError);
+    }
+    return addError("No players found");
   }
 
   return (
