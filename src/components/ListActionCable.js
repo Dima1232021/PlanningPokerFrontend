@@ -13,24 +13,10 @@ const ListActionCable = () => {
     return (
       <>
         <ActionCable
-          channel={{
-            channel: "InvitationChannel",
-            userId,
-          }}
+          channel={{ channel: "InvitationChannel", userId }}
           onReceived={(data) => {
             console.log("InvitationChannel", data);
             setAddInvitation(data);
-            // dispatch(addGameInvitationAction(data));
-          }}
-        />
-        <ActionCable
-          channel={{
-            channel: "ShowingGameRequestsChannel",
-            userId,
-          }}
-          onReceived={(data) => {
-            console.log("ShowingGameRequestsChannel", data);
-            // dispatch(addGameInvitationAction(data));
           }}
         />
         <ActionCable
@@ -38,29 +24,6 @@ const ListActionCable = () => {
           onReceived={(data) => {
             console.log("GameChannel", data);
             setIsDataGame(data);
-            // dispatch(changeGameYouHaveJoinedAction(data));
-          }}
-        />
-        <ActionCable
-          channel={{ channel: "ChangeInvitationsChannel", gameId }}
-          onReceived={(data) => {
-            console.log("ChangeInvitationsChannel", data);
-            // dispatch(changeInvitedPlayersAction(data));
-          }}
-        />
-        <ActionCable
-          channel={{ channel: "ChangePlayersOnlineChannel", gameId }}
-          onReceived={(data) => {
-            console.log("ChangePlayersOnlineChannel", data);
-            setIsDataGame(data);
-            // dispatch(changePlayersOnlineAction(data));
-          }}
-        />
-        <ActionCable
-          channel={{ channel: "DeleteInvitedChannel", userId }}
-          onReceived={(data) => {
-            console.log("DeleteInvitedChannel", data);
-            // dispatch(deleteInvitationAction(data.invitationId));
           }}
         />
         <ActionCable
@@ -68,7 +31,6 @@ const ListActionCable = () => {
           onReceived={(data) => {
             console.log("AnswersChannel", data);
             setIsDataGame(data);
-            // dispatch(addAnswersAction(data));
           }}
         />
         <ActionCable
@@ -76,7 +38,6 @@ const ListActionCable = () => {
           onReceived={(data) => {
             console.log("StoriesChannel", data);
             setIsDataGame(data);
-            // dispatch(addStoryAction(data));
           }}
         />
         <ActionCable
@@ -84,7 +45,13 @@ const ListActionCable = () => {
           onReceived={(data) => {
             console.log("SetingsGameChannel", data);
             setIsDataGame(data);
-            // dispatch(addAnswersAction(data));
+          }}
+        />
+        <ActionCable
+          channel={{ channel: "DataUsersChannel", gameId }}
+          onReceived={(data) => {
+            console.log("DataUsersChannel", data);
+            setIsDataGame(data);
           }}
         />
       </>

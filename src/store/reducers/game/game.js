@@ -19,7 +19,7 @@ const initialState = {
   game: { historyPoll: {}, idPlayersResponded: [], poll: false },
   historyNumber: 0,
   onlineUsers: [],
-  onlinePlayers: [],
+
   statusChange: false,
   flipСardsAutomatically: false,
   isActiveMenu: false,

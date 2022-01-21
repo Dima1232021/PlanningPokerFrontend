@@ -5,17 +5,23 @@ import { useActions, useAddErrors } from "../../../hooks";
 export default function FormMenu() {
   const { addError } = useAddErrors();
   const { startPollAction, flipCardAction, resetCardsAction } = useActions();
-  const { onlinePlayers, game, stories, answers, gameId, historyNumber } = useSelector(
+  const { onlineUsers, game, stories, answers, gameId, historyNumber } = useSelector(
     (state) => state.game
   );
+  const { userId } = useSelector((state) => state.auth);
   const [checkAnswer, setCheckAnswer] = useState(false);
+  const [checkPlayer, setCheckPlayer] = useState(false);
+
+  useEffect(() => {
+    setCheckPlayer(!!onlineUsers.find((user) => user.id === userId && user.player));
+  }, [onlineUsers]);
 
   useEffect(() => {
     setCheckAnswer(!!stories.length && !!answers[stories[historyNumber].id].length);
   }, [historyNumber, answers]);
 
   function startPull() {
-    if (onlinePlayers.length) {
+    if (checkPlayer) {
       return startPollAction({ storyId: stories[historyNumber].id, gameId }, addError);
     }
     return addError("No players found");
@@ -24,7 +30,7 @@ export default function FormMenu() {
     flipCardAction({ gameId }, addError);
   }
   function resetCards() {
-    if (onlinePlayers.length) {
+    if (checkPlayer) {
       return resetCardsAction({ storyId: stories[historyNumber].id, gameId }, addError);
     }
     return addError("No players found");

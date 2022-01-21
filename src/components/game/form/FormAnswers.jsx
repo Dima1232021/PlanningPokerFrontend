@@ -2,16 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function FormAnswers() {
-  const { game, stories, answers, historyNumber, onlinePlayers } = useSelector(
-    (state) => state.game
-  );
+  const { game, stories, answers, historyNumber, onlineUsers } = useSelector((state) => state.game);
 
   const [answersToHistory, setAnswersToHistory] = useState([]);
 
   useEffect(() => {
-    console.log("FormAnswers stories", stories);
-    console.log("FormAnswers answers", answers);
-    // console.log("FormAnswers", answers[stories[historyNumber].id]);
     setAnswersToHistory(stories.length && answers[stories[historyNumber].id]);
   }, [historyNumber, answers]);
 
@@ -35,16 +30,16 @@ export default function FormAnswers() {
             <h3 className="form-game__title">There are no answers yet</h3>
           )
         ) : (
-          onlinePlayers.map((playr) => {
+          onlineUsers.map((playr) => {
             let answer = game.idPlayersResponded.find((playerId) => playerId === playr.id);
-            return (
+            return playr.player ? (
               <div className="form-game__user" key={playr.id}>
                 <h3 className="form-game__username">{playr.username}</h3>
                 <div className="form-game__answer">
                   <span>Answer:</span> {answer ? "???" : "---"}
                 </div>
               </div>
-            );
+            ) : null;
           })
         )}
       </div>

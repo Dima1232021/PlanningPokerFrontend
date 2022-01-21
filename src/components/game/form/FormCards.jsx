@@ -5,15 +5,15 @@ import { useActions, useAddErrors } from "../../../hooks";
 export default function FormCards() {
   const { addError } = useAddErrors();
   const { giveAnAnswerAction } = useActions();
-  const { game, gameId, onlinePlayers, fibonacci } = useSelector((state) => state.game);
+  const { game, gameId, onlineUsers, fibonacci } = useSelector((state) => state.game);
   const { userId } = useSelector((state) => state.auth);
   const [answer, setAnswer] = useState(null);
   const [checkPlayer, setCheckPlayer] = useState(false);
   const [checkId, setCheckId] = useState(false);
 
   useEffect(() => {
-    setCheckPlayer(!!onlinePlayers.find((value) => value.id === userId));
-  }, [onlinePlayers]);
+    setCheckPlayer(!!onlineUsers.find((user) => user.id === userId && user.player));
+  }, [onlineUsers]);
 
   useEffect(() => {
     setCheckId(!!game.idPlayersResponded.find((id) => id === userId));
