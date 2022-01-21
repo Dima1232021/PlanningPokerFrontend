@@ -1,8 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useActions, useAddErrors } from "../../../hooks";
 
 function ShowUsers() {
-  const { onlineUsers } = useSelector((state) => state.game);
+  const { addError } = useAddErrors();
+  const { changeStatusUserAction } = useActions();
+  const { userId } = useSelector((state) => state.auth);
+  const { onlineUsers, driving, statusChange, gameId } = useSelector((state) => state.game);
+
+  function changeStatusUser(user) {
+    changeStatusUserAction({ userId: user.id, gameId }, addError);
+  }
   return (
     <div className="game-menu__row">
       <div className="game-menu__header">
@@ -13,7 +21,20 @@ function ShowUsers() {
         {onlineUsers.map((user) => {
           return (
             <li key={user.id} className="game-menu__link">
-              <p className="game-menu__text">{user.username}</p>
+              <div className="game-menu__users">
+                <p className="game-menu__text">{user.username}</p>
+
+                {driving.user_id === userId || (user.id === userId && statusChange) ? (
+                  <button
+                    onClick={() => changeStatusUser(user)}
+                    className="game-menu__btn-status btn"
+                  >
+                    {user.player ? "Гравець" : "Глядач"}
+                  </button>
+                ) : (
+                  <p className="game-menu__text-status">{user.player ? "Гравець" : "Глядач"}</p>
+                )}
+              </div>
             </li>
           );
         })}

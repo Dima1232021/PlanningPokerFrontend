@@ -98,11 +98,29 @@
     margin-bottom: 5px;
   }
 
+  &__users {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__text {
     font-weight: 400;
     &:first-letter {
       text-transform: uppercase;
     }
+  }
+
+  &__text-status,
+  &__btn-status {
+    width: 69px;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  &__btn-status {
+    background-color: #3a80ba;
   }
 
   &__btn-icon {

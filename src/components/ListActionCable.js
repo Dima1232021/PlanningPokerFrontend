@@ -79,6 +79,14 @@ const ListActionCable = () => {
             // dispatch(addStoryAction(data));
           }}
         />
+        <ActionCable
+          channel={{ channel: "SetingsGameChannel", gameId }}
+          onReceived={(data) => {
+            console.log("SetingsGameChannel", data);
+            setIsDataGame(data);
+            // dispatch(addAnswersAction(data));
+          }}
+        />
       </>
     );
   }

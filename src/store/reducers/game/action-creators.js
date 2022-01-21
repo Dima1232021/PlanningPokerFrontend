@@ -62,14 +62,20 @@ export const gameActionCreators = {
     );
   },
 
-  changeDrivingSetingsAction: (gameId, addError) => () => {
-    fetch(...bodyFetch("/game/change_driving_Setings", gameId)).catch(() =>
+  changeGameSettingsAutoFlipCardsAction: (gameId, addError) => () => {
+    fetch(...bodyFetch("/game/change_game_settings_auto_flip_cards", gameId)).catch(() =>
       addError("The server does not respond")
     );
   },
 
-  changeGameSettingsAction: (gameId, addError) => () => {
-    fetch(...bodyFetch("/game/change_game_settings", gameId)).catch(() =>
+  changeGameSettingsStatusChangeAction: (gameId, addError) => () => {
+    fetch(...bodyFetch("/game/change_game_settings_status_change", gameId)).catch(() =>
+      addError("The server does not respond")
+    );
+  },
+
+  changeStatusUserAction: (data, addError) => () => {
+    fetch(...bodyFetch("/game/change_status_user", data)).catch(() =>
       addError("The server does not respond")
     );
   },
