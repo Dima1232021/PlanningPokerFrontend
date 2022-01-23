@@ -1,10 +1,12 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { useActions } from "../hooks";
 
 const ListActionCable = () => {
-  const { setIsDataGame, setAddInvitation } = useActions();
+  const history = useHistory();
+  const { setIsDataGame, setAddInvitation, clearDataGame, deleteInvitation } = useActions();
   const { isAuth, userId } = useSelector((state) => state.auth);
 
   const gameId = useSelector((state) => state.game.gameId);
@@ -13,44 +15,48 @@ const ListActionCable = () => {
     return (
       <>
         <ActionCable
+          channel={{ channel: "DeleteGameChannel", userId }}
+          onReceived={(data) => {
+            if (gameId === data.gameId) {
+              clearDataGame();
+              history.push("/");
+            }
+            deleteInvitation(data.gameId);
+          }}
+        />
+        <ActionCable
           channel={{ channel: "InvitationChannel", userId }}
           onReceived={(data) => {
-            console.log("InvitationChannel", data);
             setAddInvitation(data);
           }}
         />
         <ActionCable
           channel={{ channel: "GameChannel", gameId }}
           onReceived={(data) => {
-            console.log("GameChannel", data);
             setIsDataGame(data);
           }}
         />
         <ActionCable
           channel={{ channel: "AnswersChannel", gameId }}
           onReceived={(data) => {
-            console.log("AnswersChannel", data);
             setIsDataGame(data);
           }}
         />
         <ActionCable
           channel={{ channel: "StoriesChannel", gameId }}
           onReceived={(data) => {
-            console.log("StoriesChannel", data);
             setIsDataGame(data);
           }}
         />
         <ActionCable
           channel={{ channel: "SetingsGameChannel", gameId }}
           onReceived={(data) => {
-            console.log("SetingsGameChannel", data);
             setIsDataGame(data);
           }}
         />
         <ActionCable
           channel={{ channel: "DataUsersChannel", gameId }}
           onReceived={(data) => {
-            console.log("DataUsersChannel", data);
             setIsDataGame(data);
           }}
         />

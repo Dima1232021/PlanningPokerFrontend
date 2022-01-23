@@ -36,7 +36,7 @@ function BlockCreateStory({ stories, setStories }) {
           placeholder="Enter history"
           onBlur={textStory.outputError}
         ></textarea>
-        <button className="create-game__btn" onClick={addStory}>
+        <button className="create-game__btn btn" onClick={addStory}>
           Create
         </button>
       </div>
@@ -45,7 +45,7 @@ function BlockCreateStory({ stories, setStories }) {
           {stories.map((story, index) => (
             <li key={index} className="create-game__link">
               <p className="create-game__text">{story}</p>
-              <button className="create-game__btn" onClick={() => deleteStory(index)}>
+              <button className="create-game__btn btn" onClick={() => deleteStory(index)}>
                 <img src={deleteIcon} className="create-game__icon" />
               </button>
             </li>

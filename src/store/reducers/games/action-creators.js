@@ -10,39 +10,13 @@ import {
 import { bodyFetch } from "../../../config";
 
 export const gamesActionCreators = {
-  setIsLoadGamesAction: (loading) => ({
-    type: SET_IS_LOADING_GAMES,
-    payload: loading,
-  }),
-  setIsCreateGameAction: (isCreateGame) => ({
-    type: SET_IS_CREATE_GAME,
-    payload: isCreateGame,
-  }),
-
-  setGamesAction: (games) => ({
-    type: SET_GAMES,
-    payload: games,
-  }),
-
-  addOwnGame: (game) => ({
-    type: ADD_OWN_GAME,
-    payload: game,
-  }),
-
-  deleteInvitation: (GameId) => ({
-    type: DELETE_GAME_INVITATION,
-    payload: GameId,
-  }),
-
-  deleteGame: (GameId) => ({
-    type: DELETE_GAME,
-    payload: GameId,
-  }),
-
-  setAddInvitation: (invitation) => ({
-    type: SET_ADD_INVITATION,
-    payload: invitation,
-  }),
+  setIsLoadGamesAction: (loading) => ({ type: SET_IS_LOADING_GAMES, payload: loading }),
+  setIsCreateGameAction: (isCreateGame) => ({ type: SET_IS_CREATE_GAME, payload: isCreateGame }),
+  setGamesAction: (games) => ({ type: SET_GAMES, payload: games }),
+  addOwnGame: (game) => ({ type: ADD_OWN_GAME, payload: game }),
+  deleteInvitation: (GameId) => ({ type: DELETE_GAME_INVITATION, payload: GameId }),
+  deleteGame: (GameId) => ({ type: DELETE_GAME, payload: GameId }),
+  setAddInvitation: (invitation) => ({ type: SET_ADD_INVITATION, payload: invitation }),
 
   getGamesAction: (addError) => (dispatch) => {
     dispatch(

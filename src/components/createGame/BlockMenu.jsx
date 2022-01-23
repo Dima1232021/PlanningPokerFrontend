@@ -55,10 +55,14 @@ function BlockMenu({ stories, setStories }) {
           </div>
         </div>
         <div className="create-game__column">
-          <NavLink className="create-game__btn-cancel create-game__btn" to="/">
+          <NavLink className="create-game__btn-cancel create-game__btn btn" to="/">
             Cancel
           </NavLink>
-          <button className="create-game__btn-create create-game__btn" to="/" onClick={createGame}>
+          <button
+            className="create-game__btn-create create-game__btn btn"
+            to="/"
+            onClick={createGame}
+          >
             Create game
           </button>
         </div>

@@ -17,11 +17,15 @@ export const gameActionCreators = {
   setIsDataGame: (data) => ({ type: SET_IS_DATA_GAME, payload: data }),
   changeHistoryNumber: (num) => ({ type: SET_IS_DATA_GAME, payload: num }),
 
-  joinTheGameAction: (urlGame, addError) => (dispatch) => {
+  joinTheGameAction: (urlGame, addError, history) => (dispatch) => {
     dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: true }));
     fetch(...bodyFetch("/game/join_the_game", urlGame))
       .then((value) => value.json())
-      .then((data) => dispatch(gameActionCreators.setJoinTheGame(data)))
+      .then((data) =>
+        data.joinTheGame
+          ? dispatch(gameActionCreators.setJoinTheGame(data))
+          : history && history.push("/")
+      )
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(gameActionCreators.setIsLoadingGameAction({ isLoaderPage: false })));
   },
