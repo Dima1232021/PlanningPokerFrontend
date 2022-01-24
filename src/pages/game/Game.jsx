@@ -7,12 +7,12 @@ import { useActions } from "../../hooks";
 
 function GamePage() {
   const { changeHistoryNumber, setIsActivePage } = useActions();
-  const { isActiveMenu, stories, historyNumber } = useSelector((state) => state.game);
+  const { isActiveMenu, stories, historyNumber, urlGame } = useSelector((state) => state.game);
 
   useEffect(() => {
     setIsActivePage(true);
     return () => setIsActivePage(false);
-  }, []);
+  }, [urlGame]);
 
   useEffect(() => {
     stories.length - 1 < historyNumber && changeHistoryNumber({ historyNumber: 0 });
