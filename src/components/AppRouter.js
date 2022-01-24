@@ -42,7 +42,6 @@ const AppRouter = () => {
         }
       }
     }
-    console.log("useEffect", gameYouHaveJoined);
     return isActivePage && joinTheGameAction({ urlGame: url.substr(6, 30) }, addError, history);
   }, [gameYouHaveJoined]);
 

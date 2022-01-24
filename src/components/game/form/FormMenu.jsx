@@ -19,6 +19,11 @@ export default function FormMenu() {
     setCheckAnswer(!!stories.length && !!answers[stories[historyNumber].id].length);
   }, [historyNumber, answers]);
 
+  useEffect(() => {
+    const story = stories[historyNumber];
+    setCheckAnswer(!!story && !!answers[story.id].length);
+  }, [historyNumber, answers]);
+
   function startPull() {
     if (checkPlayer) {
       return startPollAction({ storyId: stories[historyNumber].id, gameId }, addError);

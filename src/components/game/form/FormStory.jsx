@@ -22,7 +22,9 @@ export default function FormStory() {
           <>
             <div className="form-game__column">
               {!game.poll ? (
-                <p className="form-game__text">{stories[historyNumber].body}</p>
+                <p className="form-game__text">
+                  {stories[historyNumber] && stories[historyNumber].body}
+                </p>
               ) : (
                 <>
                   <h3 className="form-game__title">The poll has begun</h3>

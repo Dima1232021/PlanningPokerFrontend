@@ -16,13 +16,13 @@ export default function FormAnswers() {
       <div className="form-game__answers">
         {!game.poll ? (
           answersToHistory.length ? (
-            answersToHistory.map((value) => {
+            answersToHistory.map((answer) => {
               return (
-                <div className="form-game__user" key={value.id}>
-                  <h3 className="form-game__username">{value.user_name}</h3>
+                <div className="form-game__user" key={answer.id}>
+                  <h3 className="form-game__username">{answer.user_name}</h3>
                   <div className="form-game__answer">
                     <span>Answer:</span>
-                    {value.body}
+                    {answer.body}
                   </div>
                 </div>
               );

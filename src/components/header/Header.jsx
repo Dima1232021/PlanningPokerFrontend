@@ -24,8 +24,8 @@ export default function Header() {
           {isAuth && (
             <div className="header__block">
               <h3 className="header__username">{username}</h3>
-              <button onClick={authLogoUt} className="header__btn-log">
-                Logo ut
+              <button onClick={authLogoUt} className="header__btn-log btn">
+                Logout
               </button>
             </div>
           )}

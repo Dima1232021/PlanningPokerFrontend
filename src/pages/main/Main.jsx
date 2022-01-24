@@ -39,7 +39,6 @@ function MainPage() {
     );
 
     isConfirmed && deleteInvitationAction({ gameId: id }, addError);
-    // console.log("deleteGameInvitation", id);
   }
 
   function copyLink(event, url) {

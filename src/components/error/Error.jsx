@@ -15,7 +15,7 @@ export default function Error() {
             return (
               <li key={err.id} className="error__link">
                 <div className="error__message">{err.message}</div>
-                <button className="error__delete" onClick={() => deleteErrorAction(err.id)}>
+                <button className="error__delete btn" onClick={() => deleteErrorAction(err.id)}>
                   &#10060;
                 </button>
               </li>

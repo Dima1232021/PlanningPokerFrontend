@@ -9,7 +9,7 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
       <div className="main__header">
         <p className="main__title">{title}</p>
         {!!createGame && (
-          <button className="main__btn" onClick={createGame}>
+          <button className="main__btn btn" onClick={createGame}>
             Create game
           </button>
         )}
@@ -17,17 +17,17 @@ function Forms({ title, listGames, joinTheGame, copyLink, deleteGame, createGame
 
       <ul className="main__list">
         {listGames.map(({ id, name_game, url, drivingName = false }) => (
-          <li key={id} className="main__link" onClick={() => joinTheGame(url)}>
+          <li key={id} className="main__link btn" onClick={() => joinTheGame(url)}>
             <div className="main__btns">
               <div className="main__footer">
                 <h3>Driving:</h3>
                 <p>{drivingName ? drivingName : "You"}</p>
               </div>
 
-              <button className="main__btn" onClick={(e) => copyLink(e, url)}>
+              <button className="main__btn btn" onClick={(e) => copyLink(e, url)}>
                 <img src={addIcon} className="main__icon" alt="" />
               </button>
-              <button className="main__btn" onClick={(e) => deleteGame(e, id, name_game)}>
+              <button className="main__btn btn" onClick={(e) => deleteGame(e, id, name_game)}>
                 <img src={deleteIcon} className="main__icon" alt="" />
               </button>
             </div>
