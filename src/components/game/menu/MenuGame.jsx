@@ -31,7 +31,7 @@ function MenuGame() {
   function copyLink() {
     setActiveMessage(true);
     setTimeout(() => setActiveMessage(false), 3000);
-    navigator.clipboard.writeText(`${API_URL}/game/${urlGame}`);
+    navigator.clipboard.writeText(`${window.location.origin}/game/${urlGame}`);
   }
 
   return (

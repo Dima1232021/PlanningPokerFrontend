@@ -46,7 +46,7 @@ function MainPage() {
     event.stopPropagation();
     setActiveMessage(true);
     setTimeout(() => setActiveMessage(false), 3000);
-    navigator.clipboard.writeText(`${API_URL}/game/${url}`);
+    navigator.clipboard.writeText(`${window.location.origin}/game/${url}`);
   }
 
   useEffect(() => !isLoaderPage && joinTheGame && history.push(`/game/${urlGame}`), [isLoaderPage]);
