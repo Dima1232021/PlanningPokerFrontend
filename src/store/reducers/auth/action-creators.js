@@ -31,10 +31,9 @@ export const authActionCreators = {
     dispatch(authActionCreators.setIsLoadingAction(true));
     fetch(...bodyFetch("/authenticate/create", createData))
       .then((value) => value.json())
-      .then((data) => {
-        console.log("createAction", data);
-        data.isAuth ? dispatch(authActionCreators.setIsAuthAction(data)) : addError(data.error);
-      })
+      .then((data) =>
+        data.isAuth ? dispatch(authActionCreators.setIsAuthAction(data)) : addError(data.error)
+      )
       .catch(() => addError("The server does not respond"))
       .finally(() => dispatch(authActionCreators.setIsLoadingAction(false)));
   },
