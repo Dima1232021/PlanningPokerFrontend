@@ -11,8 +11,9 @@ function BlockMenu({ stories, setStories }) {
   const { addOwnGameAction, setIsCreateGameAction } = useActions();
   const { isLoadCreateGame, isCreateGame } = useSelector((store) => store.games);
   const nameGame = useInput("", {}, "Enter a name for the game");
-  const [player, setPlayer] = useState(false);
-  const [autoFlip, setAutoFlip] = useState(false);
+  const [player, setPlayer] = useState(true);
+  const [autoFlip, setAutoFlip] = useState(true);
+  const [statusChange, setStatusChange] = useState(true);
 
   useEffect(() => {
     const storedNames = localStorage.getItem("nameGame");
@@ -20,7 +21,10 @@ function BlockMenu({ stories, setStories }) {
   }, []);
 
   function createGame() {
-    addOwnGameAction({ nameGame: nameGame.value, stories, player, autoFlip }, addError);
+    addOwnGameAction(
+      { nameGame: nameGame.value, stories, player, autoFlip, statusChange },
+      addError
+    );
     localStorage.clear();
   }
   useEffect(() => {
@@ -45,6 +49,10 @@ function BlockMenu({ stories, setStories }) {
       </div>
       <div className="create-game__row">
         <div className="create-game__column">
+          <div className="create-game__switch">
+            <p className="create-game__name">Allow users to change status</p>
+            <Switch value={statusChange} setValue={() => setStatusChange((val) => !val)} />
+          </div>
           <div className="create-game__switch">
             <p className="create-game__name">Take part in the game</p>
             <Switch value={autoFlip} setValue={() => setAutoFlip((val) => !val)} />
