@@ -7,6 +7,7 @@ import Message from "../../message/Message";
 import ShowUsers from "./ShowUsers";
 import addIcon from "../../../icones/add.svg";
 import SetingsGame from "./SetingsGame";
+import { API_URL } from "../../../config";
 
 import "./menuGame.scss";
 
@@ -30,7 +31,7 @@ function MenuGame() {
   function copyLink() {
     setActiveMessage(true);
     setTimeout(() => setActiveMessage(false), 3000);
-    navigator.clipboard.writeText(`http://localhost:3001/game/${urlGame}`);
+    navigator.clipboard.writeText(`${API_URL}/game/${urlGame}`);
   }
 
   return (

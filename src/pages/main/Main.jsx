@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Forms from "../../components/main/Forms";
 import Message from "../../components/message/Message";
+import { API_URL } from "../../config";
 import { useActions, useAddErrors, useConfirm } from "../../hooks";
 import "./main.scss";
 
@@ -45,7 +46,7 @@ function MainPage() {
     event.stopPropagation();
     setActiveMessage(true);
     setTimeout(() => setActiveMessage(false), 3000);
-    navigator.clipboard.writeText(`http://localhost:3001/game/${url}`);
+    navigator.clipboard.writeText(`${API_URL}/game/${url}`);
   }
 
   useEffect(() => !isLoaderPage && joinTheGame && history.push(`/game/${urlGame}`), [isLoaderPage]);
